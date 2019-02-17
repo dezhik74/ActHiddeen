@@ -1,0 +1,28 @@
+
+i {
+  margin-right: 10px;
+}
+.one nav {
+  display: block;
+  width: 660px;
+  margin: 0 auto 30px;
+}
+.one ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 1em 0;
+  background: #ECDAD6;
+}
+.one a {
+  text-decoration: none;
+  font-family: 'Lora', serif;
+  transition: .5s linear;
+  padding: 1em;
+  background: rgba(177, 152, 145, .3);
+  border-right: 1px solid #b19891;
+  color: #695753;
+}
+.one a:hover {background: #b19891;}
+.one li {
+  display: inline;
+}

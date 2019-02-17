@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>
+        Акты скрытых для фонда
+    </title>
+</head>
+<body>
+
+    <nav class="one">
+        <ul>
+            <li><a href="#">Список актов</a></li>
+            <li><a href="#">Новый акт</a></li>
+            <li><a href="#">Резерв 1</a></li>
+        </ul>
+    </nav>
+
+
+    {% block mycontent %}
+
+    {% endblock %}
+
+</body>
+</html>
