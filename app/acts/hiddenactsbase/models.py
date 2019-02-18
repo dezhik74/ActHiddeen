@@ -13,7 +13,7 @@ class HASet (models.Model):
     contractor_engineer_short=models.CharField(max_length=100)
 
     def __str__(self):
-        return '{}'.format(", ".join(self.system_type, self.address))
+        return '{}'.format(", ".join([self.system_type, self.address]))
 
 class HAStandAlone (models.Model):
     ha_set = models.ForeignKey(HASet, on_delete=models.CASCADE)
@@ -25,4 +25,5 @@ class HAStandAlone (models.Model):
     end_date=models.CharField(max_length=50)
     permitted_work=models.CharField(max_length=200)
 
-
+    def __str__(self):
+        return '{}'.format(self.act_number)
