@@ -3,20 +3,18 @@
 
 {% block mycontent %}
 
-    <h1>Заголовок 1</h1>
-    <h2>Заголовок 2</h2>
-    <h3>Заголовок 3</h3>
-    <h4>Заголовок 4</h4>
-    <h5>Заголовок 5</h5>
-    <h6>Заголовок 6</h6>
-    <div>
-        Серега ККУКУ
-        {% for n in names%}
-        <ul>
-            <li>{{ n }}</li>
-        </ul>
-        {% endfor %}
-    </div>
+    <h1>Наборы актов скрытых работ</h1>
+
+    {% for act_set in objects_acts %}
+        <div>
+            <p>объект {{ act_set.address }} вид работ {{ act_set.system_type }}</p>
+            {% for hidden_act in  HAStandAlone.objects.filter(ha_set=act_set).order_by('id')%}
+                <p> {{ hidden_act.act_number }}</p>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
 
 {% endblock %}
 
