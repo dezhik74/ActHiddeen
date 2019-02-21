@@ -26,3 +26,9 @@ i {
 .one li {
   display: inline;
 }
+
+.acts li {
+  margin: 0;
+  font-size: 0.8em;
+}
+

@@ -1,20 +1,15 @@
 {% extends 'hiddenactsbase/base.html'%}
-
-
 {% block mycontent %}
-
     <h1>Наборы актов скрытых работ</h1>
-
     {% for act_set in objects_acts %}
-        <div>
-            <p>объект {{ act_set.address }} вид работ {{ act_set.system_type }}</p>
-            {% for hidden_act in  HAStandAlone.objects.filter(ha_set=act_set).order_by('id')%}
-                <p> {{ hidden_act.act_number }}</p>
+        <h5> объект {{ act_set.address }} капитальный ремонт системы {{ act_set.system_type }}</h5>
+        <ul class="acts">
+            {% for act in  acts %}
+               {% if act.ha_set == act_set %}
+                    <li> №{{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</li>
+                {% endif %}
             {% endfor %}
-
-        </div>
+        </ul>
     {% endfor %}
-
-
 {% endblock %}
 
