@@ -2,14 +2,13 @@
 {% block mycontent %}
     <h1>Наборы актов скрытых работ</h1>
     {% for act_set in objects_acts %}
-        <h5> объект {{ act_set.address }} капитальный ремонт системы {{ act_set.system_type }}</h5>
+        <h5> объект {{ act_set.address }} капитальный ремонт {{ act_set.system_type }}</h5>
         <ul class="acts">
             {% for act in  acts %}
-               {% if act.ha_set == act_set %}
+               {% if act.object_acts == act_set %}
                     <li> №{{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</li>
                 {% endif %}
             {% endfor %}
         </ul>
     {% endfor %}
 {% endblock %}
-

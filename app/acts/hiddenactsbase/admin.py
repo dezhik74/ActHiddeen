@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .models import HASet
-from .models import HAStandAlone
+from .models import ObjectActs
+from .models import HiddenActIS
+
 
 # Register your models here.
 
-admin.site.register(HASet)
-admin.site.register(HAStandAlone)
+admin.site.register(ObjectActs)
+admin.site.register(HiddenActIS)
+
 
