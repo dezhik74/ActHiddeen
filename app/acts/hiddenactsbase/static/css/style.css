@@ -2,10 +2,10 @@
 i {
   margin-right: 10px;
 }
-.one nav {
+nav.one {
   display: block;
-  width: 660px;
-  margin: 0 auto 30px;
+  width: 1900px;
+  margin-bottom: 10px;
 }
 .one ul {
   list-style: none;
@@ -32,3 +32,10 @@ i {
   font-size: 0.8em;
 }
 
+ul.acts {
+  margin-bottom: 1px;
+}
+
+span.objwork {
+  background: #ECDAD6;
+}
