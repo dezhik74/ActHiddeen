@@ -2,6 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', acts_list, name = 'acts_list_url'),
-    path('object/<int:pk>/',act_detail, name='act_detail_url'),
-]
+    path('', ObjectsList.as_view(), name='objects_list_url'),
+    path('edit-<int:pk>/', ObjectEdit.as_view(), name='object_edit_url'),
+    path('see-<int:pk>/', ObjectDetail.as_view(), name='object_detail_url'),
+    ]

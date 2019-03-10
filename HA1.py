@@ -61,7 +61,7 @@ def doc_append (file1, file2):
     doc1.add_page_break()
     for el in doc2.element.body:
         doc1.element.body.append(el)
-    doc1.save ('xxx.docx')
+    doc1.save
 
 
 def jsontest():

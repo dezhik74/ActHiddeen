@@ -1,0 +1,51 @@
+<!-- Входящий контекст form, myobj -->
+{% extends 'hiddenactsbase/base.html' %}
+{% block mycontent %}
+    <div class="container mx-1">
+
+        <h5> Редактирование </h5>
+
+        <form action="{{ obj.get_edit_url }}" method ="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="form-group row mb-1">
+                <div class="col-sm-1">{{ form.address.label }}</div>
+                <div class="col-sm-5">{{ form.address }}</div>
+                <div class="col-sm-1">{{ form.system_type.label }}</div>
+                <div class="col-sm-5">{{ form.system_type }}</div>
+            </div>
+            <div class="form-group row mb-1">
+                <div class="col-sm-1">{{ form.designer.label }}</div>
+                <div class="col-sm-11">{{ form.designer }}</div>
+            </div>
+            <div class="form-group row mb-1">
+                <div class="col-sm-1">{{ form.supervisor_engineer.label }}</div>
+                <div class="col-sm-5">{{ form.supervisor_engineer }}</div>
+                <div class="col-sm-1">{{ form.supervisor_engineer_decree.label }}</div>
+                <div class="col-sm-5">{{ form.supervisor_engineer_decree }}</div>
+            </div>
+           <div class="form-group row mb-1">
+                <div class="col-sm-1">{{ form.contractor_engineer.label }}</div>
+                <div class="col-sm-5">{{ form.contractor_engineer }}</div>
+                <div class="col-sm-1">{{ form.contractor_engineer_decree.label }}</div>
+                <div class="col-sm-5">{{ form.contractor_engineer_decree }}</div>
+            </div>
+           <div class="form-group row mb-1">
+                <div class="col-sm-1">{{ form.project_number.label }}</div>
+                <div class="col-sm-5">{{ form.project_number }}</div>
+                <div class="col-sm-1">{{ form.exec_documents.label }}</div>
+                <div class="col-sm-5">{{ form.exec_documents }}</div>
+            </div>
+
+                <button type="submit" class="btn btn-primary">Куку</button>
+        </form>
+
+    </div>
+{% endblock %}

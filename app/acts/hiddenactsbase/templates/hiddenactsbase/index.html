@@ -1,12 +1,23 @@
-{% extends 'hiddenactsbase/base.html'%}
+<!-- Входящий контекст objects_acts -->
+{% extends 'hiddenactsbase/base.html' %}
 {% block mycontent %}
-    <h2>Наборы актов скрытых работ</h2>
-    {% for act_set in objects_acts %}
-        <h5> <a href="{% url 'act_detail_url' pk=act_set.pk %}"> объект {{ act_set.address }} капитальный ремонт {{ act_set.system_type }}</a></h5>
-        <ul class="acts">
-            {% for act in  act_set.acts.all %}
-                    <li> №{{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</li>
+    <div class="container">
+        <h5>Наборы актов скрытых работ</h5>
+    </div>
+    <div class="container">
+    {% for obj in objects_acts %}
+        <div class="card my-1">
+          <div class="card-header py-0">
+            объект {{ obj.address }} капитальный ремонт {{ obj.system_type }}
+          </div>
+          <div class="card-body py-0">
+            {% for act in  obj.acts.all %}
+                <p class="card-text mb-0"> №{{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
             {% endfor %}
-        </ul>
+            <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Смотреть</a>
+            <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редакт.</a>
+          </div>
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}
