@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.views.generic import View
 from .models import *
-from .forms import ObjectForm
+from .forms import ObjectForm, HActISForm
+from django.forms import formset_factory
 
 
 class ObjectsList (View):
@@ -26,10 +27,9 @@ class ObjectEdit(View):
     # print(object_form_set, hact_is_form_set)
 
 
-
     # def get(self,request,pk):
     #     pass
-    #
+
     # def post(self,request,pk):
     #     pass
 
@@ -46,7 +46,11 @@ class ObjectEdit(View):
                         'supervisor_engineer_decree': myobj.supervisor_engineer_decree,
                         'contractor_engineer_decree': myobj.contractor_engineer_decree
         })
-        return render(request, 'hiddenactsbase/object_edit.html', context={'myobj': myobj, 'form': form})
+        acts_num=len(myobj.acts.all())
+        HActISFormSet = formset_factory(HActISForm, extra=acts_num)
+        ha_form_set=HActISFormSet(prefix='hidden_acts')
+        return render(request, 'hiddenactsbase/object_edit.html', context={'myobj': myobj, 'form': form, 'ha_form_set':ha_form_set})
+        # return HttpResponse(acts_num)
 
     def post(self,request,pk):
         myobj = get_object_or_404(ObjectActs, pk=pk)
