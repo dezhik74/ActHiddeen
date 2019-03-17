@@ -27,11 +27,14 @@
                         <div class="col-md-2">Исполнительная:</div>
                         <div class="col-md-5">{{ myobj.exec_documents }}</div>
                     </div>
+                    <a href="{% url 'create_hidden_act_to_end' myobj.pk %}" class="btn btn-primary my-1 py-0">Добавить пустой акт скрытых в конец</a>
+                    <a href="{{ myobj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое актов объекта</a>
+                    <a href="#" class="btn btn-primary my-1 py-0">Сформировать файл для печати</a>
                 </div>
             </div>
         </div>
         <div class="card mb-1">
-            <div class="card-header py-0"> -------------------АКТЫ-------------------</div>
+            <div class="card-header py-0">-------------------АКТЫ-------------------</div>
         </div>
         {% for act in myobj.acts.all %}
             <div class="card mb-1">
@@ -61,6 +64,7 @@
                             <div class="col-md-2">Разрешено:</div>
                             <div class="col-md-10">{{ act.permitted_work }}</div>
                         </div>
+                        <a href="{% url 'delete_hidden_act' myobj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>
                     </div>
                 </div>
             </div>

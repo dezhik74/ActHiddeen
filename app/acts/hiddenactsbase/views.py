@@ -41,11 +41,50 @@ def update_obj(obj, cleaned_obj_data, cleaned_act_data):
     obj.save()
     return obj
 
+def create_hidden_act_to_end (request, pk):
+    myobj = get_object_or_404(ObjectActs, pk=pk)
+    myobj.acts.create()
+    return redirect(myobj)
+
+def delete_hidden_act (request, pk_obj, pk_act):
+    myobj = get_object_or_404(ObjectActs, pk=pk_obj)
+    myact = get_object_or_404(myobj.acts.all(),pk=pk_act)
+    myact.delete()
+    return redirect(myobj)
+
+
+def copy_object (request, pk):
+    myobj = get_object_or_404(ObjectActs, pk=pk)
+    newobj=ObjectActs.objects.create(
+        address = myobj.address,
+        system_type = myobj.system_type,
+        designer = myobj.designer,
+        supervisor_engineer = myobj.supervisor_engineer,
+        contractor_engineer = myobj.contractor_engineer,
+        project_number = myobj.project_number,
+        exec_documents = myobj.exec_documents,
+        supervisor_engineer_decree = myobj.supervisor_engineer_decree,
+        contractor_engineer_decree = myobj.contractor_engineer_decree
+     )
+    # for act in myobj.acts.all():
+    #     newobj.acts.create(
+    #         act_number = act.act_number,
+    #         act_date = act.act_date,
+    #         presented_work = act.presented_work,
+    #         materials = act.materials,
+    #         permitted_work = act.permitted_work,
+    #         begin_date = act.begin_date,
+    #         end_date = act.end_date
+    #     )
+    #return redirect('objects_list_url')
+    return redirect(newobj)
+
+
 
 def objectedit (request, pk):
     myobj = get_object_or_404(ObjectActs, pk=pk)
-    ObjectFormSet = formset_factory(ObjectForm, extra=0)
-    HActISFormSet = formset_factory(HActISForm, extra=1)
+    ObjectFormSet = formset_factory(form=ObjectForm, extra=0)
+    HActISFormSet = formset_factory(form=HActISForm, extra=0)
     initial_obj = [{
         'address': myobj.address,
         'system_type': myobj.system_type,

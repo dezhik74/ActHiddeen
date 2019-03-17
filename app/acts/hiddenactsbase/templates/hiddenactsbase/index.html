@@ -14,8 +14,9 @@
             {% for act in  obj.acts.all %}
                 <p class="card-text mb-0"> №{{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
             {% endfor %}
-            <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Смотреть</a>
-            <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редакт.</a>
+            <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Редактировать структуру</a>
+            <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редактировать содержимое</a>
+            <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
           </div>
         </div>
     {% endfor %}

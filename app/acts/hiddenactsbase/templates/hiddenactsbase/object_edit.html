@@ -17,6 +17,13 @@
             {% endif %}
             {% endfor %} -->
             {% for form in object_form_set %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger mb-0 py-0">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 <div class="card p-1 mb-1">
                     <div class="form-group row mb-1">
                         <div class="col-sm-1 col-form-label-sm">{{ form.address.label }}</div>
@@ -46,14 +53,18 @@
                         <div class="col-sm-1 col-form-label-sm">{{ form.exec_documents.label }}</div>
                         <div class="col-sm-5">{{ form.exec_documents }}</div>
                     </div>
-                    <div class="inline">
-                        <button type="submit" class="btn btn-primary">Сохранить все акты по объекту</button>
-                        <a href="{% url 'objects_list_url' %}" class="btn btn-primary">Отменить</a>
-                    </div>
+
                 </div>
             {% endfor %}
             {{ ha_form_set.management_form }}
             {% for form in ha_form_set %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger mb-0 py-0">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 <div class="card p-1 mb-1">
                     <div class="form-group row mb-1">
                         <div class="col-sm-2 col-form-label-sm">{{ form.act_number.label }}</div>
@@ -81,6 +92,11 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="inline">
+                <button type="submit" class="btn btn-primary my-1 py-0">Сохранить изменения</button>
+                <a href="{% url 'objects_list_url' %}" class="btn btn-primary my-1 py-0">Вернуться в список</a>
+                <a href="{{ myobj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Вернуться в структуру</a>
+            </div>
         </form>
     </div>
 
