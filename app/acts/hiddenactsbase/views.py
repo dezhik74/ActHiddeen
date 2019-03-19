@@ -109,10 +109,9 @@ def doc_append (file1, file2):
 
 
 def make_hidden_docx(obj, docx_template_name, dynamic_dir_name):
-    doc = DocxTemplate(docx_template_name)
+    context = {}
     i=1
     for act in obj.acts.all():
-        context = {}
         context['address'] =  obj.address
         context['system_type'] = obj.system_type
         context['contractor'] = obj.contractor
@@ -131,9 +130,11 @@ def make_hidden_docx(obj, docx_template_name, dynamic_dir_name):
         context['begin_date'] = act.begin_date
         context['end_date'] = act.end_date
         name=str(i)
+        doc = DocxTemplate(docx_template_name)
         doc.render(context)
         doc.save(os.path.join(dynamic_dir_name,name+".docx"))
         i+=1
+        context.clear()
     return 'fff'
 
 
