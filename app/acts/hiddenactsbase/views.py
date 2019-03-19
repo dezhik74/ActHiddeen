@@ -6,6 +6,9 @@ from .forms import ObjectForm, HActISForm
 from .models import *
 import os
 
+from docxtpl import DocxTemplate
+from docx import Document
+
 
 class ObjectsList(View):
     def get(self, request):
@@ -23,6 +26,7 @@ def update_obj(obj, cleaned_obj_data, cleaned_act_data):
     obj.address = cleaned_obj_data[0]['address']
     obj.system_type = cleaned_obj_data[0]['system_type']
     obj.designer = cleaned_obj_data[0]['designer']
+    obj.contractor = cleaned_obj_data[0]['contractor']
     obj.supervisor_engineer = cleaned_obj_data[0]['supervisor_engineer']
     obj.contractor_engineer = cleaned_obj_data[0]['contractor_engineer']
     obj.project_number = cleaned_obj_data[0]['project_number']
@@ -65,6 +69,7 @@ def copy_object (request, pk):
     newobj=ObjectActs.objects.create(
         address = 'Копия: ' + s,
         system_type = myobj.system_type,
+        contractor = myobj.contractor,
         designer = myobj.designer,
         supervisor_engineer = myobj.supervisor_engineer,
         contractor_engineer = myobj.contractor_engineer,
@@ -94,11 +99,52 @@ def delete_object(request, pk):
     return redirect('objects_list_url')
 
 
+def doc_append (file1, file2):
+    doc1 = Document(file1)
+    doc2 = Document(file2)
+    doc1.add_page_break()
+    for el in doc2.element.body:
+        doc1.element.body.append(el)
+    doc1.save
+
+
+def make_hidden_docx(obj, docx_template_name, dynamic_dir_name):
+    doc = DocxTemplate(docx_template_name)
+    i=1
+    for act in obj.acts.all():
+        context = {}
+        context['address'] =  obj.address
+        context['system_type'] = obj.system_type
+        context['contractor'] = obj.contractor
+        context['designer'] = obj.designer
+        context['supervisor_engineer'] = obj.supervisor_engineer
+        context['contractor_engineer'] = obj.contractor_engineer
+        context['project_number'] = obj.project_number
+        context['exec_documents'] = obj.exec_documents
+        context['supervisor_engineer_decree'] = obj.supervisor_engineer_decree
+        context['contractor_engineer_decree'] = obj.contractor_engineer_decree
+        context['act_number'] = act.act_number
+        context['act_date'] = act.act_date
+        context['presented_work'] = act.presented_work
+        context['materials'] = act.materials
+        context['permitted_work'] = act.permitted_work
+        context['begin_date'] = act.begin_date
+        context['end_date'] = act.end_date
+        name=str(i)
+        doc.render(context)
+        doc.save(os.path.join(dynamic_dir_name,name+".docx"))
+        i+=1
+    return 'fff'
+
+
 def make_word_file(request, pk):
     BASE_APP_DIR = os.path.dirname(os.path.abspath(__file__))
-    DYNAMIC_DIR =  os.path.join(BASE_APP_DIR,'dynamic')
-    W_TEMPLATE = os.path.join(BASE_APP_DIR,'HiddenActTemtplate2.docx')
-    return HttpResponse (str(pk)+' '+W_TEMPLATE)
+    dynamic_dir_name = os.path.join(BASE_APP_DIR,'dynamic')
+    DOCX_TEMPLATE_DIR =  os.path.join(BASE_APP_DIR,'docx_template')
+    docx_template = os.path.join(DOCX_TEMPLATE_DIR,'HiddenActTemtplate2.docx')
+    myobj = get_object_or_404(ObjectActs, pk=pk)
+    s = make_hidden_docx (myobj, docx_template,dynamic_dir_name)
+    return HttpResponse (str(pk)+' '+dynamic_dir_name+s)
 
 
 def objectedit (request, pk):
@@ -108,6 +154,7 @@ def objectedit (request, pk):
     initial_obj = [{
         'address': myobj.address,
         'system_type': myobj.system_type,
+        'contractor': myobj.contractor,
         'designer': myobj.designer,
         'supervisor_engineer': myobj.supervisor_engineer,
         'contractor_engineer': myobj.contractor_engineer,

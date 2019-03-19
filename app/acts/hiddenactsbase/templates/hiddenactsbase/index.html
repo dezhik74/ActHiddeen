@@ -8,7 +8,7 @@
     {% for obj in objects_acts %}
         <div class="card my-1">
           <div class="card-header py-0 ">
-              <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }}
+              <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
           </div>
           <div class="card-body py-0">
             {% for act in  obj.acts.all %}

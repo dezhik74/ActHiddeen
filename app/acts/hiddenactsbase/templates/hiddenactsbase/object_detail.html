@@ -10,6 +10,10 @@
                 <div class="card-header py-0">Объект {{ myobj.address }} капитальный ремонт {{ myobj.system_type }}</div>
                 <div class="card-text">
                     <div class="row">
+                        <div class="col-md-2">Подрядчик:</div>
+                        <div class="col-md-10">{{ myobj.contractor }}</div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-2">Проектант:</div>
                         <div class="col-md-10">{{ myobj.designer }}</div>
                     </div>
