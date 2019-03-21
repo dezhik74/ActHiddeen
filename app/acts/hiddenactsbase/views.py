@@ -1,10 +1,12 @@
 from django.forms import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View
+from django.forms.models import model_to_dict
+
 
 from .forms import ObjectForm, HActISForm
 from .models import *
-import os
+import os, mimetypes
 
 from docxtpl import DocxTemplate
 from docx import Document
@@ -99,53 +101,75 @@ def delete_object(request, pk):
     return redirect('objects_list_url')
 
 
-def doc_append (file1, file2):
+def doc_append (file1, file2, numb):
+    # doc0 = Document(file1)
+    # doc0.add_paragraph('---------------------------' + str(numb) + '----------------------------------------')
+    # doc0.add_page_break()
+    # doc0.save(file1)
     doc1 = Document(file1)
     doc2 = Document(file2)
-    doc1.add_page_break()
+    #doc1.add_page_break()
     for el in doc2.element.body:
         doc1.element.body.append(el)
-    doc1.save
+    #doc1.add_page_break()
+    # doc1.add_paragraph('---------------------------' + str(numb) + '----------------------------------------')
+    doc1.save(file1)
+    # doc1.close()
+    # doc2.close()
+
 
 
 def make_hidden_docx(obj, docx_template_name, dynamic_dir_name):
-    context = {}
     i=1
+    context={}
     for act in obj.acts.all():
-        context['address'] =  obj.address
-        context['system_type'] = obj.system_type
-        context['contractor'] = obj.contractor
-        context['designer'] = obj.designer
-        context['supervisor_engineer'] = obj.supervisor_engineer
-        context['contractor_engineer'] = obj.contractor_engineer
-        context['project_number'] = obj.project_number
-        context['exec_documents'] = obj.exec_documents
-        context['supervisor_engineer_decree'] = obj.supervisor_engineer_decree
-        context['contractor_engineer_decree'] = obj.contractor_engineer_decree
-        context['act_number'] = act.act_number
-        context['act_date'] = act.act_date
-        context['presented_work'] = act.presented_work
-        context['materials'] = act.materials
-        context['permitted_work'] = act.permitted_work
-        context['begin_date'] = act.begin_date
-        context['end_date'] = act.end_date
+        context = model_to_dict(obj, exclude=['id','acts'])
+        c2 = model_to_dict(act,exclude=['id'])
+        context.update(c2)
         name=str(i)
         doc = DocxTemplate(docx_template_name)
         doc.render(context)
         doc.save(os.path.join(dynamic_dir_name,name+".docx"))
         i+=1
         context.clear()
-    return 'fff'
+    return i-1
+
+
+def assemble_docx (dynamic_dir_name, num_of_docx):
+    result_docx_name =  os.path.join(dynamic_dir_name, 'result.docx')
+    if os.path.exists(result_docx_name):
+        os.remove(result_docx_name)
+    if os.path.exists(os.path.join(dynamic_dir_name, '1.docx')):
+        os.rename(os.path.join(dynamic_dir_name, '1.docx'), result_docx_name)
+    if num_of_docx > 1:
+        for i in range (2,num_of_docx+1):
+            doc_append(result_docx_name, os.path.join(dynamic_dir_name, str(i)+'.docx'), i)
+            os.remove(os.path.join(dynamic_dir_name, str(i) + '.docx'))
+    return result_docx_name
 
 
 def make_word_file(request, pk):
-    BASE_APP_DIR = os.path.dirname(os.path.abspath(__file__))
-    dynamic_dir_name = os.path.join(BASE_APP_DIR,'dynamic')
-    DOCX_TEMPLATE_DIR =  os.path.join(BASE_APP_DIR,'docx_template')
-    docx_template = os.path.join(DOCX_TEMPLATE_DIR,'HiddenActTemtplate2.docx')
+    base_app_dir = os.path.dirname(os.path.abspath(__file__))
+    dynamic_dir_name = os.path.join(base_app_dir,'dynamic')
+    if not os.path.exists(dynamic_dir_name):
+        os.mkdir(dynamic_dir_name)
+    docx_template_dir =  os.path.join(base_app_dir,'docx_template')
+    docx_template = os.path.join(docx_template_dir,'HiddenActTemtplate2.docx')
     myobj = get_object_or_404(ObjectActs, pk=pk)
-    s = make_hidden_docx (myobj, docx_template,dynamic_dir_name)
-    return HttpResponse (str(pk)+' '+dynamic_dir_name+s)
+    num_of_docx = make_hidden_docx (myobj, docx_template,dynamic_dir_name)
+    docx_name = assemble_docx (dynamic_dir_name, num_of_docx)
+    fp = open(docx_name, "rb");
+    response = HttpResponse(fp.read());
+    fp.close();
+    file_type = mimetypes.guess_type(docx_name);
+    if file_type is None:
+        file_type = 'application/octet-stream';
+    response['Content-Type'] = file_type
+    response['Content-Length'] = str(os.stat(docx_name).st_size);
+    response['Content-Disposition'] = "attachment; filename=hidden_acts.docx";
+
+    return response
+    # return HttpResponse (str(pk)+' '+dynamic_dir_name+' ' + docx_name)
 
 
 def objectedit (request, pk):
