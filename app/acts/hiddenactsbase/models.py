@@ -25,10 +25,11 @@ class ObjectActs (models.Model):
     system_type = models.CharField(max_length=100, verbose_name='тип')
     designer = models.CharField(max_length=200, verbose_name='Проектант')
     contractor = models.CharField(max_length=300, verbose_name='Подрядчик',
-                                  default= 'Общество с ограниченной ответственностью «Интера».' +
-                                           'Свидетельство о государственной регистрации серия 78'+
-                                           '№007274277 от  02.09.2009, ОГРН 1097847236783, ИНН 7805498649,'+
-                                           '198188, г. Санкт-Петербург, ул. Возрождения, д.20, литер А, тел. 242-78-10.')
+                                  default='Общество с ограниченной ответственностью «Интера».' +
+                                          'Свидетельство о государственной регистрации серия 78' +
+                                          '№007274277 от  02.09.2009, ОГРН 1097847236783, ' +
+                                          'ИНН 7805498649, 198188, г. Санкт-Петербург,' +
+                                          ' ул. Возрождения, д.20, литер А, тел. 242-78-10.')
     supervisor_engineer = models.CharField(max_length=100, verbose_name='Технадзор')
     contractor_engineer = models.CharField(max_length=100, verbose_name='Прораб')
     project_number = models.CharField(max_length=100, verbose_name='Ном. проекта')
@@ -44,19 +45,17 @@ class ObjectActs (models.Model):
         return '{}'.format(", ".join([self.system_type, self.address]))
 
     def get_absolute_url(self):
-        return reverse('object_detail_url', kwargs={'pk':self.pk})
+        return reverse('object_detail_url', kwargs={'pk': self.pk})
 
     def get_edit_url(self):
-        return reverse('object_edit_url', kwargs={'pk':self.pk})
+        return reverse('object_edit_url', kwargs={'pk': self.pk})
 
     def get_20_chars_of_contractor(self):
         return self.contractor[0:20] + '...'
 
-    def get_short_contractor (self):
-        s=re.findall(r"[\"\«\»\']\D+?[\"\«\»\']", self.contractor)
+    def get_short_contractor(self):
+        s = re.findall(r"[\"\«\»\']\D+?[\"\«\»\']", self.contractor)
         if len(s) == 0:
             return self.contractor
         else:
             return s[0]
-
-

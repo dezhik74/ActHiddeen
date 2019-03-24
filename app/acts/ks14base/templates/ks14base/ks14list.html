@@ -1,0 +1,23 @@
+<!-- Входящий контекст objects -->
+{% extends 'base.html' %}
+{% block mycontent %}
+    <div class="container">
+        <h5>Акты КС14 по объектам</h5>
+    </div>
+    <div class="container">
+    {% for obj in objects %}
+        <div class="card my-1">
+          <div class="card-header py-0 ">
+              <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_genitive }} <b>Подрядчик</b> {{ obj.contractor }}
+          </div>
+          <div class="card-body py-0">
+            <a href="{% url 'ks14_object_detail_url' obj.pk %}" class="btn btn-primary my-1 py-0">Смотреть</a>
+            <a href="{% url 'ks14_object_edit_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Редактировать</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">Создать пустой объект</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">Удалить объект</a>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- Входящий контекст my_objyect-->
+{% extends 'base.html'%}
+{% block mycontent %}
+    <div class="container">
+        <h5>KC14 по объекту</h5>
+    </div>
+    <div class="container">
+        <div class="card mb-1">
+            <div class="card-header py-0"><b>Объект: </b>{{ my_object.address }} 
+                                          <b>Капитальный ремонт: </b>{{ my_object.system_genitive }}
+                                          <b>Подрядчик: </b>{{ my_object.contractor }}
+            </div>
+            <div class="card-body py-0">
+            </div>
+            <div class="card-text">
+                <div class="row">
+                    <div class="col-md-3">Договор: начало: </div>
+                    <div class="col-md-3">{{ my_object.begin_contract_date }}</div>
+                    <div class="col-md-3">Договор: окончание: </div>
+                    <div class="col-md-3">{{ my_object.end_contract_date }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Факт: начало: </div>
+                    <div class="col-md-3">{{ my_object.begin_fact_date }}</div>
+                    <div class="col-md-3">Факт: окончание: </div>
+                    <div class="col-md-3">{{ my_object.act_date }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+

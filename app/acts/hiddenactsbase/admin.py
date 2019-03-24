@@ -7,5 +7,3 @@ from .models import HiddenActIS
 
 admin.site.register(ObjectActs)
 admin.site.register(HiddenActIS)
-
-

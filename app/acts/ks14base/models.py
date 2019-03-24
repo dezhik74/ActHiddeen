@@ -1,18 +1,52 @@
 from django.db import models
+from django.shortcuts import reverse
 
 # Create your models here.
-class Ks14ActIS (models.Model):
+class Ks14Act (models.Model):
     act_date = models.CharField(max_length=20, verbose_name='Дата Акта')
     telephonogramm_date = models.CharField(max_length=20, verbose_name='Дата телефонограммы')
     contractor = models.CharField(max_length=20, verbose_name='Подрядчик без кавычек')
     contractor_delegate_genitive = models.CharField(max_length=50, verbose_name='Представитель подрядчика (род падеж)')
     UK_full = models.CharField(max_length=120, verbose_name='УК полное')
-    UK_position_genitive = models.CharField(max_length=30, verbose_name='Представитель УК (род падеж)')
+    UK_position_genitive = models.CharField(max_length=30, verbose_name='Должность Представителя УК (род падеж)')
     UK_delegate_genitive = models.CharField(max_length=50, verbose_name='Представитель УК (род падеж)')
     UK_decree_genitive = models.CharField(max_length=100, verbose_name='Основание УК (род падеж)')
     supervisor_OSK_number = models.CharField(max_length=2, verbose_name='инженера ОСК№')
     supervisor_delegate_genitive = models.CharField(max_length=50, verbose_name='Представитель заказчика (род падеж)')
     supervisor_decree_genitive = models.CharField(max_length=40, verbose_name = 'Основание заказчика (род падеж')
+    administration_order = models.CharField(max_length=100, verbose_name = 'по распоряжению администр.',
+                                            blank = True)
+    owner_full_genitive = models.CharField(max_length = 150, verbose_name = 'предст. собственника + основание (род падеж)',
+                                           blank = True)
+    system_genitive = models.CharField(max_length = 100, verbose_name = 'система (род падеж')
+    address = models.CharField(max_length = 100, verbose_name = 'Адрес')
+    district_prepositional = models.CharField(max_length = 20, verbose_name = 'Район (предл падеж)')
+    contract = models.CharField(max_length=30, verbose_name = 'Контракт с датой')
+    begin_contract_date = models.CharField(max_length = 20, verbose_name= 'Начало по контракту')
+    end_contract_date = models.CharField(max_length = 20, verbose_name= 'Конец по контракту')
+    begin_fact_date = models.CharField(max_length = 20, verbose_name= 'Начало по факту')
+    summa = models.CharField(max_length = 20, verbose_name= 'Сумма контракта')
+    volume = models.CharField(max_length = 30, verbose_name= 'Объем с ед изм')
+    contractor_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель подрядчика')
+    UK_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель УК')
+    supervisor_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель Заказчика')
+    owner_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель Собственника',
+                                      blank = True)
+    administration_delegate_position = models.CharField(max_length = 50, verbose_name= 'Должность представителя администрации')
+    administration_delegate_decree = models.CharField(max_length = 50, verbose_name= 'Основание представителя администрации')
+    administration_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель Администрации')
+
+    class Meta:
+        verbose_name = 'КС14 инженерка '
+
+    def __str__(self):
+        return '{} -> {}'.format(self.address, self.system_genitive)
+
+    def get_absolute_url(self):
+        return reverse('ks14_object_detail_url', kwargs={'pk': self.pk})
+
+    def get_edit_url(self):
+        return reverse('ks14_object_edit_url', kwargs={'pk': self.pk})
 
 
 
