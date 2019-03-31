@@ -13,9 +13,13 @@
           <div class="card-body py-0">
             <a href="{% url 'ks14_object_detail_url' obj.pk %}" class="btn btn-primary my-1 py-0">Смотреть</a>
             <a href="{% url 'ks14_object_edit_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Редактировать</a>
-            <a href="#" class="btn btn-primary  my-1 py-0">Создать пустой объект</a>
-            <a href="#" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
-            <a href="#" class="btn btn-primary  my-1 py-0">Удалить объект</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">+ пустой</a>
+            <a href="{% url 'ks14_copy_url' obj.pk %}" class="btn btn-primary  my-1 py-0">+ копия</a>
+            <a href="{% url 'ks14_delete_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Удалить</a>
+            <a href="{% url 'make_ks14_docx' obj.pk %}" class="btn btn-primary  my-1 py-0">-> КС14</a>
+            <a href="{% url 'make_ks3_xlsx' obj.pk %}" class="btn btn-primary  my-1 py-0">-> КС3</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">-> КС2</a>
+            <a href="#" class="btn btn-primary  my-1 py-0">-> Акт пересорта</a>
           </div>
         </div>
     {% endfor %}
