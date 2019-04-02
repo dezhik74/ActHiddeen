@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin_url'),
     path('actbase/', include('hiddenactsbase.urls'),name='actbase_url'),
     path('ks14base/', include('ks14base.urls'),name='ks14base_url'),
+    path('gati/', include('gati.urls'),name='gati_url'),
+
 
 ]
 
