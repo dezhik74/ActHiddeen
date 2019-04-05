@@ -23,8 +23,12 @@
             <div class="col-md-3">{{ my_object.act_number }}</div>
         </div>
         <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'contract' }}</div>
-            <div class="col-md-3">{{ my_object.contract }}</div>
+            <div class="col-md-3">{{ my_object|verbose_name:'contract_number' }}</div>
+            <div class="col-md-3">{{ my_object.contract_number }}</div>
+            <div class="col-md-3">{{ my_object|verbose_name:'contract_date' }}</div>
+            <div class="col-md-3">{{ my_object.contract_date }}</div>
+        </div>
+        <div class="row">
             <div class="col-md-3">{{ my_object|verbose_name:'telephonogramm_date' }}</div>
             <div class="col-md-3">{{ my_object.telephonogramm_date }}</div>
         </div>
