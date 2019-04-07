@@ -109,14 +109,20 @@
             </div>
         {% else %}
             <div class="row">
-                <div class="col-md-4">{{ my_object|verbose_name:'owner_full_genitive' }}</div>
-                <div class="col-md-8">{{ my_object.owner_full_genitive }}</div>
+                <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate_position' }}</div>
+                <div class="col-md-9">{{ my_object.owner_delegate_position }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate' }}</div>
+                <div class="col-md-3">{{ my_object.owner_delegate }}</div>
+                <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate_genitive' }}</div>
+                <div class="col-md-3">{{ my_object.owner_delegate_genitive }}</div>
             </div>
             <div class="row">
                 <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate_decree' }}</div>
                 <div class="col-md-3">{{ my_object.owner_delegate_decree }}</div>
-                <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate' }}</div>
-                <div class="col-md-3">{{ my_object.owner_delegate }}</div>
+                <div class="col-md-3">{{ my_object|verbose_name:'owner_delegate_decree_genitive' }}</div>
+                <div class="col-md-3">{{ my_object.owner_delegate_decree_genitive }}</div>
             </div>
         {% endif %}
         <h6 class="mb-0">Администрация</h6>

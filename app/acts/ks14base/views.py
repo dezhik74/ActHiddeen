@@ -90,7 +90,7 @@ def make_ks3_xlsx(request, pk):
     ws['B29'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
     ws['K34'] = my_obj.summa
     ws['A45'] = 'Инженер отдела строительного контроля №' + my_obj.supervisor_OSK_number
-    ws['A46'] = my_obj.supervisor_decree_dative
+    ws['A46'] = 'по ' + my_obj.supervisor_decree_dative
     ws['K46'] = my_obj.supervisor_delegate
     ws['A49'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»'
     ws['K50'] = my_obj.contractor_delegate
@@ -112,6 +112,70 @@ def make_ks3_xlsx(request, pk):
     return get_file(os.path.join(dynamic_dir_name, 'ks3.xlsx'), 'ks3.xlsx')
 
 
+def make_ks2_xlsx(request, pk):
+    my_obj=get_object_or_404(Ks14Act, pk=pk)
+    base_app_dir = os.path.dirname(os.path.abspath(__file__))
+    dynamic_dir_name = os.path.join(base_app_dir, 'dynamic')
+    if not os.path.exists(dynamic_dir_name):
+        os.mkdir(dynamic_dir_name)
+    docx_template_dir = os.path.join(base_app_dir, 'docx_template')
+    docx_template = os.path.join(docx_template_dir, 'KS2 Template.xlsx')
+    wb = load_workbook(docx_template,read_only=False)
+    ws = wb.active
+    ws['E9'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
+    ws['Q9'] = my_obj.contractor_OKPO
+    ws['E10'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
+    ws['E11'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
+    ws['Q13'] = my_obj.contract_number
+    s = my_obj.contract_date.split('.')
+    ws['Q14'] = s[0]
+    ws['T14'] = s[1]
+    ws['W14'] = s[2][0:4]
+    ws['H21'] = my_obj.act_number
+    ws['K21'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.act_date).group(0)
+    ws['O21'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.begin_fact_date).group(0)
+    ws['R21'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.act_date).group(0)
+    ws['B23'] = 'Сметная (договорная) стоимость в соответствии с договором подряда (субподряда): ' + my_obj.summa + 'руб.'
+    ws['I30'] = my_obj.summa
+    ws['I32'] = my_obj.summa
+    ws['B34'] = 'Подрядчик: Общество с ограниченной ответственностью «' + my_obj.contractor + '»'
+    ws['O35'] = my_obj.contractor_delegate
+    ws['B46'] = 'Инженер отдела строительного контроля №' + my_obj.supervisor_OSK_number
+    ws['B47'] = 'по ' + my_obj.supervisor_decree_dative
+    ws['O47'] = my_obj.supervisor_delegate
+    if my_obj.administration_order:
+        ws['B50'] = my_obj.administration_order
+    else:
+        ws['B50'] = 'согласно ' + my_obj.owner_delegate_decree_genitive
+        ws['O50'] = my_obj.owner_delegate
+        ws['B51'] = '(должность)                                                       ' \
+                    '                                                                   ' \
+                    '                                                           (подпись)        (расшифровка подписи)'
+    ws['B52'] = 'Уполномоченный  представитель администрации '+ my_obj.district_prepositional + ' района'
+    ws['B53'] = my_obj.administration_delegate_position
+    ws['B54'] = my_obj.administration_delegate_decree
+    ws['O54'] = my_obj.administration_delegate
+
+    wb.save(os.path.join(dynamic_dir_name, 'ks2.xlsx'))
+    wb.close()
+    return get_file(os.path.join(dynamic_dir_name, 'ks2.xlsx'), 'ks2.xlsx')
+
+
+def make_peresort (request, pk):
+    base_app_dir = os.path.dirname(os.path.abspath(__file__))
+    dynamic_dir_name = os.path.join(base_app_dir, 'dynamic')
+    if not os.path.exists(dynamic_dir_name):
+        os.mkdir(dynamic_dir_name)
+    docx_template_dir = os.path.join(base_app_dir, 'docx_template')
+    docx_template = os.path.join(docx_template_dir, 'PeresortTemplate.docx')
+    my_obj = get_object_or_404(Ks14Act, pk=pk)
+    context = model_to_dict(my_obj, exclude=['id'])
+    doc = DocxTemplate(docx_template)
+    doc.render(context)
+    doc.save(os.path.join(dynamic_dir_name, "act_peresort.docx"))
+    return get_file(os.path.join(dynamic_dir_name, "act_peresort.docx"), 'act_peresort.docx')
+
+
 class KS14_Detail(View):
     @staticmethod
     def get(request, pk):
@@ -120,7 +184,7 @@ class KS14_Detail(View):
                       context={'my_object': my_obj})
 
 
-def object_edit (request, pk):
+def object_edit(request, pk):
     pass
 
 
