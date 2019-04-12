@@ -17,7 +17,7 @@ class ObjectCommon (models.Model):
     UK_full = models.CharField(max_length=120, verbose_name='УК полное')
     UK_delegate = models.CharField(max_length = 20, verbose_name= 'Предст. УК')
     UK_delegate_genitive = models.CharField(max_length=50, verbose_name='Предст. УК (род падеж)')
-    UK_position_genitive = models.CharField(max_length=30, verbose_name='Должность Предст. УК (род падеж)')
+    UK_position_genitive = models.CharField(max_length=100, verbose_name='Должность Предст. УК (род падеж)')
     UK_decree_genitive = models.CharField(max_length=100, verbose_name='Основание УК (род падеж)')
 
     supervisor_OSK_number = models.CharField(max_length=2, verbose_name='инженера ОСК№')
@@ -38,7 +38,7 @@ class ObjectCommon (models.Model):
     owner_delegate_decree_genitive = models.CharField(max_length=100, verbose_name='Основание предст. собств. (род. падеж)',
                                                       blank=True)
 
-    administration_delegate_position = models.CharField(max_length = 50, verbose_name= 'Должн. предст. адм.')
+    administration_delegate_position = models.CharField(max_length = 150, verbose_name= 'Должн. предст. адм.')
     administration_delegate_decree = models.CharField(max_length = 50, verbose_name= 'Основание предст. адм.')
     administration_delegate = models.CharField(max_length = 20, verbose_name= 'Предст. Адм.')
 
@@ -92,7 +92,7 @@ class Ks14Act (models.Model):
     UK_full = models.CharField(max_length=120, verbose_name='УК полное')
     UK_delegate = models.CharField(max_length = 20, verbose_name= 'Предст. УК')
     UK_delegate_genitive = models.CharField(max_length=50, verbose_name='Предст. УК (род падеж)')
-    UK_position_genitive = models.CharField(max_length=30, verbose_name='Должность Предст. УК (род падеж)')
+    UK_position_genitive = models.CharField(max_length=100, verbose_name='Должность Предст. УК (род падеж)')
     UK_decree_genitive = models.CharField(max_length=100, verbose_name='Основание УК (род падеж)')
 
     supervisor_OSK_number = models.CharField(max_length=2, verbose_name='инженера ОСК№')
@@ -113,7 +113,7 @@ class Ks14Act (models.Model):
     owner_delegate_decree_genitive = models.CharField(max_length=100, verbose_name='Основание предст. собств. (род. падеж)',
                                                       blank=True)
 
-    administration_delegate_position = models.CharField(max_length = 50, verbose_name= 'Должн. предст. адм.')
+    administration_delegate_position = models.CharField(max_length = 150, verbose_name= 'Должн. предст. адм.')
     administration_delegate_decree = models.CharField(max_length = 50, verbose_name= 'Основание предст. адм.')
     administration_delegate = models.CharField(max_length = 20, verbose_name= 'Предст. Адм.')
 

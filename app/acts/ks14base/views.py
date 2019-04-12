@@ -77,7 +77,7 @@ def make_ks3_xlsx(request, pk):
     ws = wb.active
     ws['B11'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
     ws['J11'] = my_obj.contractor_OKPO
-    ws['B13'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
+    ws['B13'] = 'Капитальный ремонт ' + my_obj.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
     ws['J16'] = my_obj.contract_number
     s = my_obj.contract_date.split('.')
     ws['J17'] = s[0]
@@ -87,7 +87,7 @@ def make_ks3_xlsx(request, pk):
     ws['I24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.act_date).group(0)
     ws['K24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.begin_fact_date).group(0)
     ws['L24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', my_obj.act_date).group(0)
-    ws['B29'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
+    ws['B29'] = 'Капитальный ремонт ' + my_obj.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
     ws['K34'] = my_obj.summa
     ws['A45'] = 'Инженер отдела строительного контроля №' + my_obj.supervisor_OSK_number
     ws['A46'] = 'по ' + my_obj.supervisor_decree_dative
@@ -124,8 +124,8 @@ def make_ks2_xlsx(request, pk):
     ws = wb.active
     ws['E9'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
     ws['Q9'] = my_obj.contractor_OKPO
-    ws['E10'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
-    ws['E11'] = 'Капитальный ремонт ' + my_obj.system_genitive + 'в многоквартирном доме по адресу: ' + my_obj.address
+    ws['E10'] = 'Капитальный ремонт ' + my_obj.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
+    ws['E11'] = 'Капитальный ремонт ' + my_obj.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
     ws['Q13'] = my_obj.contract_number
     s = my_obj.contract_date.split('.')
     ws['Q14'] = s[0]
