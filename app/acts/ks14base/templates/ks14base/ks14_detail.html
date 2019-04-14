@@ -4,7 +4,7 @@
 {% load filters %}
     <div class="container-fluid px-4">
         <h5>
-            KC14, КС3, КС2 по объекту
+            Сводная информация по объекту
             <a href="{% url 'ks14_object_edit_url' my_object.pk %}" class="btn btn-primary  my-1 py-0">Редактировать</a>
             <a href="{% url 'ks14_copy_url' my_object.pk %}" class="btn btn-primary  my-1 py-0">+ копия</a>
             <a href="{% url 'ks14_delete_url' my_object.pk %}" class="btn btn-primary  my-1 py-0">Удалить</a>
@@ -12,46 +12,12 @@
         </h5>
         <div class="row">
             <div class="col-md-12"><b>Объект: </b>{{ my_object.address }}
-                                          <b>Капитальный ремонт: </b>{{ my_object.system_genitive }}
-                                          <b>Подрядчик: </b>{{ my_object.contractor }}
+                                          <b> в</b> {{ my_object.district_prepositional }} <b> районе </b>
+                                          <b> Договор: </b>{{ my_object.contract_number }}
+                                          <b> от: </b> {{ my_object.contract_date }}
+                                          <b> Подрядчик: </b>{{ my_object.contractor }}
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'district_prepositional' }}</div>
-            <div class="col-md-3">{{ my_object.district_prepositional }}</div>
-            <div class="col-md-3">{{ my_object|verbose_name:'act_number' }}</div>
-            <div class="col-md-3">{{ my_object.act_number }}</div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'contract_number' }}</div>
-            <div class="col-md-3">{{ my_object.contract_number }}</div>
-            <div class="col-md-3">{{ my_object|verbose_name:'contract_date' }}</div>
-            <div class="col-md-3">{{ my_object.contract_date }}</div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'telephonogramm_date' }}</div>
-            <div class="col-md-3">{{ my_object.telephonogramm_date }}</div>
-        </div>
-         <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'begin_contract_date' }}</div>
-            <div class="col-md-3">{{ my_object.begin_contract_date }}</div>
-            <div class="col-md-3">{{ my_object|verbose_name:'end_contract_date' }}</div>
-            <div class="col-md-3">{{ my_object.end_contract_date }}</div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'begin_fact_date' }}</div>
-            <div class="col-md-3">{{ my_object.begin_fact_date }}</div>
-            <div class="col-md-3">{{ my_object|verbose_name:'begin_contract_date' }}</div>
-            <div class="col-md-3">{{ my_object.act_date }}</div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'summa' }}</div>
-            <div class="col-md-3">{{ my_object.summa }}</div>
-            <div class="col-md-3">{{ my_object|verbose_name:'volume' }}</div>
-            <div class="col-md-3">{{ my_object.volume }}</div>
-        </div>
-
-
         <h6 class="mb-0">Подрядчик</h6>
         <div class="row">
             <div class="col-md-3">{{ my_object|verbose_name:'contractor_address' }}</div>
@@ -62,10 +28,10 @@
             <div class="col-md-9">{{ my_object.contractor_OKPO }}</div>
         </div>
         <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'contractor_delegate_genitive' }}</div>
-            <div class="col-md-3">{{ my_object.contractor_delegate_genitive }}</div>
             <div class="col-md-3">{{ my_object|verbose_name:'contractor_delegate' }}</div>
             <div class="col-md-3">{{ my_object.contractor_delegate }}</div>
+            <div class="col-md-3">{{ my_object|verbose_name:'contractor_delegate_genitive' }}</div>
+            <div class="col-md-3">{{ my_object.contractor_delegate_genitive }}</div>
         </div>
         <h6 class="mb-0">Управляющая кампания</h6>
          <div class="row">
@@ -73,10 +39,10 @@
             <div class="col-md-9">{{ my_object.UK_full }}</div>
         </div>
         <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'UK_delegate_genitive' }}</div>
-            <div class="col-md-3">{{ my_object.UK_delegate_genitive }}</div>
             <div class="col-md-3">{{ my_object|verbose_name:'UK_delegate' }}</div>
             <div class="col-md-3">{{ my_object.UK_delegate }}</div>
+            <div class="col-md-3">{{ my_object|verbose_name:'UK_delegate_genitive' }}</div>
+            <div class="col-md-3">{{ my_object.UK_delegate_genitive }}</div>
          </div>
         <div class="row">
             <div class="col-md-3">{{ my_object|verbose_name:'UK_position_genitive' }}</div>
@@ -86,10 +52,10 @@
         </div>
         <h6 class="mb-0">Технадзор заказчика</h6>
         <div class="row">
-            <div class="col-md-3">{{ my_object|verbose_name:'supervisor_delegate_genitive' }}</div>
-            <div class="col-md-3">{{ my_object.supervisor_delegate_genitive }}</div>
             <div class="col-md-3">{{ my_object|verbose_name:'supervisor_delegate' }}</div>
             <div class="col-md-3">{{ my_object.supervisor_delegate }}</div>
+            <div class="col-md-3">{{ my_object|verbose_name:'supervisor_delegate_genitive' }}</div>
+            <div class="col-md-3">{{ my_object.supervisor_delegate_genitive }}</div>
         </div>
         <div class="row">
             <div class="col-md-3">{{ my_object|verbose_name:'supervisor_OSK_number' }}</div>
@@ -135,8 +101,42 @@
             <div class="col-md-3">{{ my_object.administration_delegate_decree }}</div>
             <div class="col-md-3">{{ my_object|verbose_name:'administration_delegate' }}</div>
             <div class="col-md-3">{{ my_object.administration_delegate }}</div>
-
         </div>
+        {% for act in my_object.acts.all %}
+            <div class="row">
+                <div class="col-md-3"><b>Капитальный ремонт </b></div>
+                <div class="col-md-9"><b>{{ act.system_genitive }}</b></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">{{ act|verbose_name:'act_number' }}</div>
+                <div class="col-md-3">{{ act.act_number }}</div>
+                <div class="col-md-3">{{ act|verbose_name:'act_date' }}</div>
+                <div class="col-md-3">{{ act.act_date }}</div>
+            </div>
+        <div class="row">
+            <div class="col-md-3">{{ act|verbose_name:'begin_fact_date' }}</div>
+            <div class="col-md-3">{{ act.begin_fact_date }}</div>
+            <div class="col-md-3">{{ act|verbose_name:'telephonogramm_date' }}</div>
+            <div class="col-md-3">{{ act.telephonogramm_date }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">{{ act|verbose_name:'begin_contract_date' }}</div>
+            <div class="col-md-3">{{ act.begin_contract_date }}</div>
+            <div class="col-md-3">{{ act|verbose_name:'end_contract_date' }}</div>
+            <div class="col-md-3">{{ act.end_contract_date }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">{{ act|verbose_name:'summa' }}</div>
+            <div class="col-md-3">{{ act.summa }}</div>
+            <div class="col-md-3">{{ act|verbose_name:'volume' }}</div>
+            <div class="col-md-3">{{ act.volume }}</div>
+        </div>
+        
+        {% endfor %}
+
+
+
+
     </div>
 {% endblock %}
 

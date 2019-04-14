@@ -34,8 +34,8 @@ class ObjectActs (models.Model):
     contractor_engineer = models.CharField(max_length=100, verbose_name='Прораб')
     project_number = models.CharField(max_length=100, verbose_name='Ном. проекта')
     exec_documents = models.CharField(max_length=100, verbose_name='Исполн.')
-    supervisor_engineer_decree = models.CharField(max_length=100, verbose_name=' ')
-    contractor_engineer_decree = models.CharField(max_length=100, verbose_name=' ')
+    supervisor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ технадзора')
+    contractor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ прораба')
     acts = models.ManyToManyField('HiddenActIS', blank=True, related_name='object_acts')
 
     class Meta:

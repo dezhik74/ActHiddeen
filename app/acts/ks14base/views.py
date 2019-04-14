@@ -8,14 +8,13 @@ from django.views.generic import View
 from docxtpl import DocxTemplate
 from openpyxl import Workbook, load_workbook
 
-
-from .models import Ks14Act
-
+from .models import *
+from .forms import *
 
 # Create your views here.
 
 def ks14_list(request):
-    objs = Ks14Act.objects.order_by("-id")
+    objs = ObjectCommon.objects.order_by("-id")
     return render(request, 'ks14base/ks14list.html',
                   context={'objects': objs})
 
@@ -179,12 +178,26 @@ def make_peresort (request, pk):
 class KS14_Detail(View):
     @staticmethod
     def get(request, pk):
-        my_obj = get_object_or_404(Ks14Act, pk=pk)
+        my_obj = get_object_or_404(ObjectCommon, pk=pk)
         return render(request, 'ks14base/ks14_detail.html',
                       context={'my_object': my_obj})
 
 
-def object_edit(request, pk):
-    pass
+def ks14_object_edit(request, pk):
+    my_obj = get_object_or_404(ObjectCommon, pk=pk)
+    init_data = model_to_dict(my_obj, exclude=['id', 'acts'])
+    if request.method == 'POST':
+        my_form = ObjectCommonForm (request.POST)
+        if my_form.is_valid():
+            my_form.save()
+            return redirect(my_obj)
+        return render(request, 'ks14base/object_edit.html', context = {'my_obj' : my_obj,
+                                                                        'my_form' : my_form})
+    else:
+        my_form = ObjectCommonForm(initial=init_data)
+        return render(request, 'ks14base/object_edit.html', context={'my_obj': my_obj,
+                                                                     'my_form': my_form})
+
+
 
 

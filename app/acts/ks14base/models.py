@@ -21,8 +21,8 @@ class ObjectCommon (models.Model):
     UK_decree_genitive = models.CharField(max_length=100, verbose_name='Основание УК (род падеж)')
 
     supervisor_OSK_number = models.CharField(max_length=2, verbose_name='инженера ОСК№')
-    supervisor_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель Заказчика')
-    supervisor_delegate_genitive = models.CharField(max_length=50, verbose_name='Представитель заказчика (род падеж)')
+    supervisor_delegate = models.CharField(max_length = 20, verbose_name= 'Технадзор')
+    supervisor_delegate_genitive = models.CharField(max_length=50, verbose_name='Технадзор (род падеж)')
     supervisor_decree_genitive = models.CharField(max_length=40, verbose_name = 'Основание заказчика (род падеж')
     supervisor_decree_dative = models.CharField(max_length=40, verbose_name = 'Основание заказчика (дательн падеж')
 
@@ -48,8 +48,9 @@ class ObjectCommon (models.Model):
         return '{}'.format(self.address)
 
     class Meta:
-        verbose_name = 'Финдоки 2 '
-        verbose_name_plural = 'Финдоки 2 '
+        verbose_name = 'Информация объекта '
+        verbose_name_plural = 'Информация объекта '
+
 
 class ActSpecific (models.Model):
     system_genitive = models.CharField(max_length = 100, verbose_name = 'система (род падеж)')
@@ -64,6 +65,10 @@ class ActSpecific (models.Model):
 
     def __str__(self):
         return '№{}, {}, сумма {}'.format(self.act_number, self.system_genitive, self.summa)
+ 
+    class Meta:
+        verbose_name = 'Информация акта '
+        verbose_name_plural = 'Информация акта '
 
 
 class Ks14Act (models.Model):
@@ -96,10 +101,10 @@ class Ks14Act (models.Model):
     UK_decree_genitive = models.CharField(max_length=100, verbose_name='Основание УК (род падеж)')
 
     supervisor_OSK_number = models.CharField(max_length=2, verbose_name='инженера ОСК№')
-    supervisor_delegate = models.CharField(max_length = 20, verbose_name= 'Представитель Заказчика')
-    supervisor_delegate_genitive = models.CharField(max_length=50, verbose_name='Представитель заказчика (род падеж)')
+    supervisor_delegate = models.CharField(max_length = 20, verbose_name= 'Технадзор')
+    supervisor_delegate_genitive = models.CharField(max_length=50, verbose_name='Технадзор (род падеж)')
     supervisor_decree_genitive = models.CharField(max_length=40, verbose_name = 'Основание заказчика (род падеж')
-    supervisor_decree_dative = models.CharField(max_length=40, verbose_name = 'Основание заказчика (дательн падеж')
+    supervisor_decree_dative = models.CharField(max_length=40, verbose_name = 'Основание заказчика (дат падеж')
 
     administration_order = models.CharField(max_length=100, verbose_name = 'по распоряжению администр.',
                                             blank = True)
@@ -118,8 +123,8 @@ class Ks14Act (models.Model):
     administration_delegate = models.CharField(max_length = 20, verbose_name= 'Предст. Адм.')
 
     class Meta:
-        verbose_name = 'Финдоки '
-        verbose_name_plural = 'Финдоки'
+        verbose_name = 'Финдоки старая версия'
+        verbose_name_plural = 'Финдоки старая версия'
 
     def __str__(self):
         return '{} -> {}'.format(self.address, self.system_genitive)
