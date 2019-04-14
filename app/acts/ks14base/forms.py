@@ -1,4 +1,3 @@
-from django import forms
 from django.forms import ModelForm
 from .models import *
 
@@ -48,4 +47,4 @@ class ActSpecificForm (ModelForm):
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
         for f in self.fields:
-            self[f].widget.attrs['class'] = 'form-control form-control-sm'
+            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'

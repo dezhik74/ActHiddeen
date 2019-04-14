@@ -1,4 +1,6 @@
-<!-- Входящий контекст 'my_obj' : my_obj, 'my_form' : my_form-->
+<!-- context = {'my_obj' : my_obj,
+               'object_common_form_set' : object_common_form_set,
+               'act_specific_form_set' : act_specific_form_set})-->
 {% extends 'base.html'%}
 {% block mycontent %}
     <div class="container mx-1">
@@ -7,10 +9,18 @@
 
             <form action="{{ my_obj.get_edit_url }}" method ="post">
                 {% csrf_token %}
-                {% if my_form.errors %}
-                    <div class="alert alert-danger mb-0 py-0">Заполните все поля формы</div>
-                {% endif %}
-                {% include "ks14base/common_object_fields.html" %}
+                {{ object_common_form_set.management_form }}
+                {% for my_form in object_common_form_set %}
+                    {% if my_form.errors %}
+                        <div class="alert alert-danger mb-0 py-0">Заполните все поля формы</div>
+                    {% endif %}
+                    {% include "ks14base/common_object_fields.html" %}
+                {% endfor %}
+                {{ act_specific_form_set.management_form }}
+                {% for act_form in act_specific_form_set %}
+                    <h5>Редактирование акта</h5>
+                    {% include "ks14base/act_specific_fields.html" %}
+                {% endfor %}
                 <button type="submit" class="btn btn-primary my-3">Сохранить изменения</button>
             </form>
     </div>

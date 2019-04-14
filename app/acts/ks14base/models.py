@@ -44,12 +44,42 @@ class ObjectCommon (models.Model):
 
     acts = models.ManyToManyField('ActSpecific', blank=True, related_name='object_common')
 
-    def __str__(self):
-        return '{}'.format(self.address)
-
     class Meta:
         verbose_name = 'Информация объекта '
         verbose_name_plural = 'Информация объекта '
+
+    def __str__(self):
+        return '{}'.format(self.address)
+
+    def copy(self):
+        s = self.address
+        if len(s) > 93:
+            s = s[0:93]
+        self.address = 'Копия: ' + s
+        new_acts = []
+        for act in self.acts.all():
+            act.id = None
+            act.save()
+            new_acts.append(act)
+        self.id = None
+        self.save()
+        for act1 in new_acts:
+            self.acts.add(act1)
+
+    def delete_common_obj(self):
+        for act in self.acts.all():
+            act.delete()
+        self.delete()
+
+    def update_object_common (self, cleaned_obj_data, cleaned_act_data):
+        self.__dict__.update(cleaned_obj_data[0])
+        i = 0
+        for act in self.acts.all():
+            act.__dict__.update(cleaned_act_data[i])
+            i += 1
+            act.save()
+        self.save()
+        return self
 
 
 class ActSpecific (models.Model):
@@ -63,12 +93,12 @@ class ActSpecific (models.Model):
     volume = models.CharField(max_length = 30, verbose_name= 'Объем с ед изм')
     telephonogramm_date = models.CharField(max_length=20, verbose_name='Дата телефонограммы')
 
-    def __str__(self):
-        return '№{}, {}, сумма {}'.format(self.act_number, self.system_genitive, self.summa)
- 
     class Meta:
         verbose_name = 'Информация акта '
         verbose_name_plural = 'Информация акта '
+
+    def __str__(self):
+        return '№{}, {}, сумма {}'.format(self.act_number, self.system_genitive, self.summa)
 
 
 class Ks14Act (models.Model):
