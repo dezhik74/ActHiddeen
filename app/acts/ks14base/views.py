@@ -43,19 +43,19 @@ def make_ks14_docx (request, pk, pk2):
 
 
 def make_ks3_xlsx(request, pk, pk2):
-    my_obj=get_object_or_404(Ks14Act, pk=pk)
+    my_obj=get_object_or_404(ObjectCommon, pk=pk)
     my_act = get_object_or_404(ActSpecific, pk=pk2)
     return create_ks3_xlsx (my_obj, my_act)
 
 
 def make_ks2_xlsx(request, pk, pk2):
-    my_obj=get_object_or_404(Ks14Act, pk=pk)
+    my_obj=get_object_or_404(ObjectCommon, pk=pk)
     my_act = get_object_or_404(ActSpecific, pk=pk2)
     return create_ks2_xlsx (my_obj, my_act)
 
 
 def make_peresort (request, pk, pk2):
-    my_obj = get_object_or_404(Ks14Act, pk=pk)
+    my_obj = get_object_or_404(ObjectCommon, pk=pk)
     my_act = get_object_or_404(ActSpecific, pk=pk2)
     return create_peresort (my_obj, my_act)
 

@@ -11,7 +11,7 @@
                 <p class="my-0"><b>Объект </b> {{ obj.address }} <b>Подрядчик </b> {{ obj.contractor }} <b>Договор </b> {{ obj.contract_number }}</p>
                     <a href="{% url 'ks14_object_detail_url' obj.pk %}" class="btn btn-primary my-1 py-0">Смотреть</a>
                     <a href="{% url 'ks14_object_edit_structure_url' obj.pk %}" class="btn btn-primary my-1 py-0">Структура</a>
-                    <a href="{% url 'ks14_object_edit_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Редактировать<f/a>
+                    <a href="{% url 'ks14_object_edit_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Редактировать</a>
                     <a href="{% url 'ks14_copy_url' obj.pk %}" class="btn btn-primary  my-1 py-0">+ копия</a>
                     <a href="{% url 'ks14_delete_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Удалить</a>
             </div>

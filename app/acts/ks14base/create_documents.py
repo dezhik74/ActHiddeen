@@ -58,7 +58,7 @@ def create_ks3_xlsx (obj, act):
     ws['I24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
     ws['K24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.begin_fact_date).group(0)
     ws['L24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
-    ws['B29'] = 'Капитальный ремонт ' + obj.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
+    ws['B29'] = 'Капитальный ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
     ws['K34'] = act.summa
     ws['A45'] = 'Инженер отдела строительного контроля №' + obj.supervisor_OSK_number
     ws['A46'] = 'по ' + obj.supervisor_decree_dative
@@ -91,10 +91,10 @@ def create_ks2_xlsx (my_obj, my_act):
     docx_template = os.path.join(docx_template_dir, 'KS2 Template.xlsx')
     wb = load_workbook(docx_template,read_only=False)
     ws = wb.active
-    ws['E9'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
+    ws['C9'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
     ws['Q9'] = my_obj.contractor_OKPO
-    ws['E10'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
-    ws['E11'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
+    ws['C10'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
+    ws['C11'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
     ws['Q13'] = my_obj.contract_number
     s = my_obj.contract_date.split('.')
     ws['Q14'] = s[0]
