@@ -12,4 +12,6 @@ urlpatterns = [
     path('make_ks3-<int:pk>-<int:pk2>', make_ks3_xlsx, name='make_ks3_xlsx'),
     path('make_peresort-<int:pk>-<int:pk2>', make_peresort, name='make_peresort'),
     path('make_ks2-<int:pk>-<int:pk2>', make_ks2_xlsx, name='make_ks2_xlsx'),
+    path('insert_act-<int:pk>', insert_act, name='insert_act_url'),
+    path('delete_act-<int:pk>-<int:pk2>', delete_act, name='delete_act_url'),
 ]

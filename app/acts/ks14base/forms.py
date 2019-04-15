@@ -6,7 +6,8 @@ class ObjectCommonForm (ModelForm):
     class Meta:
         model = ObjectCommon
         fields = [
-            'address', 'district_prepositional',
+            'address',
+            'district_prepositional', 'district_genitive',
             'contract_number', 'contract_date',
             'contractor', 'contractor_address',
             'contractor_OKPO',

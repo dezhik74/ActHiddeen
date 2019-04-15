@@ -10,7 +10,8 @@ class Ks14Admin (admin.ModelAdmin):
     save_as = True
     list_display = ('address', 'contract_number', 'district_prepositional', 'system_genitive', 'summa')
     fields = (
-              ('address',  'district_prepositional'),
+              'address',
+              ('district_prepositional','district_genitive'),
               'system_genitive',
               ('contract_number', 'contract_date'),
               ('begin_contract_date', 'end_contract_date'),
@@ -46,7 +47,8 @@ class ObjectCommonAdmin (admin.ModelAdmin):
     list_display = ('address', 'contract_number', 'district_prepositional')
     inlines = [ActSpecificInline]
     fields = (
-                ('address',  'district_prepositional'),
+                'address',
+                ('district_prepositional','district_genitive'),
                 ('contract_number', 'contract_date'),
                 ('contractor', 'contractor_address'),
                 'contractor_OKPO',

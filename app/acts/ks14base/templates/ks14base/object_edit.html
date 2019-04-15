@@ -22,6 +22,8 @@
                     {% include "ks14base/act_specific_fields.html" %}
                 {% endfor %}
                 <button type="submit" class="btn btn-primary my-3">Сохранить изменения</button>
+                <a href="{% url 'ks14_list_url' %}" class="btn btn-primary my-3">Выйти в список</a>
+                <a href="{% url 'ks14_object_edit_structure_url' my_obj.pk %}" class="btn btn-primary my-3">Выйти в структуру</a>
             </form>
     </div>
 {% endblock %}

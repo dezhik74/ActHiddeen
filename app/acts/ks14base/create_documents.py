@@ -73,7 +73,7 @@ def create_ks3_xlsx (obj, act):
         ws['A54'] = '(должность)'
         ws['G54'] = '(подпись)'
         ws['K54'] = '  (расшифровка подписи)'
-    ws['A56'] = 'Уполномоченный  представитель администрации '+ obj.district_prepositional + ' района'
+    ws['A56'] = 'Уполномоченный  представитель администрации '+ obj.district_genitive + ' района'
     ws['A57'] = obj.administration_delegate_position
     ws['A58'] = obj.administration_delegate_decree
     ws['K58'] = obj.administration_delegate
@@ -120,7 +120,7 @@ def create_ks2_xlsx (my_obj, my_act):
         ws['B51'] = '(должность)                                                       ' \
                     '                                                                   ' \
                     '                                                           (подпись)        (расшифровка подписи)'
-    ws['B52'] = 'Уполномоченный  представитель администрации '+ my_obj.district_prepositional + ' района'
+    ws['B52'] = 'Уполномоченный  представитель администрации '+ my_obj.district_genitive + ' района'
     ws['B53'] = my_obj.administration_delegate_position
     ws['B54'] = my_obj.administration_delegate_decree
     ws['O54'] = my_obj.administration_delegate

@@ -4,7 +4,8 @@ from django.shortcuts import reverse
 
 class ObjectCommon (models.Model):
     address = models.CharField(max_length = 100, verbose_name = 'Адрес')
-    district_prepositional = models.CharField(max_length = 20, verbose_name = 'Район (предл падеж)')
+    district_prepositional = models.CharField(max_length = 30, verbose_name = 'Район (предл падеж)')
+    district_genitive = models.CharField(max_length = 30, verbose_name = 'Район (род падеж)')
     contract_number = models.CharField(max_length=40, verbose_name = '№ Контракта')
     contract_date = models.CharField(max_length=20, verbose_name= 'Дата контракта')
 
@@ -50,6 +51,12 @@ class ObjectCommon (models.Model):
 
     def __str__(self):
         return '{}'.format(self.address)
+
+    def get_absolute_url(self):
+        return reverse('ks14_object_detail_url', kwargs={'pk': self.pk})
+
+    def get_edit_url(self):
+        return reverse('ks14_object_edit_url', kwargs={'pk': self.pk})
 
     def copy(self):
         s = self.address

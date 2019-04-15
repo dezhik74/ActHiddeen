@@ -81,7 +81,7 @@ def ks14_object_edit(request, pk):
         act_specific_form_set = ActSpecificFormSet(request.POST, prefix ='act_data')
         if object_common_form_set.is_valid() and act_specific_form_set.is_valid():
             my_obj.update_object_common (object_common_form_set.cleaned_data, act_specific_form_set.cleaned_data)
-            return redirect('ks14_list_url')
+            return redirect('ks14_object_edit_structure_url', pk=pk)
         return render(request, 'ks14base/object_edit.html', context = {'my_obj' : my_obj,
                                                                        'object_common_form_set' : object_common_form_set,
                                                                        'act_specific_form_set' : act_specific_form_set})
@@ -92,6 +92,18 @@ def ks14_object_edit(request, pk):
                                                                        'object_common_form_set' : object_common_form_set,
                                                                        'act_specific_form_set' : act_specific_form_set})
 
+
+def insert_act(request, pk):
+    my_obj = get_object_or_404(ObjectCommon, pk=pk)
+    my_obj.acts.create()
+    return redirect('ks14_object_edit_structure_url', pk = pk)
+
+
+def delete_act(request, pk, pk2):
+    my_obj = get_object_or_404(ObjectCommon, pk=pk)
+    my_act = get_object_or_404(ActSpecific, pk=pk2)
+    my_act.delete()
+    return redirect('ks14_object_edit_structure_url', pk = pk)
 
 
 
