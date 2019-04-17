@@ -11,15 +11,24 @@
               <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
           </div>
           <div class="card-body py-0">
-            {% for act in  obj.acts.all %}
-                <p class="card-text mb-0"> № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
-            {% endfor %}
             <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Редактировать структуру</a>
             <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редактировать содержимое</a>
             <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
             <a href="{% url 'delete_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Удалить объект</a>
+            <a class="btn btn-primary my-1 py-0" data-toggle="collapse" href="#collapseExample{{ obj.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ obj.pk }}">
+                \/
+            </a>
+            <div class="collapse" id="collapseExample{{ obj.pk }}">
+                {% for act in  obj.acts.all %}
+                    <p class="card-text mb-0"> № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
+                {% endfor %}
+            </div>
           </div>
         </div>
     {% endfor %}
     </div>
+
+</div>
+
+
 {% endblock %}
