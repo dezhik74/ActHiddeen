@@ -1,14 +1,14 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import ObjectActs, HiddenActIS
+from .models import *
 
 
 class ObjectForm (ModelForm):
     class Meta:
         model = ObjectActs
         fields = [
-            'address', 'system_type', 'designer', 'contractor', 'supervisor_engineer',
+            'address', 'system_type', 'designer', 'contractor', 'contractor_requisite','supervisor_engineer',
             'contractor_engineer', 'project_number', 'exec_documents',
             'supervisor_engineer_decree', 'contractor_engineer_decree'
         ]
@@ -19,7 +19,8 @@ class ObjectForm (ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'system_type': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'designer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contractor': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': '"2"'}),
+            'contractor': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'contractor_requisite': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': '"2"'}),
             'supervisor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'contractor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'project_number': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
@@ -45,3 +46,14 @@ class HActISForm(ModelForm):
             'begin_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'end_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
+
+
+class BlowDownActForm(ModelForm):
+    class Meta:
+        model = BlowDownAct
+        fields = ['act_number','act_date', 'trassa','trassa_lenght', 'purge_method']
+
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        for f in self.fields:
+            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
