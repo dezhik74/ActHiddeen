@@ -53,7 +53,7 @@ class ObjectActs (models.Model):
     supervisor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ технадзора')
     contractor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ прораба')
     acts = models.ManyToManyField('HiddenActIS', blank=True, related_name='object_acts')
-    blow_down_act=models.ForeignKey('BlowDownAct', on_delete=models.CASCADE, blank=True)
+    # blow_down_act=models.ForeignKey('BlowDownAct', on_delete=models.CASCADE, blank=True)
 
     class Meta:
         verbose_name = 'Набор актов объекта '

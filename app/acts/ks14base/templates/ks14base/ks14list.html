@@ -14,18 +14,23 @@
                     <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редактировать</a>
                     <a href="{% url 'ks14_copy_url' obj.pk %}" class="btn btn-primary  my-1 py-0">+ копия</a>
                     <a href="{% url 'ks14_delete_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Удалить</a>
+                <a class="btn btn-primary my-1 py-0" data-toggle="collapse" href="#collapseExample{{ obj.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ obj.pk }}">
+                   \/
+                </a>
             </div>
-            <ul class="list-group list-group-flush">
-            {% for act in obj.acts.all %}
-                <li class="list-group-item py-0">
-                    <p class="my-0">Кап ремонт {{ act.system_genitive }}</p>
-                    <a href="{% url 'make_ks14_docx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС14</a>
-                    <a href="{% url 'make_ks3_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС3</a>
-                    <a href="{% url 'make_ks2_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС2</a>
-                    <a href="{% url 'make_peresort' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> Акт пересорта</a>
-                </li>
-            {% endfor %}
-            </ul>
+            <div class="collapse" id="collapseExample{{ obj.pk }}">
+                <ul class="list-group list-group-flush">
+                {% for act in obj.acts.all %}
+                    <li class="list-group-item py-0">
+                        <p class="my-0">Кап ремонт {{ act.system_genitive }}</p>
+                        <a href="{% url 'make_ks14_docx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС14</a>
+                        <a href="{% url 'make_ks3_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС3</a>
+                        <a href="{% url 'make_ks2_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС2</a>
+                        <a href="{% url 'make_peresort' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> Акт пересорта</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
         </div>
     {% endfor %}
     </div>
