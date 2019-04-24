@@ -23,10 +23,10 @@ class HiddenActIS (models.Model):
 class BlowDownAct (models.Model):
     act_number = models.CharField(max_length=20, verbose_name='Ном. Акта', blank=True)
     act_date = models.CharField(max_length=50, verbose_name='Дата Акта')
-    trassa = models.CharField(max_length=100, verbose_name='Трасса',
+    trassa = models.CharField(max_length=150, verbose_name='Трасса',
                               default='от отключающего устройства Д=     мм розлив холодного водоснабжения')
     trassa_lenght = models.CharField(max_length=10, verbose_name='Длина трассы')
-    purge_method = models.CharField(max_length=100, verbose_name='Метод продувки',
+    purge_method = models.CharField(max_length=150, verbose_name='Метод продувки',
                                     default='сетевой водой ХВС не менее 2-3 раз объема системы до "светлой воды"')
 
     class Meta:
