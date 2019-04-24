@@ -22,7 +22,7 @@
                 <ul class="list-group list-group-flush">
                 {% for act in obj.acts.all %}
                     <li class="list-group-item py-0">
-                        <p class="my-0">Кап ремонт {{ act.system_genitive }}</p>
+                        <p class="my-0">Кап ремонт {{ act.system_genitive }}. Акт №{{ act.act_number }}. Сумма: {{ act.summa }}</p>
                         <a href="{% url 'make_ks14_docx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС14</a>
                         <a href="{% url 'make_ks3_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС3</a>
                         <a href="{% url 'make_ks2_xlsx' obj.pk act.pk %}" class="btn btn-primary  my-1 py-0">-> КС2</a>
