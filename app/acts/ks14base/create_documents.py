@@ -48,7 +48,7 @@ def create_ks3_xlsx (obj, act):
     ws = wb.active
     ws['B11'] = 'Общество с ограниченной ответственностью «' + obj.contractor + '»' + obj.contractor_address
     ws['J11'] = obj.contractor_OKPO
-    ws['B13'] = 'Капитальный ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
+    ws['B13'] = 'Ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
     ws['J16'] = obj.contract_number
     s = obj.contract_date.split('.')
     ws['J17'] = s[0]
@@ -58,7 +58,7 @@ def create_ks3_xlsx (obj, act):
     ws['I24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
     ws['K24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.begin_fact_date).group(0)
     ws['L24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
-    ws['B29'] = 'Капитальный ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
+    ws['B29'] = 'Ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
     ws['K34'] = act.summa
     ws['A45'] = 'Инженер отдела строительного контроля №' + obj.supervisor_OSK_number
     ws['A46'] = 'по ' + obj.supervisor_decree_dative
@@ -93,8 +93,8 @@ def create_ks2_xlsx (my_obj, my_act):
     ws = wb.active
     ws['C9'] = 'Общество с ограниченной ответственностью «' + my_obj.contractor + '»' + my_obj.contractor_address
     ws['Q9'] = my_obj.contractor_OKPO
-    ws['C10'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
-    ws['C11'] = 'Капитальный ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
+    ws['C10'] = 'Ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
+    ws['C11'] = 'Ремонт ' + my_act.system_genitive + ' в многоквартирном доме по адресу: ' + my_obj.address
     ws['Q13'] = my_obj.contract_number
     s = my_obj.contract_date.split('.')
     ws['Q14'] = s[0]
