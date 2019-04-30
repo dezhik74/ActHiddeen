@@ -35,7 +35,8 @@
                         <div class="col-md-2">Исполнительная:</div>
                         <div class="col-md-5">{{ myobj.exec_documents }}</div>
                     </div>
-                    <a href="{% url 'create_hidden_act_to_end' myobj.pk %}" class="btn btn-primary my-1 py-0">Добавить пустой акт скрытых в конец</a>
+                    <a href="{% url 'create_hidden_act_to_end' myobj.pk %}" class="btn btn-primary my-1 py-0">+Aкт скрытых</a>
+                    <a href="{% url 'create_blow_down' myobj.pk %}" class="btn btn-primary my-1 py-0">+Aкт промывки</a>
                     <a href="{{ myobj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое актов объекта</a>
                     <a href="{% url 'make_word_file' myobj.pk %}" class="btn btn-primary my-1 py-0">Сформировать файл для печати</a>
                 </div>
@@ -77,6 +78,38 @@
                 </div>
             </div>
         {% endfor %}
+        {% if myobj.blow_down_act %}
+             <div class="card mb-1">
+                <div class="card-header py-0">---------------ПРОМЫВКА-ПРОДУВКА----------</div>
+            </div>
+            <div class="card mb-1">
+                <div class="card-body py-0">
+                    <div class="card-text">
+                        <div class="row">
+                            <div class="col-md-3">Номер:</div>
+                            <div class="col-md-3">{{ myobj.blow_down_act.act_number }}</div>
+                            <div class="col-md-3">Дата:</div>
+                            <div class="col-md-3">{{ myobj.blow_down_act.act_date }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Трасса: </div>
+                            <div class="col-md-9">{{ myobj.blow_down_act.trassa }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Длина: </div>
+                            <div class="col-md-9">{{ myobj.blow_down_act.trassa_lenght }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Метод продувки: </div>
+                            <div class="col-md-9">{{ myobj.blow_down_act.purge_method }}</div>
+                        </div>
+                        <a href="{% url 'delete_blow_down_act' myobj.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
     </div>
 
 

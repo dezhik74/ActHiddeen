@@ -1,4 +1,6 @@
-<!-- Входящий контекст object_form_set - верхушка формы, myobj - редактируемый объект, ha_form_set - набор форм для актов скрытых  -->
+<!-- Входящий контекст object_form_set - верхушка формы, myobj - редактируемый объект,
+ha_form_set - набор форм для актов скрытых, blow_down_act_form_set - акт промывки продувки
+-->
 {% extends 'base.html' %}
 {% block mycontent %}
     <div class="container-fluid mx-1">
@@ -80,6 +82,34 @@
                     <div class="form-group row mb-1">
                         <div class="col-sm-2 col-form-label-sm">{{ form.permitted_work.label }}</div>
                         <div class="col-sm-10">{{ form.permitted_work }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {{ blow_down_act_form_set.management_form }}
+
+            {% for form in blow_down_act_form_set %}
+                {% if form.errors %}
+                    <div class="alert alert-danger mb-0 py-0">Заполните все поля формы</div>
+                {% endif %}
+                <div class="card p-1 mb-1">
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.act_number.label }}</div>
+                        <div class="col-sm-4">{{ form.act_number }}</div>
+                        <div class="col-sm-2 col-form-label-sm">{{ form.act_date.label }}</div>
+                        <div class="col-sm-4">{{ form.act_date }}</div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.trassa.label }}</div>
+                        <div class="col-sm-10">{{ form.trassa }}</div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.trassa_lenght.label }}</div>
+                        <div class="col-sm-10">{{ form.trassa_lenght }}</div>
+                    </div>
+                     <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.purge_method.label }}</div>
+                        <div class="col-sm-10">{{ form.purge_method }}</div>
                     </div>
                 </div>
             {% endfor %}

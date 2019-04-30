@@ -8,7 +8,7 @@
     {% for obj in objects_acts %}
         <div class="card my-1">
           <div class="card-header py-0 ">
-              <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
+              [ {{ obj.pk }} ]<b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
           </div>
           <div class="card-body py-0">
             <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Редактировать структуру</a>
@@ -20,8 +20,13 @@
             </a>
             <div class="collapse" id="collapseExample{{ obj.pk }}">
                 {% for act in  obj.acts.all %}
-                    <p class="card-text mb-0"> № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
+                    <p class="card-text mb-0"> [ {{ act.pk }} ] № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
                 {% endfor %}
+
+                {% if obj.blow_down_act %}
+                    <p class="card-text mb-0"> [ {{ obj.blow_down_act.pk }} ] № {{ obj.blow_down_act.act_number }}, Промывка-продувка</p>
+                {% endif %}
+
             </div>
           </div>
         </div>

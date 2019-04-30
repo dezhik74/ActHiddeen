@@ -8,7 +8,7 @@ from django.views.generic import View
 from docx import Document
 from docxtpl import DocxTemplate
 
-from .forms import ObjectForm, HActISForm
+from .forms import ObjectForm, HActISForm, BlowDownActForm
 from .models import *
 
 
@@ -28,13 +28,16 @@ class ObjectDetail (View):
                       context={'myobj': my_obj})
 
 
-def update_obj(obj, cleaned_obj_data, cleaned_act_data):
+def update_obj(obj, cleaned_obj_data, cleaned_act_data, cleaned_blow_down_act_data):
     obj.__dict__.update(cleaned_obj_data[0])
     i = 0
     for act in obj.acts.all():
         act.__dict__.update(cleaned_act_data[i])
         i += 1
         act.save()
+    if obj.blow_down_act != None:
+        obj.blow_down_act.__dict__.update(cleaned_blow_down_act_data[0])
+        obj.blow_down_act.save()
     obj.save()
     return obj
 
@@ -42,6 +45,14 @@ def update_obj(obj, cleaned_obj_data, cleaned_act_data):
 def create_hidden_act_to_end(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
     my_obj.acts.create()
+    return redirect(my_obj)
+
+
+def create_blow_down(request, pk):
+    my_obj = get_object_or_404(ObjectActs, pk=pk)
+    if my_obj.blow_down_act == None:
+        my_obj.blow_down_act = BlowDownAct.objects.create()
+        my_obj.save()
     return redirect(my_obj)
 
 
@@ -63,10 +74,18 @@ def copy_object(request, pk):
         act.id = None
         act.save()
         new_acts.append(act)
+    new_b_d_a = None
+    if my_obj.blow_down_act != None:
+        new_b_d_a = my_obj.blow_down_act
+        new_b_d_a.id = None
+        new_b_d_a.save()
     my_obj.id = None
     my_obj.save()
     for act1 in new_acts:
         my_obj.acts.add(act1)
+    if new_b_d_a != None:
+        my_obj.blow_down_act = new_b_d_a
+        my_obj.save()
     return redirect(my_obj)
 
 
@@ -75,6 +94,8 @@ def delete_object(request, pk):
     for act in my_obj.acts.all():
         act.delete()
     my_obj.delete()
+    if my_obj.blow_down_act != None:
+        my_obj.blow_down_act.delete()
     return redirect('objects_list_url')
 
 
@@ -143,27 +164,45 @@ def object_edit(request, pk):
     myobj = get_object_or_404(ObjectActs, pk=pk)
     ObjectFormSet = formset_factory(form=ObjectForm, extra=0)
     HActISFormSet = formset_factory(form=HActISForm, extra=0)
+    BlowDownActFormSet = formset_factory(form=BlowDownActForm, extra=0)
     initial_obj = [model_to_dict(myobj, exclude=['id', 'acts'])]
     initial_ha_act = []
+    initial_blow_down = []
     for act in myobj.acts.all():
         initial_ha_act.append(model_to_dict(act, exclude=['id']))
+    if myobj.blow_down_act:
+        initial_blow_down.append(model_to_dict(myobj.blow_down_act))
     if request.method == 'POST':
         object_form_set = ObjectFormSet(request.POST, prefix='object_data')
         ha_form_set = HActISFormSet(request.POST, prefix='hidden_acts')
-        if object_form_set.is_valid() and ha_form_set.is_valid():
+        blow_down_act_form_set = BlowDownActFormSet(request.POST, prefix='blow_down_act')
+        if object_form_set.is_valid() and ha_form_set.is_valid() and blow_down_act_form_set.is_valid():
             new_object_acts = update_obj(myobj, object_form_set.cleaned_data,
-                                         ha_form_set.cleaned_data)
+                                         ha_form_set.cleaned_data, blow_down_act_form_set.cleaned_data)
             return redirect(new_object_acts)
         return render(request, 'hiddenactsbase/object_edit.html', context={
             'myobj': myobj,
             'object_form_set': object_form_set,
-            'ha_form_set': ha_form_set})
+            'ha_form_set': ha_form_set,
+            'blow_down_act_form_set': blow_down_act_form_set})
     else:
         object_form_set = ObjectFormSet(prefix='object_data',
                                         initial=initial_obj)
         ha_form_set = HActISFormSet(prefix='hidden_acts',
                                     initial=initial_ha_act)
+        blow_down_act_form_set = BlowDownActFormSet(prefix='blow_down_act',
+                                                    initial=initial_blow_down)
         return render(request, 'hiddenactsbase/object_edit.html', context={
             'myobj': myobj,
             'object_form_set': object_form_set,
-            'ha_form_set': ha_form_set})
+            'ha_form_set': ha_form_set,
+            'blow_down_act_form_set': blow_down_act_form_set})
+
+
+def delete_blow_down_act(request, pk):
+    myobj = get_object_or_404(ObjectActs, pk=pk)
+    if myobj.blow_down_act != None:
+        b_d_a = myobj.blow_down_act
+        b_d_a.delete()
+        myobj.blow_down_act = None
+    return redirect(myobj)
