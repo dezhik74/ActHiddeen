@@ -1,4 +1,34 @@
+<!--Входящий контекст context
+order_list
+'Order_N' 'Contractor' 'Address' 'Work_Type'
+'Begin_Date'  'End_Date'} или Error-->
+
 {% extends 'base.html' %}
 {% block mycontent %}
-    {{ list.text }}
+    <div class="container">
+        <h5>Список открытых ордеров ГАТИ ООО "Интера" и ООО "Техолит"</h5>
+        {% for order in order_list %}
+            <div class="row">
+                <div class="col-xl-1">{{ forloop.counter }}</div>
+                <div class="col-xl-1">Адрес:</div>
+                <div class="col-xl-10">{{ order.Address }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl-1"></div>
+                <div class="col-xl-1">Подрядчик:</div>
+                <div class="col-xl-2">{{ order.Contractor }}</div>
+                <div class="col-xl-2">Ордер №:</div>
+                <div class="col-xl-2">{{ order.Order_N }}</div>
+                <div class="col-xl-1">Начало:</div>
+                <div class="col-xl-1">{{ order.Begin_Date }}</div>
+                <div class="col-xl-1">Конец:</div>
+                <div class="col-xl-1">{{ order.End_Date }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xl-1"></div>
+                <div class="col-xl-1">Работы:</div>
+                <div class="col-xl-10">{{ order.Work_Type }}</div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

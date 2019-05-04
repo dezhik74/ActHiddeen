@@ -76,6 +76,8 @@ WSGI_APPLICATION = 'acts.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,10 +87,10 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hiddenacts',
-#         'USER': 'postgres',
-#         'PASSWORD': 'aopq27',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django_db',
+#         'USER': 'user2',
+#         'PASSWORD': 'pww2',
 #         'HOST': '127.0.0.1',
 #         'PORT': '5432',
 #     }
