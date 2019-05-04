@@ -163,7 +163,13 @@ python manage.py dumpdata --indent=2 --exclude=contenttypes > datadump.json
 python manage.py loaddata datadump.json
 ```
 
+### Ссылки на руководоства
 
+[Django+PostgreSQL за 8 шагов](https://djbook.ru/examples/77/)
+
+[Django + Python3 + Nginx + Gunicorn + DO](https://djbook.ru/examples/62/)
+
+[Инструкция: как перевести проект Django с SQLite на MySQL без боли](https://tproger.ru/articles/django-sqlite-to-mysql/)
 
  
  
