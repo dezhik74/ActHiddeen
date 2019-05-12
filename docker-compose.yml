@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: 'nginx_serv'
+    restart: always
+    image: nginx:latest
+#    expose:
+#      - 80
+    ports: 
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/sitename.conf
+      - ./app/acts/static:/srv/www/acts/static
+      - ./logs:/srv/www/logs
+    depends_on: 
+      - web
+  db:
+    image: postgres
+    container_name: 'acts_db'
+    environment:
+      POSTGRES_PASSWORD: pww2
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: ../../docker_entrypoint.sh
+    container_name: 'acts_web'
+    restart: always
+    volumes:
+      - .:/code
+    expose: 
+       - "8000"
+    ports:
+       - "8000:8000"
+    depends_on:
+      - db
