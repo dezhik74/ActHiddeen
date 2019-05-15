@@ -171,6 +171,10 @@ python manage.py loaddata datadump.json
 
 [Инструкция: как перевести проект Django с SQLite на MySQL без боли](https://tproger.ru/articles/django-sqlite-to-mysql/)
 
+[Python+gunicorne+posgressql+nginx -> Docker](https://www.haikson.com/programmirovanie/python/django-nginx-gunicorn-postgresql-docker/)
+
+[Хороший учебник по докеру](https://habr.com/ru/post/310460/)
+
  
  
  
