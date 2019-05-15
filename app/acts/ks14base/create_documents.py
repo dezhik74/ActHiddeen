@@ -48,7 +48,7 @@ def create_ks3_xlsx (obj, act):
     ws = wb.active
     ws['B11'] = 'Общество с ограниченной ответственностью «' + obj.contractor + '»' + obj.contractor_address
     ws['J11'] = obj.contractor_OKPO
-    ws['B13'] = 'Ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
+    ws['B13'] = 'Ремонт ' + act.system_genitive + ' по адресу: ' + obj.address
     ws['J16'] = obj.contract_number
     s = obj.contract_date.split('.')
     ws['J17'] = s[0]
@@ -58,7 +58,7 @@ def create_ks3_xlsx (obj, act):
     ws['I24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
     ws['K24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.begin_fact_date).group(0)
     ws['L24'] = re.search(r'^[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]', act.act_date).group(0)
-    ws['B29'] = 'Ремонт ' + act.system_genitive + ' в многоквартирном доме по адресу: ' + obj.address
+    ws['B29'] = 'Ремонт ' + act.system_genitive + ' по адресу: ' + obj.address
     ws['K34'] = act.summa
     ws['A45'] = 'Инженер отдела строительного контроля №' + obj.supervisor_OSK_number
     ws['A46'] = 'по ' + obj.supervisor_decree_dative
