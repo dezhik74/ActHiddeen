@@ -9,8 +9,8 @@ class ObjectForm (ModelForm):
         model = ObjectActs
         fields = [
             'address', 'system_type', 'designer', 'contractor', 'contractor_requisite','supervisor_engineer',
-            'contractor_engineer', 'project_number', 'exec_documents',
-            'supervisor_engineer_decree', 'contractor_engineer_decree'
+            'designer_engineer', 'contractor_engineer', 'project_number', 'exec_documents',
+            'supervisor_engineer_decree', 'contractor_engineer_decree', 'designer_engineer_decree'
         ]
 
         error_css_class = "alert alert-danger mb-0 py-0"
@@ -23,10 +23,12 @@ class ObjectForm (ModelForm):
             'contractor_requisite': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': '"2"'}),
             'supervisor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'contractor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'designer_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'project_number': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'exec_documents': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'supervisor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'contractor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'designer_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
 
 
@@ -35,7 +37,7 @@ class HActISForm(ModelForm):
         model = HiddenActIS
         fields = [
             'act_number', 'act_date', 'presented_work', 'materials',
-            'permitted_work', 'begin_date', 'end_date'
+            'permitted_work', 'begin_date', 'end_date', 'work_SNIP'
         ]
         widgets = {
             'act_number': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
@@ -45,6 +47,7 @@ class HActISForm(ModelForm):
             'permitted_work': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'begin_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'end_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'work_SNIP': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
 
 

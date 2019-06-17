@@ -31,6 +31,7 @@ urlpatterns = [
     path('gati/', include('gati.urls'),name='gati_url'),
 
 
+
 ]
 
 

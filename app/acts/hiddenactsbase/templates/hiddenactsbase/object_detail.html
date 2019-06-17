@@ -30,6 +30,10 @@
                         <div class="col-md-10">{{ myobj.contractor_engineer }} ({{ myobj.contractor_engineer_decree }})</div>
                     </div>
                     <div class="row">
+                        <div class="col-md-2">Проектировщик:</div>
+                        <div class="col-md-10">{{ myobj.designer_engineer }} ({{ myobj.designer_engineer_decree }})</div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-2">Номер проекта:</div>
                         <div class="col-md-3">{{ myobj.project_number }}</div>
                         <div class="col-md-2">Исполнительная:</div>
@@ -64,6 +68,10 @@
                         <div class="row">
                             <div class="col-md-2">Материалы:</div>
                             <div class="col-md-10">{{ act.materials }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">СНИП:</div>
+                            <div class="col-md-10">{{ act.work_SNIP }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-2">Предъявл.:</div>

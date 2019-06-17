@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hiddenactsbase',
     'ks14base',
-    'gati'
+    'gati',
 ]
 
 MIDDLEWARE = [
