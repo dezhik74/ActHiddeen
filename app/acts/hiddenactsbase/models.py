@@ -11,7 +11,7 @@ class HiddenActIS (models.Model):
     permitted_work = models.CharField(max_length=200, verbose_name='Разрешено')
     begin_date = models.CharField(max_length=50, verbose_name='От:')
     end_date = models.CharField(max_length=50, verbose_name='До:')
-    work_SNIP = models.CharField(max_length=100, verbose_name='СНИП:')
+    work_SNIP = models.CharField(max_length=100, verbose_name='СНИП:', blank=True)
 
     class Meta:
         ordering = ['act_number']
@@ -49,12 +49,12 @@ class ObjectActs (models.Model):
                                              ' ул. Возрождения, д.20, литер А, тел. 242-78-10.')
     supervisor_engineer = models.CharField(max_length=100, verbose_name='Технадзор')
     contractor_engineer = models.CharField(max_length=100, verbose_name='Прораб')
-    designer_engineer = models.CharField(max_length=100, verbose_name='Проектировщик')
+    designer_engineer = models.CharField(max_length=100, verbose_name='Проектировщик', blank=True)
     project_number = models.CharField(max_length=100, verbose_name='Ном. проекта')
     exec_documents = models.CharField(max_length=100, verbose_name='Исполн.')
     supervisor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ технадзора')
     contractor_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ прораба')
-    designer_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ проектировщика')
+    designer_engineer_decree = models.CharField(max_length=100, verbose_name='Приказ проектировщика', blank=True)
     acts = models.ManyToManyField('HiddenActIS', blank=True, related_name='object_acts')
     blow_down_act = models.ForeignKey('BlowDownAct', blank=True, null=True, on_delete=models.CASCADE)
 
