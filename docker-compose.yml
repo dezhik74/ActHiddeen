@@ -1,5 +1,9 @@
 version: '3'
 
+volumes:
+    pgdata:
+        driver: local
+
 services:
   nginx:
     container_name: 'srv1'
@@ -21,8 +25,14 @@ services:
     environment:
       POSTGRES_PASSWORD: pww2
       POSTGRES_USER: postgres
+      POSTGRES_DB: intera_base_1
+      PGDATA: /var/lib/postgresql/data
+
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   web:
     build: .
     command: ../../docker_entrypoint.sh
