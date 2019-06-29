@@ -26,6 +26,8 @@ services:
   web:
     build: .
     command: ../../docker_entrypoint.sh
+    environment:
+        APP_LAUNCH_SITE: docker
     container_name: 'app1'
     restart: always
     volumes:
