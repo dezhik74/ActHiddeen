@@ -21,6 +21,7 @@ services:
       - web
   db:
     image: postgres
+    restart: always
     container_name: 'db1'
     environment:
       POSTGRES_PASSWORD: pww2
@@ -35,7 +36,7 @@ services:
 
   web:
     build: .
-    command: ../../docker_entrypoint.sh
+    command: ../../acthiddeen_init.sh
     environment:
         APP_LAUNCH_SITE: docker
     container_name: 'app1'
