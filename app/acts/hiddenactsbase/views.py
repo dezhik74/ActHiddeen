@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View
 from docx import Document
 from docxtpl import DocxTemplate
+from django.contrib.auth.decorators import login_required
 
 from .forms import ObjectForm, HActISForm, BlowDownActForm
 from .models import *
@@ -42,12 +43,14 @@ def update_obj(obj, cleaned_obj_data, cleaned_act_data, cleaned_blow_down_act_da
     return obj
 
 
+@login_required
 def create_hidden_act_to_end(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
     my_obj.acts.create()
     return redirect(my_obj)
 
 
+@login_required
 def create_blow_down(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
     if my_obj.blow_down_act == None:
@@ -56,6 +59,7 @@ def create_blow_down(request, pk):
     return redirect(my_obj)
 
 
+@login_required
 def delete_hidden_act(request, pk_obj, pk_act):
     my_obj = get_object_or_404(ObjectActs, pk=pk_obj)
     my_act = get_object_or_404(my_obj.acts.all(), pk=pk_act)
@@ -63,6 +67,7 @@ def delete_hidden_act(request, pk_obj, pk_act):
     return redirect(my_obj)
 
 
+@login_required
 def copy_object(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
     s = my_obj.address
@@ -89,6 +94,7 @@ def copy_object(request, pk):
     return redirect(my_obj)
 
 
+@login_required
 def delete_object(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
     for act in my_obj.acts.all():
@@ -160,6 +166,7 @@ def make_word_file(request, pk):
     return response
 
 
+@login_required
 def object_edit(request, pk):
     myobj = get_object_or_404(ObjectActs, pk=pk)
     ObjectFormSet = formset_factory(form=ObjectForm, extra=0)
@@ -199,6 +206,7 @@ def object_edit(request, pk):
             'blow_down_act_form_set': blow_down_act_form_set})
 
 
+@login_required
 def delete_blow_down_act(request, pk):
     myobj = get_object_or_404(ObjectActs, pk=pk)
     if myobj.blow_down_act != None:

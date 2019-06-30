@@ -22,16 +22,15 @@ from django.shortcuts import render
 def main_index(request):
     return render(request, 'index_main.html')
 
-
 urlpatterns = [
     path('',main_index,name='main_index'),
     path('admin/', admin.site.urls, name='admin_url'),
     path('actbase/', include('hiddenactsbase.urls'),name='actbase_url'),
     path('ks14base/', include('ks14base.urls'),name='ks14base_url'),
     path('gati/', include('gati.urls'),name='gati_url'),
+    ]
 
 
-
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
-
-

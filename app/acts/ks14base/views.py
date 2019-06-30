@@ -6,30 +6,33 @@ from django.forms import formset_factory
 from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View
-from docxtpl import DocxTemplate
-from openpyxl import Workbook, load_workbook
+from django.contrib.auth.decorators import login_required
 
-from .models import *
 from .forms import *
 from .create_documents import *
 
 # Create your views here.
+
 
 def ks14_list(request):
     objs = ObjectCommon.objects.order_by("-id")
     return render(request, 'ks14base/ks14list.html',
                   context={'objects': objs})
 
+
 def ks14_object_edit_structure(request, pk):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     return render(request, 'ks14base/ks14structure.html',locals())
 
+
+@login_required
 def copy_ks14(request, pk):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     my_obj.copy()
     return redirect('ks14_list_url')
 
 
+@login_required
 def delete_ks14(request, pk):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     my_obj.delete_common_obj()
@@ -68,6 +71,7 @@ class KS14_Detail(View):
                       context={'my_object': my_obj})
 
 
+@login_required
 def ks14_object_edit(request, pk):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     ObjectCommonFormSet = formset_factory(form=ObjectCommonForm, extra=0)
@@ -93,12 +97,14 @@ def ks14_object_edit(request, pk):
                                                                        'act_specific_form_set' : act_specific_form_set})
 
 
+@login_required
 def insert_act(request, pk):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     my_obj.acts.create()
     return redirect('ks14_object_edit_structure_url', pk = pk)
 
 
+@login_required
 def delete_act(request, pk, pk2):
     my_obj = get_object_or_404(ObjectCommon, pk=pk)
     my_act = get_object_or_404(ActSpecific, pk=pk2)
