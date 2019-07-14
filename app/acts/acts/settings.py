@@ -78,25 +78,26 @@ WSGI_APPLICATION = 'acts.wsgi.application'
 if os.getenv('APP_LAUNCH_SITE') == 'docker':
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'pww2',
-            'HOST': 'db',
-            'PORT': '5432',
-        }
-    }
+#    DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#            'NAME': 'postgres',
+#            'USER': 'postgres',
+#            'PASSWORD': 'pww2',
+#            'HOST': 'db',
+#            'PORT': '5432',
+#        }
+#    }
 else:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+
+DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

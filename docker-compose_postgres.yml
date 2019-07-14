@@ -17,6 +17,22 @@ services:
       - ./nginx:/etc/nginx/conf.d
       - ./app/acts/static:/srv/www/acts/static
       - ./logs:/srv/www/logs # удаляется папка в контейнере и заменяется на папку их хоста
+    depends_on: 
+      - web
+  db:
+    image: postgres
+    restart: always
+    container_name: 'db1'
+    environment:
+      POSTGRES_PASSWORD: pww2
+      POSTGRES_USER: postgres
+      POSTGRES_DB: intera_base_1
+      PGDATA: /var/lib/postgresql/data
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   web:
     build: .
@@ -32,4 +48,4 @@ services:
     ports:
        - "8000:8000"
     depends_on:
-      - nginx
+      - db
