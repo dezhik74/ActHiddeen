@@ -1,18 +1,16 @@
 version: '3'
 
-volumes:
-    pgdata:
-        driver: local
-
 services:
   nginx:
     container_name: 'srv1'
     restart: always
     image: nginx:latest
     expose:
-      - 80
+      - "8000"
     ports: 
-      - 80:80
+      - 8055:8055
+    depends_on:
+      - web
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./app/acts/static:/srv/www/acts/static
@@ -31,5 +29,3 @@ services:
        - "8000"
     ports:
        - "8000:8000"
-    depends_on:
-      - nginx
