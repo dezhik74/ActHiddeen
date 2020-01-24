@@ -7,14 +7,17 @@ services:
     image: nginx:latest
     expose:
       - "8000"
+      - "8082"
     ports: 
-      - 8055:8055
+      - 80:80
+      - 82:82
     depends_on:
       - web
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./app/acts/static:/srv/www/acts/static
-      - ./logs:/srv/www/logs # удаляется папка в контейнере и заменяется на папку их хоста
+      - ./nginx:/etc/nginx/conf.d #папка для конфигурации nginx
+      - ./app/acts/static:/srv/www/acts/static #статика приложения ActHiddeen
+      - ./logs:/srv/www/logs # удаляется папка в контейнере и заменяется на папку их хоста, логи nginx
+      - ./html:/srv/www/html #папка для статического содержимого - другие сайты
 
   web:
     build: .
@@ -29,3 +32,4 @@ services:
        - "8000"
     ports:
        - "8000:8000"
+  
