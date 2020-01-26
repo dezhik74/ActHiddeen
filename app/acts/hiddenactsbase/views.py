@@ -38,7 +38,8 @@ class ObjectsList(View):
         search_form = SearchForm (request.POST)
         if search_form.is_valid():
             objs = ObjectActs.objects.filter(Q(address__icontains=search_form.cleaned_data['search_object'])
-                                            | Q(contractor__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
+                                            | Q(contractor__icontains=search_form.cleaned_data['search_object'])
+                                            | Q(system_type__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
             # objs = ObjectActs.objects.filter(address__contains=search_form.cleaned_data['search_object']).order_by("-id")
         else:
             objs = ObjectActs.objects.order_by("-id")
