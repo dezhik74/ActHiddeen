@@ -60,3 +60,14 @@ class BlowDownActForm(ModelForm):
         super(ModelForm, self).__init__(*args, **kwargs)
         for f in self.fields:
             self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
+
+
+class SearchForm (forms.Form):
+    search_object = forms.CharField (max_length=100)
+
+
+    def __init__(self, *args, **kwargs):
+        super(forms.Form, self).__init__(*args, **kwargs)
+        self.fields['search_object'].widget.attrs['class'] = 'align-self-center form-control-sm mr-sm-2'
+        self.fields['search_object'].widget.attrs['placeholder'] = 'Поиск по объектам'
+

@@ -8,18 +8,42 @@ from django.views.generic import View
 from docx import Document
 from docxtpl import DocxTemplate
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.core.paginator import Paginator
 
-from .forms import ObjectForm, HActISForm, BlowDownActForm
+from .forms import ObjectForm, HActISForm, BlowDownActForm, SearchForm
 from .models import *
 
 
+def paged_output(request, objects, template, search_form):
+    paginator = Paginator(objects, 15)
+    page = request.GET.get('page')
+    page_objs = paginator.get_page(page)
+    return render(request, template,
+                  context={'objects_acts': page_objs,
+                           'search_form': search_form
+                           })
+
+
 class ObjectsList(View):
+
     @staticmethod
     def get(request):
         objs = ObjectActs.objects.order_by("-id")
-        return render(request, 'hiddenactsbase/index.html',
-                      context={'objects_acts': objs})
+        search_form = SearchForm()
+        return paged_output(request, objs, 'hiddenactsbase/index.html', search_form)
 
+    @staticmethod
+    def post(request):
+        search_form = SearchForm (request.POST)
+        if search_form.is_valid():
+            objs = ObjectActs.objects.filter(Q(address__icontains=search_form.cleaned_data['search_object'])
+                                            | Q(contractor__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
+            # objs = ObjectActs.objects.filter(address__contains=search_form.cleaned_data['search_object']).order_by("-id")
+        else:
+            objs = ObjectActs.objects.order_by("-id")
+        return paged_output(request, objs, 'hiddenactsbase/index.html', search_form)
+        # return  HttpResponse ('rere: ' + objs)
 
 class ObjectDetail (View):
     @staticmethod

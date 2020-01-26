@@ -2,7 +2,7 @@
 
 echo "PREPARE DATABASE..."
 
-cd ./app/acts
+# cd ./app/acts
 
 echo "Collect static files..."
 python manage.py collectstatic --noinput
@@ -15,7 +15,7 @@ python manage.py collectstatic --noinput
 
 echo "Starting server..."
 # echo "Django development server..."
-# python manage.py runserver 0.0.0.0:8000
+# python manage.py runserver 80
 
 echo "Gunicorn server"
 gunicorn -b 0.0.0.0:8000 acts.wsgi:application
