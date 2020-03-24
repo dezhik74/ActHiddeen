@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hiddenactsbase',
-    'ks14base',
+    # 'ks14base',
     'gati',
 ]
 
