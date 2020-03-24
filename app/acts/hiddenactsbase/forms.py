@@ -10,7 +10,8 @@ class ObjectForm (ModelForm):
         fields = [
             'address', 'system_type', 'designer', 'contractor', 'contractor_requisite','supervisor_engineer',
             'designer_engineer', 'contractor_engineer', 'project_number', 'exec_documents',
-            'supervisor_engineer_decree', 'contractor_engineer_decree', 'designer_engineer_decree'
+            'supervisor_engineer_decree', 'contractor_engineer_decree', 'designer_engineer_decree',
+            'acts_instance_num'
         ]
 
         error_css_class = "alert alert-danger mb-0 py-0"
@@ -29,6 +30,7 @@ class ObjectForm (ModelForm):
             'supervisor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'contractor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'designer_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'acts_instance_num': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
 
 

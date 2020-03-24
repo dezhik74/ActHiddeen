@@ -11,7 +11,7 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
     <title>
         Акты скрытых для фонда
     </title>
@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link " href="{% url 'objects_list_url' %}">Скрытые</a>
-<!--                <a class="nav-item nav-link " href="{% url 'ks14_list_url' %}">КС-14</a>-->
+<!--                <a class="nav-item nav-link " href=" {# % url 'ks14_list_url' %}">КС-14</a>-->
                 <a class="nav-item nav-link " href="{% url 'gati_order_list_url' %}">ГАТИ</a>
             </div>
             <div class="navbar-nav navbar-right">

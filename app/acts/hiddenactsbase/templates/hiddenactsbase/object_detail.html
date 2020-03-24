@@ -39,6 +39,10 @@
                         <div class="col-md-2">Исполнительная:</div>
                         <div class="col-md-5">{{ myobj.exec_documents }}</div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-2">Акт составлен в:</div>
+                        <div class="col-md-3">{{ myobj.acts_instance_num }}</div>
+                    </div>
                     <a href="{% url 'create_hidden_act_to_end' myobj.pk %}" class="btn btn-primary my-1 py-0">+Aкт скрытых</a>
                     <a href="{% url 'create_blow_down' myobj.pk %}" class="btn btn-primary my-1 py-0">+Aкт промывки</a>
                     <a href="{{ myobj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое актов объекта</a>
