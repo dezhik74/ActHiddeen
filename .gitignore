@@ -2,6 +2,7 @@
 # PyCharm
 .idea/
 venv/
+data/
 logs/
 *.pyc
 datadump.json

@@ -88,16 +88,16 @@ if os.getenv('APP_LAUNCH_SITE') == 'docker':
 #            'PORT': '5432',
 #        }
 #    }
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'aosr',
-#             'USER': 'django',
-#             'PASSWORD': '1234',
-#             'HOST': 'localhost',
-#             'PORT': '3306',
-#         }
-#     }
+    DATABASES = {
+         'default': {
+             'ENGINE': 'django.db.backends.mysql',
+             'NAME': 'hiddenactsbase',
+             'USER': 'django',
+             'PASSWORD': 'aopqaopq27',
+             'HOST': 'db',
+             'PORT': '3306',
+         }
+     }
 
 else:
     # SECURITY WARNING: don't run with debug turned on in production!
