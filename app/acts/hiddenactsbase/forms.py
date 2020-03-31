@@ -16,22 +16,11 @@ class ObjectForm (ModelForm):
 
         error_css_class = "alert alert-danger mb-0 py-0"
 
-        widgets = {
-            'address': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'system_type': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'designer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contractor': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contractor_requisite': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': '"2"'}),
-            'supervisor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contractor_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'designer_engineer': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'project_number': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'exec_documents': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'supervisor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contractor_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'designer_engineer_decree': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'acts_instance_num': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        }
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        for f in self.fields:
+            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
+
 
 
 class HActISForm(ModelForm):
@@ -41,16 +30,11 @@ class HActISForm(ModelForm):
             'act_number', 'act_date', 'presented_work', 'materials',
             'permitted_work', 'begin_date', 'end_date', 'work_SNIP'
         ]
-        widgets = {
-            'act_number': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'act_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'presented_work': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'materials': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'permitted_work': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'begin_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'end_date': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'work_SNIP': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        }
+
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        for f in self.fields:
+            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
 
 
 class BlowDownActForm(ModelForm):

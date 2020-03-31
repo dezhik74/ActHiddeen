@@ -55,7 +55,7 @@ class ObjectActs (models.Model):
     supervisor_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ технадзора')
     contractor_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ прораба')
     designer_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ проектировщика', blank=True)
-    acts_instance_num = models.CharField(max_length=100, verbose_name='Кол-во экземпдяров', blank=True)
+    acts_instance_num = models.CharField(max_length=100, verbose_name='Кол-во экземпляров', blank=True)
     acts = models.ManyToManyField('HiddenActIS', blank=True, related_name='object_acts')
     blow_down_act = models.ForeignKey('BlowDownAct', blank=True, null=True, on_delete=models.CASCADE)
 

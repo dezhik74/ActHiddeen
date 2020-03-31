@@ -163,6 +163,8 @@ python manage.py dumpdata --indent=2 --exclude=contenttypes > datadump.json
 python manage.py loaddata datadump.json
 ```
 
+Чтобы перенести в Mysql в докере, надо вручную удалить все данные юзеров сессий итд.
+Или исключить таблицы contenttypes и auth.permissions
 ### Ссылки на руководоства
 
 [Django+PostgreSQL за 8 шагов](https://djbook.ru/examples/77/)
