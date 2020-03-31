@@ -1,6 +1,7 @@
 from django.db import models
 from django.shortcuts import reverse
 import re
+from datetime import date
 
 
 class HiddenActIS (models.Model):
@@ -37,6 +38,7 @@ class BlowDownAct (models.Model):
         return '{} -> Промывка (продувка)'.format(self.act_number)
 
 class ObjectActs (models.Model):
+    create_date = models.DateField(blank=False, default=date(2019, 12, 6))
     address = models.CharField(max_length=500, verbose_name='Адрес', blank=False)
     system_type = models.CharField(max_length=500, verbose_name='тип')
     designer = models.CharField(max_length=500, verbose_name='Проектант')

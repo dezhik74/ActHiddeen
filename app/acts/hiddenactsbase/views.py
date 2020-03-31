@@ -1,5 +1,6 @@
 import mimetypes
 import os
+from datetime import datetime
 
 from django.forms import formset_factory
 from django.forms.models import model_to_dict
@@ -99,6 +100,7 @@ def copy_object(request, pk):
     if len(s) > 93:
         s = s[0:93]
     my_obj.address = 'Копия: ' + s
+    my_obj.create_date = datetime.now().date()
     new_acts = []
     for act in my_obj.acts.all():
         act.id = None

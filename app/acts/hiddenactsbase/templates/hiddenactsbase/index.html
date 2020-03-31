@@ -21,7 +21,7 @@
     {% for obj in objects_acts %}
         <div class="card my-1">
           <div class="card-header py-0 ">
-              [ {{ obj.pk }} ]<b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
+              [{{ obj.create_date|date:"d.m.y" }}] <b>Объект</b> {{ obj.address }} <b>капитальный ремонт</b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
           </div>
           <div class="card-body py-0">
             <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Редактировать структуру</a>
