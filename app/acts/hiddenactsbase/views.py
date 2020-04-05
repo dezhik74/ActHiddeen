@@ -55,20 +55,6 @@ class ObjectDetail (View):
                       context={'myobj': my_obj})
 
 
-def update_obj(obj, cleaned_obj_data, cleaned_act_data, cleaned_blow_down_act_data):
-    obj.__dict__.update(cleaned_obj_data[0])
-    i = 0
-    for act in obj.acts.all():
-        act.__dict__.update(cleaned_act_data[i])
-        i += 1
-        act.save()
-    if obj.blow_down_act != None:
-        obj.blow_down_act.__dict__.update(cleaned_blow_down_act_data[0])
-        obj.blow_down_act.save()
-    obj.save()
-    return obj
-
-
 @login_required
 def create_hidden_act_to_end(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
@@ -211,9 +197,9 @@ def object_edit(request, pk):
         ha_form_set = HActISFormSet(request.POST, prefix='hidden_acts')
         blow_down_act_form_set = BlowDownActFormSet(request.POST, prefix='blow_down_act')
         if object_form_set.is_valid() and ha_form_set.is_valid() and blow_down_act_form_set.is_valid():
-            new_object_acts = update_obj(myobj, object_form_set.cleaned_data,
+            myobj.update_obj(object_form_set.cleaned_data,
                                          ha_form_set.cleaned_data, blow_down_act_form_set.cleaned_data)
-            return redirect(new_object_acts)
+            return redirect(myobj)
         return render(request, 'hiddenactsbase/object_edit.html', context={
             'myobj': myobj,
             'object_form_set': object_form_set,

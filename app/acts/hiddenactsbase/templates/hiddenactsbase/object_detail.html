@@ -1,5 +1,6 @@
 <!-- Входящий контекст myobj-->
 {% extends 'base.html'%}
+{% load static %}
 {% block mycontent %}
     <div class="container">
         <h5>Наборы актов скрытых работ</h5>
@@ -85,7 +86,7 @@
                             <div class="col-md-2">Разрешено:</div>
                             <div class="col-md-10">{{ act.permitted_work }}</div>
                         </div>
-                        <a href="{% url 'delete_hidden_act' myobj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>
+                        <a href="{% url 'delete_hidden_act' myobj.pk act.pk %}" class="btn btn-primary my-1 py-0 delete_btn">Удалить</a>
                     </div>
                 </div>
             </div>
@@ -128,4 +129,18 @@
 {% endblock %}
 
 
+{% block my_java_script %}
+    <script>
+        //определяем функции для кнопки удалить карточку
+        let allDelButtons = document.querySelectorAll ('.delete_btn');
+        Array.from(allDelButtons).map (function (item) {
+            item.addEventListener('click', DeleteHidAct);
+        });
 
+        function DeleteHidAct (event) {
+            if (!confirm ("Точно удалить акт?")) {
+                event.preventDefault();
+            }
+        }
+    </script>
+{% endblock %}
