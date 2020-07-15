@@ -2,6 +2,7 @@
 # PyCharm
 .idea/
 venv/
+.vscode/
 data/
 logs/
 *.pyc

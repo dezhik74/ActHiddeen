@@ -85,3 +85,25 @@ class ObjectActs (models.Model):
             return self.contractor
         else:
             return s[0]
+
+    def update_obj(self, cleaned_obj_data, cleaned_act_data, cleaned_blow_down_act_data):
+        # главное - массив актов скрытых cleaned_act_data
+        # из-за того, что в cleaned_act_data может быть больше, равно, меньше записей, чем в объекте
+        # лучше всего будет удалить все записи и записать новые
+
+        self.__dict__.update(cleaned_obj_data[0])
+        #удаляем
+        for act in self.acts.all():
+            act.delete()
+        #создаем новые
+        i = 0
+        for act_data in cleaned_act_data:
+            act = self.acts.create()
+            act.__dict__.update(cleaned_act_data[i])
+            i += 1
+            act.save()
+        if self.blow_down_act != None:
+            self.blow_down_act.__dict__.update(cleaned_blow_down_act_data[0])
+            self.blow_down_act.save()
+        self.save()
+        return self
