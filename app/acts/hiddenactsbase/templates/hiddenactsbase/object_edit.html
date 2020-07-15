@@ -72,20 +72,20 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
                 <div class="card p-1 mb-1 ha-card">
                     <div class="form-group row mb-1">
                         <div class="col-sm-2 col-form-label-sm">{{ form.act_number.label }}</div>
-                        <div class="col-sm-2">{{ form.act_number }}</div>
-                        <div class="col-sm-2">
-                            <button id="id_{{ form.prefix }}_up_add_button" type="button" class="btn btn-primary my-0 py-0 up-add" tabindex="-1">
+                        <div class="col-sm-1">{{ form.act_number }}</div>
+                        <div class="col-sm-3">
+                            <button id="id_{{ form.prefix }}_up_add_button" type="button" class="btn btn-primary my-0 py-0 px-1 up-add" tabindex="-1">
                                 <i class="fas fa-plus"></i>
                                 <i class="fas fa-angle-double-up"></i>
                             </button>
-                            <button id="id_{{ form.prefix }}_down_add_button" type="button" class="btn btn-primary my-0 py-0 down-add" tabindex="-1">
+                            <button id="id_{{ form.prefix }}_down_add_button" type="button" class="btn btn-primary my-0 py-0 px-1 down-add" tabindex="-1">
                                 <i class="fas fa-plus"></i>
                                 <i class="fas fa-angle-double-down"></i>
                             </button>
-                            <button id="id_{{ form.prefix }}_delete" type="button" class="btn btn-primary my-0 py-0 delete_ha" tabindex="-1">
+                            <button id="id_{{ form.prefix }}_delete" type="button" class="btn btn-primary my-0 py-0 delete_ha px-1" tabindex="-1">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            <button id="id_{{ form.prefix }}_swap" type="button" class="btn btn-primary my-0 py-0 swap_ha" tabindex="-1">
+                            <button id="id_{{ form.prefix }}_swap" type="button" class="btn btn-primary my-0 py-0 swap_ha px-1" tabindex="-1">
                                 <i class="fas fa-retweet"></i>
                                 <i class="fas fa-angle-double-down"></i>
                             </button>

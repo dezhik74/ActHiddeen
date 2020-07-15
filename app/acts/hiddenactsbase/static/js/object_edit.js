@@ -1,29 +1,30 @@
-window.onload = function () {
-  // определяем функцию для кнопки добавить вверх
-  let allUpButtons = document.querySelectorAll ('.up-add');
-  Array.from(allUpButtons).map (function (item) {
-    item.addEventListener('click', AddHAUp);
-  })
+'use strict';
 
-  //определяем фунцию для кнопки добавить вниз
-  let allDownButtons = document.querySelectorAll ('.down-add');
-  Array.from(allDownButtons).map (function (item) {
-    item.addEventListener('click', AddHADown);
-  })
+// определяем функцию для кнопки добавить вверх
+let allUpButtons = document.querySelectorAll ('.up-add');
+Array.from(allUpButtons).map (function (item) {
+  item.addEventListener('click', AddHAUp);
+})
 
-  //определяем функции для кнопки удалить карточку
-  let allDelButtons = document.querySelectorAll ('.delete_ha');
-  Array.from(allDelButtons).map (function (item) {
-    item.addEventListener('click', DeleteHA);
-  })
+//определяем фунцию для кнопки добавить вниз
+let allDownButtons = document.querySelectorAll ('.down-add');
+Array.from(allDownButtons).map (function (item) {
+  item.addEventListener('click', AddHADown);
+})
 
-  //определяем функции для кнопки поменять содержимое с НИЖНЕЙ карточкой
-  let allXChangeButtons = document.querySelectorAll ('.swap_ha');
-  Array.from(allXChangeButtons).map (function (item) {
-    item.addEventListener('click', SwapHA);
-  })
+//определяем функции для кнопки удалить карточку
+let allDelButtons = document.querySelectorAll ('.delete_ha');
+Array.from(allDelButtons).map (function (item) {
+  item.addEventListener('click', DeleteHA);
+})
 
-}
+//определяем функции для кнопки поменять содержимое с НИЖНЕЙ карточкой
+let allXChangeButtons = document.querySelectorAll ('.swap_ha');
+Array.from(allXChangeButtons).map (function (item) {
+  item.addEventListener('click', SwapHA);
+})
+
+
 
 function AddHAUp (event) {
   let haTotalForms = document.getElementById('id_hidden_acts-TOTAL_FORMS');
@@ -119,7 +120,6 @@ function SwapHA () {
     Swap('-permitted_work');
     Swap('-docs');
     Swap('-annex');
-
     function Swap (part_of_id) {
       let swapper = haCard.querySelector('#id_hidden_acts-'+haCardId+part_of_id).value;
       haCard.querySelector('#id_hidden_acts-'+haCardId+part_of_id).value = nextHaCard.querySelector('#id_hidden_acts-'+nextHaCardId+part_of_id).value;
