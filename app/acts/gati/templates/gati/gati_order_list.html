@@ -8,26 +8,34 @@ order_list
     <div class="container">
         <h5>Список открытых ордеров ГАТИ ООО "Интера" и ООО "Техолит"</h5>
         {% for order in order_list %}
-            <div class="row">
-                <div class="col-xl-1">{{ forloop.counter }}</div>
-                <div class="col-xl-1">Адрес:</div>
-                <div class="col-xl-10">{{ order.Address }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xl-1"></div>
-                <div class="col-xl-1">Подрядчик:</div>
-                <div class="col-xl-2">{{ order.Contractor }}</div>
-                <div class="col-xl-2">Ордер №:</div>
-                <div class="col-xl-2">{{ order.Order_N }}</div>
-                <div class="col-xl-1">Начало:</div>
-                <div class="col-xl-1">{{ order.Begin_Date }}</div>
-                <div class="col-xl-1">Конец:</div>
-                <div class="col-xl-1">{{ order.End_Date }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xl-1"></div>
-                <div class="col-xl-1">Работы:</div>
-                <div class="col-xl-10">{{ order.Work_Type }}</div>
+            <div class="card mb-1">
+                <div class="row">
+                    <div class="col-xl-1"><strong>{{ forloop.counter }}</strong></div>
+                    <div class="col-xl-2">Адрес:</div>
+                    <div class="col-xl-9"><strong>{{ order.Address }}</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-1"></div>
+                    <div class="col-xl-2">Подрядчик:</div>
+                    <div class="col-xl-9">{{ order.Contractor }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-1"></div>
+                    <div class="col-xl-2">Ордер №:</div>
+                    <div class="col-xl-9">{{ order.Order_N }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-1"></div>
+                    <div class="col-xl-2">Начало:</div>
+                    <div class="col-xl-3">{{ order.Begin_Date }}</div>
+                    <div class="col-xl-2">Конец:</div>
+                    <div class="col-xl-4">{{ order.End_Date }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-1"></div>
+                    <div class="col-xl-2">Работы:</div>
+                    <div class="col-xl-9">{{ order.Work_Type }}</div>
+                </div>
             </div>
         {% endfor %}
     </div>
