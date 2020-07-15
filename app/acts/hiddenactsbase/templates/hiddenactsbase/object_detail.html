@@ -85,6 +85,14 @@
                             <div class="col-md-2">Разрешено:</div>
                             <div class="col-md-10">{{ act.permitted_work }}</div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-2">Документы:</div>
+                            <div class="col-md-10">{{ act.docs }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Приложения:</div>
+                            <div class="col-md-10">{{ act.annex }}</div>
+                        </div>
                         <a href="{% url 'delete_hidden_act' myobj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>
                     </div>
                 </div>

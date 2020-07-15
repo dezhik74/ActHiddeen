@@ -82,6 +82,14 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
                         <div class="col-sm-4">{{ form.end_date }}</div>
                     </div>
                     <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.presented_work.label }}</div>
+                        <div class="col-sm-10">{{ form.presented_work }}</div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <div class="col-sm-2 col-form-label-sm">{{ form.permitted_work.label }}</div>
+                        <div class="col-sm-10">{{ form.permitted_work }}</div>
+                    </div>
+                    <div class="form-group row mb-1">
                         <div class="col-sm-2 col-form-label-sm">{{ form.materials.label }}</div>
                         <div class="col-sm-10">{{ form.materials }}</div>
                     </div>
@@ -90,12 +98,12 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
                         <div class="col-sm-10">{{ form.work_SNIP }}</div>
                     </div>
                     <div class="form-group row mb-1">
-                        <div class="col-sm-2 col-form-label-sm">{{ form.presented_work.label }}</div>
-                        <div class="col-sm-10">{{ form.presented_work }}</div>
+                        <div class="col-sm-2 col-form-label-sm">{{ form.docs.label }}</div>
+                        <div class="col-sm-10">{{ form.docs }}</div>
                     </div>
                     <div class="form-group row mb-1">
-                        <div class="col-sm-2 col-form-label-sm">{{ form.permitted_work.label }}</div>
-                        <div class="col-sm-10">{{ form.permitted_work }}</div>
+                        <div class="col-sm-2 col-form-label-sm">{{ form.annex.label }}</div>
+                        <div class="col-sm-10">{{ form.annex }}</div>
                     </div>
                 </div>
             {% endfor %}

@@ -28,7 +28,8 @@ class HActISForm(ModelForm):
         model = HiddenActIS
         fields = [
             'act_number', 'act_date', 'presented_work', 'materials',
-            'permitted_work', 'begin_date', 'end_date', 'work_SNIP'
+            'permitted_work', 'begin_date', 'end_date', 'work_SNIP',
+            'docs', 'annex'
         ]
 
     def __init__(self, *args, **kwargs):

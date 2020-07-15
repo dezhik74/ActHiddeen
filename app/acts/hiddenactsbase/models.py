@@ -13,6 +13,9 @@ class HiddenActIS (models.Model):
     begin_date = models.CharField(max_length=50, verbose_name='От:')
     end_date = models.CharField(max_length=50, verbose_name='До:')
     work_SNIP = models.CharField(max_length=500, verbose_name='СНИП:', blank=True)
+    docs = models.CharField(max_length=500, verbose_name='Предьявлены документы',
+                            default='исполнительная схема, сертификаты/свителельства', blank=True)
+    annex = models.CharField(max_length=500, verbose_name='Приложения', blank=True)
 
     class Meta:
         ordering = ['act_number']
