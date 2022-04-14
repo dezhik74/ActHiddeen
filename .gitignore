@@ -11,5 +11,4 @@ dump.json
 gatidata.pkl
 www.csv
 dynamic/
-db.sqlite3
 app/acts/static
