@@ -36,18 +36,20 @@ class ObjectsList(View):
 
     @staticmethod
     def post(request):
-        search_form = SearchForm (request.POST)
+        search_form = SearchForm(request.POST)
         if search_form.is_valid():
             objs = ObjectActs.objects.filter(Q(address__icontains=search_form.cleaned_data['search_object'])
-                                            | Q(contractor__icontains=search_form.cleaned_data['search_object'])
-                                            | Q(system_type__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
+                                             | Q(contractor__icontains=search_form.cleaned_data['search_object'])
+                                             | Q(
+                system_type__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
             # objs = ObjectActs.objects.filter(address__contains=search_form.cleaned_data['search_object']).order_by("-id")
         else:
             objs = ObjectActs.objects.order_by("-id")
         return paged_output(request, objs, 'hiddenactsbase/index.html', search_form)
         # return  HttpResponse ('rere: ' + objs)
 
-class ObjectDetail (View):
+
+class ObjectDetail(View):
     @staticmethod
     def get(request, pk):
         my_obj = get_object_or_404(ObjectActs, pk=pk)
@@ -65,7 +67,7 @@ def create_hidden_act_to_end(request, pk):
 @login_required
 def create_blow_down(request, pk):
     my_obj = get_object_or_404(ObjectActs, pk=pk)
-    if my_obj.blow_down_act == None:
+    if my_obj.blow_down_act is None:
         my_obj.blow_down_act = BlowDownAct.objects.create()
         my_obj.save()
     return redirect(my_obj)
@@ -93,7 +95,7 @@ def copy_object(request, pk):
         act.save()
         new_acts.append(act)
     new_b_d_a = None
-    if my_obj.blow_down_act != None:
+    if my_obj.blow_down_act is not None:
         new_b_d_a = my_obj.blow_down_act
         new_b_d_a.id = None
         new_b_d_a.save()
@@ -101,7 +103,7 @@ def copy_object(request, pk):
     my_obj.save()
     for act1 in new_acts:
         my_obj.acts.add(act1)
-    if new_b_d_a != None:
+    if new_b_d_a is not None:
         my_obj.blow_down_act = new_b_d_a
         my_obj.save()
     return redirect(my_obj)
@@ -113,7 +115,7 @@ def delete_object(request, pk):
     for act in my_obj.acts.all():
         act.delete()
     my_obj.delete()
-    if my_obj.blow_down_act != None:
+    if my_obj.blow_down_act is not None:
         my_obj.blow_down_act.delete()
     return redirect('objects_list_url')
 
@@ -123,7 +125,7 @@ def doc_append(file1, file2, numb):
     doc2 = Document(file2)
     for el in doc2.element.body:
         doc1.element.body.append(el)
-    #doc1.add_page_break()
+    # doc1.add_page_break()
     doc1.save(file1)
 
 
@@ -163,7 +165,7 @@ def make_word_file(request, pk):
     if not os.path.exists(dynamic_dir_name):
         os.mkdir(dynamic_dir_name)
     docx_template_dir = os.path.join(base_app_dir, 'docx_template')
-    docx_template = os.path.join(docx_template_dir, 'HiddenActTemtplate2.docx')
+    docx_template = os.path.join(docx_template_dir, 'HiddenActTemtplate.docx')
     myobj = get_object_or_404(ObjectActs, pk=pk)
     num_of_docx = make_hidden_docx(myobj, docx_template, dynamic_dir_name)
     docx_name = assemble_docx(dynamic_dir_name, num_of_docx)
@@ -198,7 +200,7 @@ def object_edit(request, pk):
         blow_down_act_form_set = BlowDownActFormSet(request.POST, prefix='blow_down_act')
         if object_form_set.is_valid() and ha_form_set.is_valid() and blow_down_act_form_set.is_valid():
             myobj.update_obj(object_form_set.cleaned_data,
-                                         ha_form_set.cleaned_data, blow_down_act_form_set.cleaned_data)
+                             ha_form_set.cleaned_data, blow_down_act_form_set.cleaned_data)
             return redirect(myobj)
         return render(request, 'hiddenactsbase/object_edit.html', context={
             'myobj': myobj,
@@ -221,9 +223,9 @@ def object_edit(request, pk):
 
 @login_required
 def delete_blow_down_act(request, pk):
-    myobj = get_object_or_404(ObjectActs, pk=pk)
-    if myobj.blow_down_act != None:
-        b_d_a = myobj.blow_down_act
+    my_obj = get_object_or_404(ObjectActs, pk=pk)
+    if my_obj.blow_down_act is not None:
+        b_d_a = my_obj.blow_down_act
         b_d_a.delete()
-        myobj.blow_down_act = None
-    return redirect(myobj)
+        my_obj.blow_down_act = None
+    return redirect(my_obj)

@@ -4,7 +4,7 @@ import re
 from datetime import date
 
 
-class HiddenActIS (models.Model):
+class HiddenActIS(models.Model):
     act_number = models.CharField(max_length=20, verbose_name='Ном. Акта', blank=True)
     act_date = models.CharField(max_length=50, verbose_name='Дата Акта')
     presented_work = models.CharField(max_length=500, verbose_name='Предъявл.')
@@ -25,7 +25,7 @@ class HiddenActIS (models.Model):
         return '{} -> {}'.format(self.act_number, self.presented_work)
 
 
-class BlowDownAct (models.Model):
+class BlowDownAct(models.Model):
     act_number = models.CharField(max_length=20, verbose_name='Ном. Акта', blank=True)
     act_date = models.CharField(max_length=50, verbose_name='Дата Акта')
     trassa = models.CharField(max_length=500, verbose_name='Трасса',
@@ -40,25 +40,28 @@ class BlowDownAct (models.Model):
     def __str__(self):
         return '{} -> Промывка (продувка)'.format(self.act_number)
 
-class ObjectActs (models.Model):
+
+class ObjectActs(models.Model):
     create_date = models.DateField(blank=False, default=date(2019, 12, 6))
     address = models.CharField(max_length=500, verbose_name='Адрес', blank=False)
     system_type = models.CharField(max_length=500, verbose_name='тип')
     designer = models.CharField(max_length=500, verbose_name='Проектант')
     contractor = models.CharField(max_length=500, verbose_name='Подрядчик',
                                   default='Общество с ограниченной ответственностью «Интера».')
-    contractor_requisite = models.CharField(max_length= 500, verbose_name='Реквизиты подрядчика',
-                                    default= 'Свидетельство о государственной регистрации серия 78' +
-                                             '№007274277 от  02.09.2009, ОГРН 1097847236783, ' +
-                                             'ИНН 7805498649, 198188, г. Санкт-Петербург,' +
-                                             ' ул. Возрождения, д.20, литер А, тел. 242-78-10.')
+    contractor_requisite = models.CharField(max_length=500, verbose_name='Реквизиты подрядчика',
+                                            default='Свидетельство о государственной регистрации серия 78' +
+                                                    '№007274277 от  02.09.2009, ОГРН 1097847236783, ' +
+                                                    'ИНН 7805498649, 198188, г. Санкт-Петербург,' +
+                                                    ' ул. Возрождения, д.20, литер А, тел. 242-78-10.')
     supervisor_engineer = models.CharField(max_length=200, verbose_name='Технадзор')
     contractor_engineer = models.CharField(max_length=200, verbose_name='Прораб')
+    contractor_supervisor = models.CharField(max_length=200, verbose_name='Технадзор заказчика', blank=True)
     designer_engineer = models.CharField(max_length=200, verbose_name='Проектировщик', blank=True)
     project_number = models.CharField(max_length=100, verbose_name='Ном. проекта')
     exec_documents = models.CharField(max_length=500, verbose_name='Исполн.')
     supervisor_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ технадзора')
     contractor_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ прораба')
+    contractor_supervisor_decree = models.CharField(max_length=200, verbose_name='Приказ технадз. заказ.', blank=True)
     designer_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ проектировщика', blank=True)
     acts_instance_num = models.CharField(max_length=100, verbose_name='Кол-во экземпляров', blank=True)
     acts = models.ManyToManyField('HiddenActIS', blank=True, related_name='object_acts')
@@ -92,17 +95,17 @@ class ObjectActs (models.Model):
         # лучше всего будет удалить все записи и записать новые
 
         self.__dict__.update(cleaned_obj_data[0])
-        #удаляем
+        # удаляем
         for act in self.acts.all():
             act.delete()
-        #создаем новые
+        # создаем новые
         i = 0
         for act_data in cleaned_act_data:
             act = self.acts.create()
             act.__dict__.update(cleaned_act_data[i])
             i += 1
             act.save()
-        if self.blow_down_act != None:
+        if self.blow_down_act is not None:
             self.blow_down_act.__dict__.update(cleaned_blow_down_act_data[0])
             self.blow_down_act.save()
         self.save()
