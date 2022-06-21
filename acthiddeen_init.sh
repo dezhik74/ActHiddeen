@@ -15,7 +15,7 @@ python manage.py collectstatic --noinput
 
 echo "Starting server..."
 # echo "Django development server..."
-# python manage.py runserver 80
+# python manage.py runserver 0.0.0.0:8000
 
 echo "Gunicorn server"
 gunicorn -b 0.0.0.0:8000 acts.wsgi:application
