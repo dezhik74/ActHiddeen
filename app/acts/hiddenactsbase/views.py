@@ -2,6 +2,7 @@ import mimetypes
 import os
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
@@ -26,7 +27,8 @@ def paged_output(request, objects, template, search_form):
                            })
 
 
-class ObjectsList(View):
+class ObjectsList(LoginRequiredMixin, View):
+    login_url = ''
 
     @staticmethod
     def get(request):
@@ -49,7 +51,9 @@ class ObjectsList(View):
         # return  HttpResponse ('rere: ' + objs)
 
 
-class ObjectDetail(View):
+class ObjectDetail(LoginRequiredMixin, View):
+    login_url = ''
+
     @staticmethod
     def get(request, pk):
         my_obj = get_object_or_404(ObjectActs, pk=pk)

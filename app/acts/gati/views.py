@@ -1,9 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
 from .gati_render import get_gati_data
 
 
-class GatiOrderView(View):
+class GatiOrderView(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         order_list = get_gati_data()
