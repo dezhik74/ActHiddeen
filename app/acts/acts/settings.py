@@ -25,7 +25,7 @@ SECRET_KEY = '_aehzl#8dx8dsz=o5@-v7%pp5qn076oywr^cxq%av)lsux9$63'
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.56.107', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['http://snab.ovz3.dezhik.gmzem.vps.myjino.ru']
+CSRF_TRUSTED_ORIGINS = ['http://pto.ovz3.dezhik.gmzem.vps.myjino.ru']
 
 
 # Application definition
