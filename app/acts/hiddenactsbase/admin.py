@@ -1,12 +1,18 @@
 from django.contrib import admin
 from .models import *
 
-# администратор admin / admin
-# пользователь user / intera_user
+
+class HiddenActISInline(admin.TabularInline):
+    model = ObjectActs.acts.through
 
 
-# Register your models here.
+@admin.register(HiddenActIS)
+class HiddenActISAdmin(admin.ModelAdmin):
+    inlines = [HiddenActISInline]
 
-admin.site.register(ObjectActs)
-admin.site.register(HiddenActIS)
-admin.site.register(BlowDownAct)
+
+@admin.register(ObjectActs)
+class ObjectActsAdmin(admin.ModelAdmin):
+    inlines = [HiddenActISInline]
+    exclude = ('acts', )
+    list_display = ('address', 'system_type')

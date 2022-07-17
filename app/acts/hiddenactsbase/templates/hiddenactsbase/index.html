@@ -29,19 +29,19 @@
             <a href="{% url 'make_word_file' obj.pk %}" class="btn btn-primary my-1 py-0">Сформировать файл</a>
             <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
             <a href="{% url 'delete_object' obj.pk %}" class="btn btn-primary  my-1 py-0 del_btn">Удалить объект</a>
-            <a class="btn btn-primary my-1 py-0" data-toggle="collapse" href="#collapseExample{{ obj.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ obj.pk }}">
-                \/
-            </a>
-            <div class="collapse" id="collapseExample{{ obj.pk }}">
-                {% for act in  obj.acts.all %}
-                    <p class="card-text mb-0"> [ {{ act.pk }} ] № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>
-                {% endfor %}
-
-                {% if obj.blow_down_act %}
-                    <p class="card-text mb-0"> [ {{ obj.blow_down_act.pk }} ] № {{ obj.blow_down_act.act_number }}, Промывка-продувка</p>
-                {% endif %}
-
-            </div>
+{#            <a class="btn btn-primary my-1 py-0" data-toggle="collapse" href="#collapseExample{{ obj.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ obj.pk }}">#}
+{#                \/#}
+{#            </a>#}
+{#            <div class="collapse" id="collapseExample{{ obj.pk }}">#}
+{#                {% for act in  obj.acts.all %}#}
+{#                    <p class="card-text mb-0"> [ {{ act.pk }} ] № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>#}
+{#                {% endfor %}#}
+{##}
+{#                {% if obj.blow_down_act %}#}
+{#                    <p class="card-text mb-0"> [ {{ obj.blow_down_act.pk }} ] № {{ obj.blow_down_act.act_number }}, Промывка-продувка</p>#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
           </div>
         </div>
     {% endfor %}

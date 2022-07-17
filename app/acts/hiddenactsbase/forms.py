@@ -4,10 +4,21 @@ from django.forms import ModelForm
 from .models import *
 
 
-class ObjectForm (ModelForm):
+class EditObjectBaseForm (ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        for f in self.fields:
+            if f.startswith('is') :
+                self.fields[f].widget.attrs['class'] = 'form-control-sm'
+            else:
+                self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
+
+
+class ObjectForm (EditObjectBaseForm):
     class Meta:
         model = ObjectActs
-        exclude = ['create_date', 'acts', 'blow_down_act']
+        exclude = ['create_date', 'acts']
         # fields = [
         #     'address', 'system_type', 'designer', 'contractor', 'contractor_requisite', 'supervisor_engineer',
         #     'designer_engineer', 'contractor_engineer', 'project_number', 'exec_documents',
@@ -17,13 +28,8 @@ class ObjectForm (ModelForm):
 
         error_css_class = "alert alert-danger mb-0 py-0"
 
-    def __init__(self, *args, **kwargs):
-        super(ModelForm, self).__init__(*args, **kwargs)
-        for f in self.fields:
-            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
 
-
-class HActISForm(ModelForm):
+class HActISForm(EditObjectBaseForm):
     class Meta:
         model = HiddenActIS
         fields = [
@@ -31,22 +37,6 @@ class HActISForm(ModelForm):
             'permitted_work', 'begin_date', 'end_date', 'work_SNIP',
             'docs', 'annex'
         ]
-
-    def __init__(self, *args, **kwargs):
-        super(ModelForm, self).__init__(*args, **kwargs)
-        for f in self.fields:
-            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
-
-
-class BlowDownActForm(ModelForm):
-    class Meta:
-        model = BlowDownAct
-        fields = ['act_number', 'act_date', 'trassa','trassa_lenght', 'purge_method']
-
-    def __init__(self, *args, **kwargs):
-        super(ModelForm, self).__init__(*args, **kwargs)
-        for f in self.fields:
-            self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
 
 
 class SearchForm (forms.Form):
