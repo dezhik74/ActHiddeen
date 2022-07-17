@@ -20,7 +20,7 @@
     <div class="container">
     {% for obj in objects_acts %}
         <div class="card my-1">
-          <div class="card-header py-0 ">
+          <div class="card-header py-0 text-truncate">
               [{{ obj.create_date|date:"d.m.y" }}] <b>Объект</b> {{ obj.address }} <b>Кап. ремонт </b> {{ obj.system_type }} <b>Подрядчик</b> {{ obj.get_short_contractor }}
           </div>
           <div class="card-body py-0">
