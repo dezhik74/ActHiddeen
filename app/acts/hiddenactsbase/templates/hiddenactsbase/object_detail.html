@@ -1,4 +1,4 @@
-<!-- Входящий контекст myobj-->
+<!-- Входящий контекст my_obj-->
 {% extends 'base.html'%}
 {% block mycontent %}
     <div class="container">
@@ -6,57 +6,59 @@
     </div>
     <div class="container">
         <div class="card mb-1">
-            <div class="card-header py-0">Объект {{ myobj.address }} капитальный ремонт {{ myobj.system_type }}</div>
+            <div class="card-header py-0">Объект {{ my_obj.address }} капитальный ремонт {{ my_obj.system_type }}</div>
             <div class="card-body py-0">
                 <div class="card-text">
                     <div class="row">
                         <div class="col-md-2">Подрядчик:</div>
-                        <div class="col-md-10">{{ myobj.contractor }}</div>
+                        <div class="col-md-10">{{ my_obj.contractor }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Реквизиты подрядчика:</div>
-                        <div class="col-md-10">{{ myobj.contractor_requisite }}</div>
+                        <div class="col-md-10">{{ my_obj.contractor_requisite }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Проектант:</div>
-                        <div class="col-md-10">{{ myobj.designer }}</div>
+                        <div class="col-md-10">{{ my_obj.designer }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Технадзор:</div>
-                        <div class="col-md-10">{{ myobj.supervisor_engineer }} ({{ myobj.supervisor_engineer_decree }})</div>
+                        <div class="col-md-10">{{ my_obj.supervisor_engineer }} ({{ my_obj.supervisor_engineer_decree }})</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Прораб:</div>
-                        <div class="col-md-10">{{ myobj.contractor_engineer }} ({{ myobj.contractor_engineer_decree }})</div>
+                        <div class="col-md-10">{{ my_obj.contractor_engineer }} ({{ my_obj.contractor_engineer_decree }})</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Технадз. наш.:</div>
-                        <div class="col-md-10">{{ myobj.contractor_supervisor }} ({{ myobj.contractor_supervisor_decree }})</div>
+                        <div class="col-md-10">{{ my_obj.contractor_supervisor }} ({{ my_obj.contractor_supervisor_decree }})</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Проектировщик:</div>
-                        <div class="col-md-10">{{ myobj.designer_engineer }} ({{ myobj.designer_engineer_decree }})</div>
+                        <div class="col-md-10">{{ my_obj.designer_engineer }} ({{ my_obj.designer_engineer_decree }})</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Номер проекта:</div>
-                        <div class="col-md-3">{{ myobj.project_number }}</div>
+                        <div class="col-md-3">{{ my_obj.project_number }}</div>
                         <div class="col-md-2">Исполнительная:</div>
-                        <div class="col-md-5">{{ myobj.exec_documents }}</div>
+                        <div class="col-md-5">{{ my_obj.exec_documents }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">Акт составлен в:</div>
-                        <div class="col-md-3">{{ myobj.acts_instance_num }}</div>
+                        <div class="col-md-3">{{ my_obj.acts_instance_num }}</div>
                     </div>
-                    <a href="{% url 'create_hidden_act_to_end' myobj.pk %}" class="btn btn-primary my-1 py-0">+Aкт скрытых</a>
-                    <a href="{{ myobj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое актов объекта</a>
-                    <a href="{% url 'make_word_file' myobj.pk %}" class="btn btn-primary my-1 py-0">Сформировать файл для печати</a>
+{#                    <a href="{% url 'create_hidden_act_to_end' my_obj.pk %}" class="btn btn-primary my-1 py-0">+Aкт скрытых</a>#}
+                    <a href="{{ my_obj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое</a>
+                    <a href="{% url 'make_word_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Сформировать файл для печати</a>
+                    <a href="{% url 'object_table_url' my_obj.pk %}" class="btn btn-primary my-1 py-0">Таблица</a>
+
                 </div>
             </div>
         </div>
         <div class="card mb-1">
             <div class="card-header py-0">-------------------АКТЫ-------------------</div>
         </div>
-        {% for act in myobj.acts.all %}
+        {% for act in my_obj.acts.all %}
             <div class="card mb-1">
                 <div class="card-body py-0">
                     <div class="card-text">
@@ -96,7 +98,7 @@
                             <div class="col-md-2">Приложения:</div>
                             <div class="col-md-10">{{ act.annex }}</div>
                         </div>
-                        <a href="{% url 'delete_hidden_act' myobj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>
+{#                        <a href="{% url 'delete_hidden_act' my_obj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>#}
                     </div>
                 </div>
             </div>
@@ -106,44 +108,44 @@
                     Дополнительные акты
             </div>
             <div class="card-body py-0">
-                {% if myobj.is_washing_purging_act %}
+                {% if my_obj.is_washing_purging_act %}
                     <div class="row">
-                        <div class="col-md-3">Продувка. Акт номер:</div>
-                        <div class="col-md-2">{{ myobj.w_p_act_number }}</div>
+                        <div class="col-md-3">Продувка:</div>
+                        <div class="col-md-2">{{ my_obj.w_p_act_number }}</div>
                         <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ myobj.w_p_act_date }}</div>
+                        <div class="col-md-2">{{ my_obj.w_p_act_date }}</div>
                     </div>
                 {% endif %}
-                {% if myobj.is_washing_disinfection_act %}
+                {% if my_obj.is_washing_disinfection_act %}
                     <div class="row">
-                        <div class="col-md-3">Дезинфекция. Акт номер:</div>
-                        <div class="col-md-2">{{ myobj.w_d_act_number }}</div>
+                        <div class="col-md-3">Дезинфекция:</div>
+                        <div class="col-md-2">{{ my_obj.w_d_act_number }}</div>
                         <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ myobj.w_d_act_date }}</div>
+                        <div class="col-md-2">{{ my_obj.w_d_act_date }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Анализ воды 1 №</div>
-                        <div class="col-md-4">{{ myobj.w_d_disinfection_protocol_1 }}</div>
+                        <div class="col-md-3">Анализ воды 1</div>
+                        <div class="col-md-4">{{ my_obj.w_d_disinfection_protocol_1 }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Анализ воды 2 №</div>
-                        <div class="col-md-4">{{ myobj.w_d_disinfection_protocol_2 }}</div>
+                        <div class="col-md-3">Анализ воды 2</div>
+                        <div class="col-md-4">{{ my_obj.w_d_disinfection_protocol_2 }}</div>
                     </div>
                 {% endif %}
-                {% if myobj.is_hydraulic_testing_act %}
+                {% if my_obj.is_hydraulic_testing_act %}
                     <div class="row">
-                        <div class="col-md-3">Гидравлика. Акт номер:</div>
-                        <div class="col-md-2">{{ myobj.h_act_number }}</div>
+                        <div class="col-md-3">Гидравлика:</div>
+                        <div class="col-md-2">{{ my_obj.h_act_number }}</div>
                         <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ myobj.h_act_date }}</div>
+                        <div class="col-md-2">{{ my_obj.h_act_date }}</div>
                     </div>
                 {% endif %}
-                {% if myobj.is_sewer_testing_act %}
+                {% if my_obj.is_sewer_testing_act %}
                     <div class="row">
-                        <div class="col-md-3">Исп. канализации. Акт номер:</div>
-                        <div class="col-md-2">{{ myobj.s_t_act_number }}</div>
+                        <div class="col-md-3">Исп. канализации:</div>
+                        <div class="col-md-2">{{ my_obj.s_t_act_number }}</div>
                         <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ myobj.s_t_act_date }}</div>
+                        <div class="col-md-2">{{ my_obj.s_t_act_date }}</div>
                     </div>
                 {% endif %}
 

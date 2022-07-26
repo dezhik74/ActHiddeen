@@ -6,13 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from django.views.generic import View
+from django.views.generic import View, DetailView
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
 
 from .forms import ObjectForm, HActISForm, SearchForm
-from .models import *
+from .models import ObjectActs
 from .AssembleFile import AssembleFile
 
 
@@ -43,36 +43,21 @@ class ObjectsList(LoginRequiredMixin, View):
                                              | Q(contractor__icontains=search_form.cleaned_data['search_object'])
                                              | Q(
                 system_type__icontains=search_form.cleaned_data['search_object'])).order_by("-id")
-            # objs = ObjectActs.objects.filter(address__contains=search_form.cleaned_data['search_object']).order_by("-id")
         else:
             objs = ObjectActs.objects.order_by("-id")
         return paged_output(request, objs, 'hiddenactsbase/index.html', search_form)
         # return  HttpResponse ('rere: ' + objs)
 
 
-class ObjectDetail(LoginRequiredMixin, View):
+class ObjectDetail(LoginRequiredMixin, DetailView):
     login_url = ''
-
-    @staticmethod
-    def get(request, pk):
-        my_obj = get_object_or_404(ObjectActs, pk=pk)
-        return render(request, 'hiddenactsbase/object_detail.html',
-                      context={'myobj': my_obj})
+    template_name = 'hiddenactsbase/object_detail.html'
+    model = ObjectActs
+    context_object_name = 'my_obj'
 
 
-@login_required
-def create_hidden_act_to_end(request, pk):
-    my_obj = get_object_or_404(ObjectActs, pk=pk)
-    my_obj.acts.create()
-    return redirect(my_obj)
-
-
-@login_required
-def delete_hidden_act(request, pk_obj, pk_act):
-    my_obj = get_object_or_404(ObjectActs, pk=pk_obj)
-    my_act = get_object_or_404(my_obj.acts.all(), pk=pk_act)
-    my_act.delete()
-    return redirect(my_obj)
+class ObjectTableView(ObjectDetail):
+    template_name = 'hiddenactsbase/object_table.html'
 
 
 @login_required
@@ -88,19 +73,10 @@ def copy_object(request, pk):
         act.id = None
         act.save()
         new_acts.append(act)
-    #new_b_d_a = None
-    #if my_obj.washing_purging_act is not None:
-    #    new_b_d_a = my_obj.washing_purging_act
-    #    new_b_d_a.id = None
-    #    new_b_d_a.save()
     my_obj.id = None
-    #my_obj.washing_purging_act = None
     my_obj.save()
     for act1 in new_acts:
         my_obj.acts.add(act1)
-    #if new_b_d_a is not None:
-    #    my_obj.washing_purging_act = new_b_d_a
-    #    my_obj.save()
     return redirect(my_obj)
 
 
@@ -110,8 +86,6 @@ def delete_object(request, pk):
     for act in my_obj.acts.all():
         act.delete()
     my_obj.delete()
-    if my_obj.washing_purging_act is not None:
-        my_obj.washing_purging_act.delete()
     return redirect('objects_list_url')
 
 

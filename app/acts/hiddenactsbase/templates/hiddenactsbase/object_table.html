@@ -1,0 +1,80 @@
+<!-- Входящий контекст my_obj-->
+{% extends 'base.html'%}
+{% block mycontent %}
+    <div class="container">
+        <h5 class="card-header">Объект {{ my_obj.address }} капитальный ремонт {{ my_obj.system_type }}</h5>
+        <div class="card mb-4 ">
+            <div class="card-header mb-1 font-weight-bold">
+                Акты освидетельствования скрытых работ
+            </div>
+            <table class="table table-bordered ">
+            <thead>
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col">Дата</th>
+                  <th scope="col">Вид работ</th>
+                  <th scope="col">Лежаки</th>
+                  <th scope="col">Стояки</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for act in my_obj.acts.all %}
+                    <tr>
+                        <td>{{ act.act_number }}</td>
+                        <td class="text-nowrap">{{ act.act_date }}</td>
+                        <td>{{ act.presented_work }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {%  endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header mb-1 font-weight-bold">
+                    Дополнительные акты
+            </div>
+            <div class="card-body py-0">
+                {% if my_obj.is_washing_purging_act %}
+                    <div class="row">
+                        <div class="col-md-3">Продувка:</div>
+                        <div class="col-md-2">{{ my_obj.w_p_act_number }}</div>
+                        <div class="col-md-1">от</div>
+                        <div class="col-md-2">{{ my_obj.w_p_act_date }}</div>
+                    </div>
+                {% endif %}
+                {% if my_obj.is_washing_disinfection_act %}
+                    <div class="row">
+                        <div class="col-md-3">Дезинфекция:</div>
+                        <div class="col-md-2">{{ my_obj.w_d_act_number }}</div>
+                        <div class="col-md-1">от</div>
+                        <div class="col-md-2">{{ my_obj.w_d_act_date }}</div>
+                    </div>
+                {% endif %}
+                {% if my_obj.is_hydraulic_testing_act %}
+                    <div class="row">
+                        <div class="col-md-3">Гидравлика:</div>
+                        <div class="col-md-2">{{ my_obj.h_act_number }}</div>
+                        <div class="col-md-1">от</div>
+                        <div class="col-md-2">{{ my_obj.h_act_date }}</div>
+                    </div>
+                {% endif %}
+                {% if my_obj.is_sewer_testing_act %}
+                    <div class="row">
+                        <div class="col-md-3">Исп. канализации:</div>
+                        <div class="col-md-2">{{ my_obj.s_t_act_number }}</div>
+                        <div class="col-md-1">от</div>
+                        <div class="col-md-2">{{ my_obj.s_t_act_date }}</div>
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
