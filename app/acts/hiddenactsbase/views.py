@@ -88,19 +88,19 @@ def copy_object(request, pk):
         act.id = None
         act.save()
         new_acts.append(act)
-    new_b_d_a = None
-    if my_obj.washing_purging_act is not None:
-        new_b_d_a = my_obj.washing_purging_act
-        new_b_d_a.id = None
-        new_b_d_a.save()
+    #new_b_d_a = None
+    #if my_obj.washing_purging_act is not None:
+    #    new_b_d_a = my_obj.washing_purging_act
+    #    new_b_d_a.id = None
+    #    new_b_d_a.save()
     my_obj.id = None
-    my_obj.washing_purging_act = None
+    #my_obj.washing_purging_act = None
     my_obj.save()
     for act1 in new_acts:
         my_obj.acts.add(act1)
-    if new_b_d_a is not None:
-        my_obj.washing_purging_act = new_b_d_a
-        my_obj.save()
+    #if new_b_d_a is not None:
+    #    my_obj.washing_purging_act = new_b_d_a
+    #    my_obj.save()
     return redirect(my_obj)
 
 
