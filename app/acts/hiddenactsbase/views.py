@@ -17,7 +17,7 @@ from .AssembleFile import AssembleFile
 
 
 def paged_output(request, objects, template, search_form):
-    paginator = Paginator(objects, 15)
+    paginator = Paginator(objects, 30)
     page = request.GET.get('page')
     page_objs = paginator.get_page(page)
     return render(request, template,
