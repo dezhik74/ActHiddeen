@@ -110,9 +110,9 @@ class ObjectActs(models.Model):
                 new_act_data = cleaned_act_data.pop()
                 act.__dict__.update(new_act_data)
                 act.save()
-                print('change', act.pk)
+                # print('change', act.pk)
             else:
-                print('delete', act.pk)
+                # print('delete', act.pk)
                 act.delete()
         # создаем новые
         for act_data in cleaned_act_data:

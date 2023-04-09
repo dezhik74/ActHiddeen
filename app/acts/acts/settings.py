@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,14 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_aehzl#8dx8dsz=o5@-v7%pp5qn076oywr^cxq%av)lsux9$63'
+SECRET_KEY = config('SECRET_KEY')
 
-
-
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.56.107', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['http://pto.ovz3.dezhik.gmzem.vps.myjino.ru']
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Application definition
 
@@ -37,8 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'hiddenactsbase',
-    # 'ks14base',
     'gati',
 ]
 
@@ -84,50 +82,9 @@ DATABASES = {
 }
 
 if os.getenv('APP_LAUNCH_SITE') == 'docker':
-    # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': 'postgres',
-#            'USER': 'postgres',
-#            'PASSWORD': 'pww2',
-#            'HOST': 'db',
-#            'PORT': '5432',
-#        }
-#    }
-#     DATABASES = {
-#          'default': {
-#              'ENGINE': 'django.db.backends.mysql',
-#              'NAME': 'hiddenactsbase',
-#              'USER': 'django',
-#              'PASSWORD': 'aopqaopq27',
-#              'HOST': 'db',
-#              'PORT': '3306',
-#          }
-#      }
-
 else:
-    # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
-
-    # DATABASES = {
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #     }
-    # }
-
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': 'aosr',
-    #         'USER': 'django',
-    #         'PASSWORD': '1234',
-    #         'HOST': 'localhost',
-    #         'PORT': '3306',
-    #     }
-    # }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

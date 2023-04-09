@@ -12,3 +12,5 @@ gatidata.pkl
 www.csv
 dynamic/
 app/acts/static
+app/acts/*.sqlite3
+.env
