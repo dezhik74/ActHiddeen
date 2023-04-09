@@ -127,3 +127,29 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/static'
 
 LOGIN_REDIRECT_URL = '/'
+
+# для отладки базы данных
+db_Debug = 0
+if db_Debug == 1:
+    LOGGING = {
+        'version': 1,
+        'filters': {
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            }
+        },
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'filters': ['require_debug_true'],
+                'class': 'logging.StreamHandler',
+            }
+        },
+        'loggers': {
+            'django.db.backends': {
+                'level': 'DEBUG',
+                'handlers': ['console'],
+            }
+        }
+    }
+
