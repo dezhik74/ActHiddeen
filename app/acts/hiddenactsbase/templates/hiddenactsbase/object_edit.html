@@ -7,6 +7,19 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
     <div class="container-fluid mx-1">
 
         <h5> Редактирование </h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <span class="font-weight-bold">Пакетное изменение дат</span>
+                </div>
+                <div class="form-inline">
+                    <input type="text" class="form-control form-control-sm" id="batch-input">
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-date">Изм. Даты Акта</div>
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-begin">Изм. Даты Начала</div>
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-end">Изм. Даты Конца</div>
+                </div>
+            </div>
+        </div>
         <form action="{{ obj.get_edit_url }}" method ="post">
 
             {% csrf_token %}

@@ -24,7 +24,32 @@ Array.from(allXChangeButtons).map (function (item) {
   item.addEventListener('click', SwapHA);
 })
 
+// поле ввода пакетного изменения дат
+const batchInput = document.getElementById('batch-input')
+// кнопки пакетного изменения дат
+document.getElementById('batch-act-date').addEventListener('click', () => {
+  Array.from(document.getElementsByTagName('input')).forEach((el) => {
+    if (el.id.endsWith('act_date')) {
+      el.value = batchInput.value
+    }
+  })
+})
 
+document.getElementById('batch-act-begin').addEventListener('click', () => {
+  Array.from(document.getElementsByTagName('input')).forEach((el) => {
+    if (el.id.endsWith('begin_date')) {
+      el.value = batchInput.value
+    }
+  })
+})
+
+document.getElementById('batch-act-end').addEventListener('click', () => {
+  Array.from(document.getElementsByTagName('input')).forEach((el) => {
+    if (el.id.endsWith('end_date')) {
+      el.value = batchInput.value
+    }
+  })
+})
 
 function AddHAUp (event) {
   let haTotalForms = document.getElementById('id_hidden_acts-TOTAL_FORMS');
