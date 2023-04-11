@@ -49,71 +49,70 @@
                     </div>
 {#                    <a href="{% url 'create_hidden_act_to_end' my_obj.pk %}" class="btn btn-primary my-1 py-0">+Aкт скрытых</a>#}
                     <a href="{{ my_obj.get_edit_url }}" class="btn btn-primary my-1 py-0">Редактировать содержимое</a>
-                    <a href="{% url 'make_word_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Сформировать файл для печати</a>
+                    <a href="{% url 'make_word_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
+                    <a href="{% url 'make_cert_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить сертификаты</a>
                     <a href="{% url 'object_table_url' my_obj.pk %}" class="btn btn-primary my-1 py-0">Таблица</a>
 
                 </div>
             </div>
         </div>
         <div class="card mb-1">
-            <div class="card-header py-0">-------------------АКТЫ-------------------</div>
-        </div>
-        {% for act in my_obj.acts.all %}
-            <div class="card mb-1">
-                <div class="card-body py-0">
-                    <div class="card-text">
-                        <div class="row">
-                            <div class="col-md-3">Номер:</div>
-                            <div class="col-md-3">{{ act.act_number }}</div>
-                            <div class="col-md-3">Дата:</div>
-                            <div class="col-md-3">{{ act.act_date }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">От:</div>
-                            <div class="col-md-3">{{ act.begin_date }}</div>
-                            <div class="col-md-3">До:</div>
-                            <div class="col-md-3">{{ act.end_date }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Предъявл.:</div>
-                            <div class="col-md-10">{{ act.presented_work }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Разрешено:</div>
-                            <div class="col-md-10">{{ act.permitted_work }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Материалы:</div>
-                            <div class="col-md-10">{{ act.materials }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">СНИП:</div>
-                            <div class="col-md-10">{{ act.work_SNIP }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Документы:</div>
-                            <div class="col-md-10">{{ act.docs }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Приложения:</div>
-                            <div class="col-md-10">{{ act.annex }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Сертификаты:</div>
-                            <div class="col-md-10">
-                                {% for cert in act.certificates.all %}
-                                    <span>
-                                    {{ cert }}
-                                    </span>;
-                                {% endfor %}
+            <div class="card-header mb-1 font-weight-bold">Акты</div>
+            {% for act in my_obj.acts.all %}
+                <div class="card mb-1">
+                    <div class="card-body py-0">
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-md-3">Номер:</div>
+                                <div class="col-md-3">{{ act.act_number }}</div>
+                                <div class="col-md-3">Дата:</div>
+                                <div class="col-md-3">{{ act.act_date }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">От:</div>
+                                <div class="col-md-3">{{ act.begin_date }}</div>
+                                <div class="col-md-3">До:</div>
+                                <div class="col-md-3">{{ act.end_date }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Предъявл.:</div>
+                                <div class="col-md-10">{{ act.presented_work }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Разрешено:</div>
+                                <div class="col-md-10">{{ act.permitted_work }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Материалы:</div>
+                                <div class="col-md-10">{{ act.materials }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">СНИП:</div>
+                                <div class="col-md-10">{{ act.work_SNIP }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Документы:</div>
+                                <div class="col-md-10">{{ act.docs }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Приложения:</div>
+                                <div class="col-md-10">{{ act.annex }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">Сертификаты:</div>
+                                <div class="col-md-10">
+                                    {% for cert in act.certificates.all %}
+                                        <span>
+                                        {{ cert }}
+                                        </span>;
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-
-{#                        <a href="{% url 'delete_hidden_act' my_obj.pk act.pk %}" class="btn btn-primary my-1 py-0">Удалить</a>#}
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
         <div class="card mb-4">
             <div class="card-header mb-1 font-weight-bold">
                     Дополнительные акты
