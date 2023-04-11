@@ -19,8 +19,9 @@ class ObjectActsAdmin(admin.ModelAdmin):
     # TODO Спорное решение - filter_horizontal практически ничего не дает.
     # inlines = [HiddenActISInline]
     # exclude = ('acts', )
-    list_display = ('address', 'system_type')
+    list_display = ('id', 'address', 'system_type')
     filter_horizontal = ('acts',)
+    list_display_links = ('address',)
 
 
 @admin.register(Certificate)
