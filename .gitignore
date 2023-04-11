@@ -14,4 +14,4 @@ dynamic/
 app/acts/static
 app/acts/*.sqlite3
 .env
-app/acts/media
+app/acts/media/*
