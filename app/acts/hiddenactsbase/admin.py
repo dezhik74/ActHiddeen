@@ -1,5 +1,8 @@
+import re
+
 from django.contrib import admin
-from .models import ObjectActs, HiddenActIS
+from .models import ObjectActs, HiddenActIS, Certificate
+
 
 class HiddenActISInline(admin.TabularInline):
     model = ObjectActs.acts.through
@@ -7,7 +10,8 @@ class HiddenActISInline(admin.TabularInline):
 
 @admin.register(HiddenActIS)
 class HiddenActISAdmin(admin.ModelAdmin):
-    inlines = [HiddenActISInline]
+    # inlines = [HiddenActISInline]
+    search_fields = ('id',)
 
 
 @admin.register(ObjectActs)
@@ -17,3 +21,14 @@ class ObjectActsAdmin(admin.ModelAdmin):
     # exclude = ('acts', )
     list_display = ('address', 'system_type')
     filter_horizontal = ('acts',)
+
+
+@admin.register(Certificate)
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ('id', 'description', 'get_filename', 'year')
+    list_display_links = ('id', 'description')
+
+    @admin.display(description='Имя файла')
+    def get_filename(self, obj):
+        reg_exp = r'^(\w|\d)*/'
+        return re.sub(reg_exp, '', obj.filename.name)
