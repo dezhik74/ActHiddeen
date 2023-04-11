@@ -71,8 +71,11 @@ def copy_object(request, pk):
     my_obj.create_date = datetime.now().date()
     new_acts = []
     for act in my_obj.acts.all():
+        certificates = [cert for cert in act.certificates.all()]
         act.id = None
         act.save()
+        for cert in certificates:
+            act.certificates.add(cert)
         new_acts.append(act)
     my_obj.id = None
     my_obj.save()
