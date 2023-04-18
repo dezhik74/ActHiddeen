@@ -26,7 +26,7 @@ Array.from(allXChangeButtons).map (function (item) {
 
 // поле ввода пакетного изменения дат
 const batchInput = document.getElementById('batch-input')
-// кнопки пакетного изменения дат
+// кнопки пакетного изменения дат актов
 document.getElementById('batch-act-date').addEventListener('click', () => {
   Array.from(document.getElementsByTagName('input')).forEach((el) => {
     if (el.id.endsWith('act_date')) {
@@ -34,7 +34,7 @@ document.getElementById('batch-act-date').addEventListener('click', () => {
     }
   })
 })
-
+// кнопки пакетного изменения дат начала
 document.getElementById('batch-act-begin').addEventListener('click', () => {
   Array.from(document.getElementsByTagName('input')).forEach((el) => {
     if (el.id.endsWith('begin_date')) {
@@ -42,7 +42,7 @@ document.getElementById('batch-act-begin').addEventListener('click', () => {
     }
   })
 })
-
+// кнопки пакетного изменения дат конца
 document.getElementById('batch-act-end').addEventListener('click', () => {
   Array.from(document.getElementsByTagName('input')).forEach((el) => {
     if (el.id.endsWith('end_date')) {
@@ -145,6 +145,15 @@ function SwapHA () {
     Swap('-permitted_work');
     Swap('-docs');
     Swap('-annex');
+    //меняем значение select
+    const currentSelectEl = haCard.querySelector('select')
+    const currentOptionList = currentSelectEl.querySelectorAll('option')
+    // console.log(currentOptionList)
+    const nextSelectEl = nextHaCard.querySelector('select')
+    const nextOptionList = nextSelectEl.querySelectorAll('option')
+    currentOptionList.forEach((el, idx) => {
+      [el.selected, nextOptionList[idx].selected] = [nextOptionList[idx].selected, el.selected]
+    })
     function Swap (part_of_id) {
       let swapper = haCard.querySelector('#id_hidden_acts-'+haCardId+part_of_id).value;
       haCard.querySelector('#id_hidden_acts-'+haCardId+part_of_id).value = nextHaCard.querySelector('#id_hidden_acts-'+nextHaCardId+part_of_id).value;

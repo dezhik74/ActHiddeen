@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
 
+from .certificates import compose_cert_file
 from .forms import ObjectForm, HActISForm, SearchForm
 from .models import ObjectActs
 from .AssembleFile import AssembleFile
@@ -70,8 +71,11 @@ def copy_object(request, pk):
     my_obj.create_date = datetime.now().date()
     new_acts = []
     for act in my_obj.acts.all():
+        certificates = [cert for cert in act.certificates.all()]
         act.id = None
         act.save()
+        for cert in certificates:
+            act.certificates.add(cert)
         new_acts.append(act)
     my_obj.id = None
     my_obj.save()
@@ -102,6 +106,15 @@ def make_word_file(request, pk):
     response['Content-Type'] = file_type
     response['Content-Length'] = str(os.stat(docx_name).st_size)
     response['Content-Disposition'] = "attachment; filename=hidden_acts.docx"
+    return response
+
+
+def make_cert_file(request, pk):
+    obj = get_object_or_404(ObjectActs, pk=pk)
+    buffer = compose_cert_file(obj)
+    response = HttpResponse(buffer, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment; filename=certificates.docx'
+    # response['Content-Length'] = str(len(buffer))
     return response
 
 

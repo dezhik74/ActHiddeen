@@ -1,4 +1,4 @@
-from pprint import pprint
+import pprint
 
 from django.db import models
 from django.shortcuts import reverse
@@ -18,6 +18,7 @@ class HiddenActIS(models.Model):
     docs = models.CharField(max_length=500, verbose_name='Предьявлены документы',
                             default='исполнительная схема, сертификаты/свителельства', blank=True)
     annex = models.CharField(max_length=500, verbose_name='Приложения', blank=True)
+    certificates = models.ManyToManyField(to='Certificate', related_name='acts', verbose_name='Сертификаты', blank=True)
 
     class Meta:
         ordering = ['act_number']
@@ -25,7 +26,7 @@ class HiddenActIS(models.Model):
         verbose_name_plural = 'Акты скрытых'
 
     def __str__(self):
-        return '{} -> {}'.format(self.act_number, self.presented_work)
+        return f'[{self.id}] {self.act_number} -> {self.presented_work}'
 
 
 class ObjectActs(models.Model):
@@ -109,6 +110,11 @@ class ObjectActs(models.Model):
             if len(cleaned_act_data) > 0:
                 new_act_data = cleaned_act_data.pop()
                 act.__dict__.update(new_act_data)
+                if act.certificates.count() > 0:
+                    for cert in act.certificates.all():
+                        act.certificates.remove(cert)
+                for new_cert in new_act_data["certificates"]:
+                    act.certificates.add(new_cert)
                 act.save()
                 # print('change', act.pk)
             else:
@@ -116,9 +122,24 @@ class ObjectActs(models.Model):
                 act.delete()
         # создаем новые
         for act_data in cleaned_act_data:
-            self.acts.create(**act_data)
+            new_cert_list = act_data.pop('certificates')
+            new_act = self.acts.create(**act_data)
+            for new_cert in new_cert_list:
+                new_act.certificates.add(new_cert)
+            new_act.save()
         self.save()
         return self
 
 
+class Certificate(models.Model):
+    filename = models.FileField(upload_to='certificates/', verbose_name='Файл')
+    description = models.CharField(max_length=100, verbose_name='Описание')
+    year = models.CharField(max_length=4, verbose_name='Год')
+
+    class Meta:
+        verbose_name = 'Сертификат'
+        verbose_name_plural = 'Сертификаты'
+
+    def __str__(self):
+        return f'[{self.year}] {self.description}'
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import *
+from .models import ObjectActs, Certificate, HiddenActIS
 
 
 class EditObjectBaseForm (ModelForm):
@@ -30,17 +30,22 @@ class ObjectForm (EditObjectBaseForm):
 
 
 class HActISForm(EditObjectBaseForm):
+    # certificates = forms.ModelMultipleChoiceField(
+    #     queryset=Certificate.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple
+    # )
+    #
     class Meta:
         model = HiddenActIS
         fields = [
             'act_number', 'act_date', 'presented_work', 'materials',
             'permitted_work', 'begin_date', 'end_date', 'work_SNIP',
-            'docs', 'annex'
+            'docs', 'annex', 'certificates'
         ]
 
 
 class SearchForm (forms.Form):
-    search_object = forms.CharField (max_length=100)
+    search_object = forms.CharField(max_length=100)
 
     def __init__(self, *args, **kwargs):
         super(forms.Form, self).__init__(*args, **kwargs)
