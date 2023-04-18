@@ -45,6 +45,7 @@ class ObjectActs(models.Model):
     contractor_engineer = models.CharField(max_length=200, verbose_name='Прораб')
     contractor_supervisor = models.CharField(max_length=200, verbose_name='Технадзор наш', blank=True)
     designer_engineer = models.CharField(max_length=200, verbose_name='Проектировщик', blank=True)
+    service_engineer = models.CharField(max_length=200, verbose_name='От УК', blank=True)
     project_number = models.CharField(max_length=100, verbose_name='Ном. проекта')
     exec_documents = models.CharField(max_length=500, verbose_name='Исполн.')
     supervisor_engineer_decree = models.CharField(max_length=200, verbose_name='Приказ технадзора')
