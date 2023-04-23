@@ -146,9 +146,16 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
                         <div class="col-sm-2 col-form-label-sm">{{ form.annex.label }}</div>
                         <div class="col-sm-10">{{ form.annex }}</div>
                     </div>
-                    <div class="form-group row mb-1">
-                        <div class="col-sm-2 col-form-label-sm">{{ form.certificates.label }}</div>
-                        <div class="col-sm-10 mb-5">{{ form.certificates }}</div>
+                    <div class="form-group row mb-1 cert-card" id="cert-card-{{ forloop.counter }}" style="cursor: pointer">
+                        {{ form.certificates }}
+                        <div class="col-sm-2 col-form-label-sm">Сертификаты</div>
+                        <div class="col-sm-10 mb-1">
+                            <div class="card pl-3 cert-picker" id="certificates-picker-0">
+                                <div class="row cert-picker-row">
+                                    <!-- сюда идут баджи с названиями сертификатов -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -213,8 +220,33 @@ ha_form_set - набор форм для актов скрытых, blow_down_ac
         </form>
     </div>
 
+    <!-- модальное окно -->
+
+    <div class="modal" id="modal">
+        <div class="modal-dialog" id="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Выберите сертификат</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCrossButton">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- insert here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCancelButton">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="modalOkButton">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block my_java_script %}
+    <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/certificates.js' %}"></script>
     <script src="{% static 'js/object_edit.js' %}"></script>
 {% endblock %}

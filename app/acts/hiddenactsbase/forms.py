@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, SelectMultiple
 
 from .models import ObjectActs, Certificate, HiddenActIS
 
@@ -13,6 +13,8 @@ class EditObjectBaseForm (ModelForm):
                 self.fields[f].widget.attrs['class'] = 'form-control-sm'
             else:
                 self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
+            if f == 'certificates':
+                self.fields[f].widget.attrs['class'] = '5d-none'
 
 
 class ObjectForm (EditObjectBaseForm):
@@ -40,7 +42,7 @@ class HActISForm(EditObjectBaseForm):
         fields = [
             'act_number', 'act_date', 'presented_work', 'materials',
             'permitted_work', 'begin_date', 'end_date', 'work_SNIP',
-            'docs', 'annex', 'certificates'
+            'docs', 'annex', 'certificates',
         ]
 
 

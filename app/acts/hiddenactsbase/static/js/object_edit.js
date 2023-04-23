@@ -54,7 +54,7 @@ document.getElementById('batch-act-end').addEventListener('click', () => {
 function AddHAUp (event) {
   let haTotalForms = document.getElementById('id_hidden_acts-TOTAL_FORMS');
   // console.log ('Событие' + event.target.id);
-  let haCard = this.parentNode.parentNode.parentNode;
+  let haCard = this.closest('.ha-card');
   // console.log(haCard);
   let newHACard = haCard.cloneNode(true);
   haCard.before(newHACard);
@@ -77,7 +77,7 @@ function AddHAUp (event) {
 function AddHADown (event) {
   let haTotalForms = document.getElementById('id_hidden_acts-TOTAL_FORMS');
   // console.log ('Событие' + event.target.id);
-  let haCard = this.parentNode.parentNode.parentNode;
+  let haCard = this.closest('.ha-card');
   // console.log(haCard);
   let newHACard = haCard.cloneNode(true);
   haCard.after(newHACard);
@@ -104,7 +104,9 @@ function RenumHACardsItems () {
         item.id = item.id.replace(/^id_hidden_acts-[0-9]+/, 'id_hidden_acts-' + i);
       }
       if (item.id != '') {
-        item.name = item.name.replace(/^hidden_acts-[0-9]+/, 'hidden_acts-' + i);
+        if (item.name) {
+          item.name = item.name.replace(/^hidden_acts-[0-9]+/, 'hidden_acts-' + i);
+        }
       }
     })
   })
