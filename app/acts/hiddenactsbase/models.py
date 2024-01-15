@@ -140,6 +140,7 @@ class Certificate(models.Model):
     class Meta:
         verbose_name = 'Сертификат'
         verbose_name_plural = 'Сертификаты'
+        ordering = ['year', 'description']
 
     def __str__(self):
         return f'[{self.year}] {self.description}'
