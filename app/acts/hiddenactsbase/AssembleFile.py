@@ -55,7 +55,8 @@ def AssembleFile(obj, user_name):
         'is_washing_purging_act': 'WashingPurgingActTemplate.docx',
         'is_washing_disinfection_act': 'WashingDisinfectionActTemplate.docx',
         'is_hydraulic_testing_act': 'HydraulicTestingActTemplate.docx',
-        'is_sewer_testing_act': 'SewerTestingActTemplate.docx'
+        'is_sewer_testing_act': 'SewerTestingActTemplate.docx',
+        'is_adjusting_heating_act': 'AdjustmentActTemplate.docx'
     }
     base_app_dir = os.path.dirname(os.path.abspath(__file__))
     dynamic_dir_name = os.path.join(base_app_dir, 'dynamic')

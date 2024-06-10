@@ -41,6 +41,8 @@ class ObjectActs(models.Model):
                                                     '№007274277 от  02.09.2009, ОГРН 1097847236783, ' +
                                                     'ИНН 7805498649, 198188, г. Санкт-Петербург,' +
                                                     ' ул. Возрождения, д.20, литер А, тел. 242-78-10.')
+    contract = models.CharField(max_length=100, verbose_name='Договор', blank=True)
+
     supervisor_engineer = models.CharField(max_length=200, verbose_name='Технадзор')
     contractor_engineer = models.CharField(max_length=200, verbose_name='Прораб')
     contractor_supervisor = models.CharField(max_length=200, verbose_name='Технадзор наш', blank=True)
@@ -77,6 +79,10 @@ class ObjectActs(models.Model):
     is_sewer_testing_act = models.BooleanField(default=False, verbose_name='Испыт. канализации')
     s_t_act_number = models.CharField(max_length=20, verbose_name='Номер', blank=True)
     s_t_act_date = models.CharField(max_length=50, verbose_name='Дата', default='"15" июня 2022 г.')
+    # Акт регулировки системы отопления // The act of adjusting the heating system
+    is_adjusting_heating_act = models.BooleanField(default=False, verbose_name='Балансировка')
+    a_act_number = models.CharField(max_length=20, verbose_name='Номер', blank=True)
+    a_act_date = models.CharField(max_length=20, verbose_name='Дата', blank=True)
 
     class Meta:
         verbose_name = 'Объект'
