@@ -82,7 +82,7 @@ class ObjectActs(models.Model):
     # Акт регулировки системы отопления // The act of adjusting the heating system
     is_adjusting_heating_act = models.BooleanField(default=False, verbose_name='Балансировка')
     a_act_number = models.CharField(max_length=20, verbose_name='Номер', blank=True)
-    a_act_date = models.CharField(max_length=20, verbose_name='Дата', blank=True)
+    a_act_date = models.CharField(max_length=50, verbose_name='Дата', blank=True)
 
     class Meta:
         verbose_name = 'Объект'
