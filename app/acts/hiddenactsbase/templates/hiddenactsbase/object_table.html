@@ -29,48 +29,9 @@
                 {%  endfor %}
             </tbody>
         </table>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header mb-1 font-weight-bold">
-                    Дополнительные акты
-            </div>
-            <div class="card-body py-0">
-                {% if my_obj.is_washing_purging_act %}
-                    <div class="row">
-                        <div class="col-md-3">Продувка:</div>
-                        <div class="col-md-2">{{ my_obj.w_p_act_number }}</div>
-                        <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ my_obj.w_p_act_date }}</div>
-                    </div>
-                {% endif %}
-                {% if my_obj.is_washing_disinfection_act %}
-                    <div class="row">
-                        <div class="col-md-3">Дезинфекция:</div>
-                        <div class="col-md-2">{{ my_obj.w_d_act_number }}</div>
-                        <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ my_obj.w_d_act_date }}</div>
-                    </div>
-                {% endif %}
-                {% if my_obj.is_hydraulic_testing_act %}
-                    <div class="row">
-                        <div class="col-md-3">Гидравлика:</div>
-                        <div class="col-md-2">{{ my_obj.h_act_number }}</div>
-                        <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ my_obj.h_act_date }}</div>
-                    </div>
-                {% endif %}
-                {% if my_obj.is_sewer_testing_act %}
-                    <div class="row">
-                        <div class="col-md-3">Исп. канализации:</div>
-                        <div class="col-md-2">{{ my_obj.s_t_act_number }}</div>
-                        <div class="col-md-1">от</div>
-                        <div class="col-md-2">{{ my_obj.s_t_act_date }}</div>
-                    </div>
-                {% endif %}
 
-            </div>
+        {% include "hiddenactsbase/partials/additional_acts.html" %}
 
-        </div>
     </div>
 
 
