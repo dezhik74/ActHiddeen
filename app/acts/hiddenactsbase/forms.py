@@ -14,7 +14,7 @@ class EditObjectBaseForm (ModelForm):
             else:
                 self.fields[f].widget.attrs['class'] = 'form-control form-control-sm'
             if f == 'certificates':
-                self.fields[f].widget.attrs['class'] = '5d-none'
+                self.fields[f].widget.attrs['class'] = 'd-none'
 
 
 class ObjectForm (EditObjectBaseForm):

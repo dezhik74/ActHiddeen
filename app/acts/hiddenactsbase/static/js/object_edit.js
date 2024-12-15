@@ -83,8 +83,13 @@ function AddHADown (event) {
   haCard.after(newHACard);
   let newHACardItems = newHACard.querySelectorAll ('*');
   Array.from(newHACardItems).map (function (cardItem) {
-    if (cardItem.value != '') {
+    // console.log(cardItem)
+    if (cardItem.tagName == 'INPUT' && cardItem.value != '') {
       cardItem.value = '';
+    }
+    if (cardItem.tagName == 'OPTION') {
+      cardItem.removeAttribute('selected')
+      console.log(cardItem.selected)
     }
   })
   newHACard.querySelector('.down-add').addEventListener('click', AddHADown);
@@ -93,6 +98,7 @@ function AddHADown (event) {
   newHACard.querySelector('.delete_ha').addEventListener('click', DeleteHA);
   haTotalForms.value= Number (haTotalForms.value) + 1;
   RenumHACardsItems ();
+  makeAllPickers();
 }
 
 function RenumHACardsItems () {

@@ -72,7 +72,7 @@ $('.cert-card').each( function() {
   })
 })
 
-$(document).ready(function() {
+function makeAllPickers() {
   $('.cert-card').each(function () {
     const certList = $(this).find('option').map(function () {
       return {
@@ -84,4 +84,6 @@ $(document).ready(function() {
     // console.log(certList)
     makePicker($(this), certList)
   })
-})
+}
+
+$(document).ready(makeAllPickers())
