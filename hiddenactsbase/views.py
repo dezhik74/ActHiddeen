@@ -17,6 +17,10 @@ from .models import ObjectActs
 from .AssembleFile import AssembleFile
 
 
+def main_index(request):
+    return render(request, 'hiddenactsbase/index_main.html')
+
+
 def paged_output(request, objects, template, search_form):
     paginator = Paginator(objects, 30)
     page = request.GET.get('page')

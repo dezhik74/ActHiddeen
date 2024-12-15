@@ -1,9 +1,10 @@
 from django.urls import path
 from .views import ObjectsList, object_edit, ObjectDetail, ObjectTableView, \
-    copy_object, delete_object, make_word_file, make_cert_file
+    copy_object, delete_object, make_word_file, make_cert_file, main_index
 
 urlpatterns = [
-    path('', ObjectsList.as_view(), name='objects_list_url'),
+    path('', main_index, name='main_index'),
+    path('list/', ObjectsList.as_view(), name='objects_list_url'),
     path('edit-<int:pk>/', object_edit, name='object_edit_url'),
     path('see-<int:pk>/', ObjectDetail.as_view(), name='object_detail_url'),
     path('table-<int:pk>/', ObjectTableView.as_view(), name='object_table_url'),
