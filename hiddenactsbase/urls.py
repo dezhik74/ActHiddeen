@@ -12,5 +12,4 @@ urlpatterns = [
     path('obj_delete-<int:pk>', delete_object, name='delete_object'),
     path('make_word-<int:pk>', make_word_file, name='make_word_file'),
     path('make_sert-<int:pk>', make_cert_file, name='make_cert_file'),
-
     ]
