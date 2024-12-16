@@ -68,7 +68,9 @@
                         <div class="card-text">
                             <div class="row">
                                 <div class="col-md-3">Номер:</div>
-                                <div class="col-md-3">{{ act.act_number }}</div>
+                                <div class="col-md-3">
+                                    {{ my_obj.acts_prefix }}-{{ act.act_number }}{{ act.act_suffix }}
+                                </div>
                                 <div class="col-md-3">Дата:</div>
                                 <div class="col-md-3">{{ act.act_date }}</div>
                             </div>

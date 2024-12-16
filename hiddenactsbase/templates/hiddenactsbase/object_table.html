@@ -20,7 +20,9 @@
             <tbody>
                 {% for act in my_obj.acts.all %}
                     <tr>
-                        <td>{{ act.act_number }}</td>
+                        <td>
+                            {{ my_obj.acts_prefix }}-{{ act.act_number }}{{ act.act_suffix }}
+                        </td>
                         <td class="text-nowrap">{{ act.act_date }}</td>
                         <td>{{ act.presented_work }}</td>
                         <td></td>

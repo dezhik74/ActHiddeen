@@ -6,7 +6,7 @@
         {% if my_obj.is_washing_purging_act %}
             <div class="row">
                 <div class="col-md-3">Продувка:</div>
-                <div class="col-md-2">{{ my_obj.w_p_act_number }}</div>
+                <div class="col-md-2">{{ my_obj.acts_prefix }}-{{ my_obj.w_p_act_number }}</div>
                 <div class="col-md-1">от</div>
                 <div class="col-md-2">{{ my_obj.w_p_act_date }}</div>
             </div>
@@ -14,7 +14,7 @@
         {% if my_obj.is_washing_disinfection_act %}
             <div class="row">
                 <div class="col-md-3">Дезинфекция:</div>
-                <div class="col-md-2">{{ my_obj.w_d_act_number }}</div>
+                <div class="col-md-2">{{ my_obj.acts_prefix }}-{{ my_obj.w_d_act_number }}</div>
                 <div class="col-md-1">от</div>
                 <div class="col-md-2">{{ my_obj.w_d_act_date }}</div>
             </div>
@@ -30,7 +30,7 @@
         {% if my_obj.is_hydraulic_testing_act %}
             <div class="row">
                 <div class="col-md-3">Гидравлика:</div>
-                <div class="col-md-2">{{ my_obj.h_act_number }}</div>
+                <div class="col-md-2">{{ my_obj.acts_prefix }}-{{ my_obj.h_act_number }}</div>
                 <div class="col-md-1">от</div>
                 <div class="col-md-2">{{ my_obj.h_act_date }}</div>
             </div>
@@ -38,7 +38,7 @@
         {% if my_obj.is_sewer_testing_act %}
             <div class="row">
                 <div class="col-md-3">Исп. канализации:</div>
-                <div class="col-md-2">{{ my_obj.s_t_act_number }}</div>
+                <div class="col-md-2">{{ my_obj.acts_prefix }}-{{ my_obj.s_t_act_number }}</div>
                 <div class="col-md-1">от</div>
                 <div class="col-md-2">{{ my_obj.s_t_act_date }}</div>
             </div>
@@ -46,7 +46,7 @@
         {% if my_obj.is_adjusting_heating_act %}
             <div class="row">
                 <div class="col-md-3">Балансировка ТС:</div>
-                <div class="col-md-2">{{ my_obj.a_act_number }}</div>
+                <div class="col-md-2">{{ my_obj.acts_prefix }}-{{ my_obj.a_act_number }}</div>
                 <div class="col-md-1">от</div>
                 <div class="col-md-2">{{ my_obj.a_act_date }}</div>
             </div>

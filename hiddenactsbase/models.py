@@ -8,6 +8,7 @@ from datetime import date
 
 class HiddenActIS(models.Model):
     act_number = models.CharField(max_length=20, verbose_name='Ном. Акта', blank=True)
+    act_suffix = models.CharField(max_length=20, verbose_name='Суффикс', blank=True)
     act_date = models.CharField(max_length=50, verbose_name='Дата Акта')
     presented_work = models.CharField(max_length=500, verbose_name='Предъявл.')
     materials = models.CharField(max_length=500, verbose_name='Материалы')
@@ -33,6 +34,7 @@ class ObjectActs(models.Model):
     create_date = models.DateField(blank=False, default=date(2019, 12, 6))
     address = models.CharField(max_length=500, verbose_name='Адрес', blank=False)
     system_type = models.CharField(max_length=500, verbose_name='тип')
+    acts_prefix = models.CharField(max_length=20, verbose_name='Префикс актов', blank=True)
     designer = models.CharField(max_length=500, verbose_name='Проектант')
     contractor = models.CharField(max_length=500, verbose_name='Подрядчик',
                                   default='Общество с ограниченной ответственностью «Интера».')
