@@ -153,3 +153,8 @@ def object_edit(request, pk):
             'object_form_set': object_form_set,
             'ha_form_set': ha_form_set,
         })
+
+
+def new_object_edit(request, pk):
+    ctx = {"object_id": pk}
+    return render(request, 'hiddenactsbase/new_object_edit.html', context=ctx)
