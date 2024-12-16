@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block mycontent %}
+    <input type="hidden" id="object_id" value="{{ object_id }}">
+    <div class="container-fluid mx-1" x-data="formManager()">
+        <h5> Редактирование </h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <span class="font-weight-bold">Пакетное изменение дат</span>
+                </div>
+                <div class="form-inline">
+                    <input type="text" class="form-control form-control-sm" id="batch-input">
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-date">Изм. Даты Акта</div>
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-begin">Изм. Даты Начала</div>
+                    <div class="btn btn-primary py-0 ml-1" id="batch-act-end">Изм. Даты Конца</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block my_java_script %}
+    <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}
+
