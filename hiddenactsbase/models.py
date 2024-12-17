@@ -157,8 +157,8 @@ class ObjectActs(models.Model):
                 act.delete()
         for act_data in acts_data:
             new_cert_list = act_data.pop('certificates')
+            act_data.pop('id')
             new_act = self.acts.create(**act_data)
-            new_act.save()
             for cert in new_cert_list:
                 new_cert = Certificate.objects.get(pk=cert['id'])
                 new_act.certificates.add(new_cert)

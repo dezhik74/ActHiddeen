@@ -185,19 +185,19 @@ def get_object(request, pk):
 def save_object(request):
     if request.method == "POST":
         # try:
-        data = json.loads(request.body)
-        result = data.get("result", [])
-        if not result:
-            return JsonResponse({"error": "С клиента пришли пустые данные"}, status=400)
-        # Обработка данных (например, сохранение в базу данных)
-        object_data = result["my_object"]
-        acts_data = result["acts"]
-        if not object_data or not acts_data:
-            return JsonResponse({"error": "Объект или список актов пустой"}, status=400)
-        my_obj = ObjectActs.objects.get(pk=object_data["id"])
-        my_obj.update_from_json(object_data, acts_data)
-        # Возвращаем успешный ответ
-        return JsonResponse({"message": "Данные успешно обработаны"}, status=200)
+            data = json.loads(request.body)
+            result = data.get("result", [])
+            if not result:
+                return JsonResponse({"error": "С клиента пришли пустые данные"}, status=400)
+            # Обработка данных (например, сохранение в базу данных)
+            object_data = result["my_object"]
+            acts_data = result["acts"]
+            if not object_data or not acts_data:
+                return JsonResponse({"error": "Объект или список актов пустой"}, status=400)
+            my_obj = ObjectActs.objects.get(pk=object_data["id"])
+            my_obj.update_from_json(object_data, acts_data)
+            # Возвращаем успешный ответ
+            return JsonResponse({"message": "Данные успешно обработаны"}, status=200)
         # except json.JSONDecodeError:
         #     return JsonResponse({"error": "Неверный формат JSON"}, status=400)
         # except Exception as e:
