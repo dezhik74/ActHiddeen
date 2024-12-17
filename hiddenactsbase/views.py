@@ -1,6 +1,8 @@
+import json
 import mimetypes
 import os
 from datetime import datetime
+from pprint import pprint
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
@@ -178,3 +180,27 @@ def get_object(request, pk):
         "all_certs": all_certs,
     }
     return JsonResponse(result)
+
+
+def save_object(request):
+    if request.method == "POST":
+        # try:
+        data = json.loads(request.body)
+        result = data.get("result", [])
+        if not result:
+            return JsonResponse({"error": "Пустой список объектов"}, status=400)
+        # Обработка данных (например, сохранение в базу данных)
+        object_data = result["my_object"]
+        my_obj_id = object_data.pop("id", None)
+        acts_data = result["acts"]
+        qs = ObjectActs.objects.filter(pk=my_obj_id)
+        qs.update(**object_data)
+        # Возвращаем успешный ответ
+        return JsonResponse({"message": "Данные успешно обработаны"}, status=200)
+        # except json.JSONDecodeError:
+        #     return JsonResponse({"error": "Неверный формат JSON"}, status=400)
+        # except Exception as e:
+        #     return JsonResponse({"error": str(e)}, status=500)
+    # Если метод не POST, возвращаем ошибку
+    return JsonResponse({"error": "Метод не поддерживается"}, status=405)
+

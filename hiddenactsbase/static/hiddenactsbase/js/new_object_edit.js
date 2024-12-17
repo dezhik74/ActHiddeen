@@ -28,7 +28,29 @@ function formManager() {
             } finally {
                 this.loading = false;
             }
-
         },
+        async sendResults() {
+            this.error = "";
+            this.success = "";
+            const tokenInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
+            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            axios.defaults.headers.common['X-CSRFToken'] = tokenInput ? tokenInput.value : '';
+            try {
+                const response = await axios.post(`/api/results/`, {
+                    result: {
+                        my_object: this.my_object,
+                        acts: this.acts,
+                    }
+                });
+                this.success = "Список успешно отправлен!";
+                setTimeout(() => {
+                    this.success = "";
+                }, 1000);
+            } catch (err) {
+                this.error = "Не удалось отправить данные на API.";
+                console.error(err);
+            }
+        },
+
     }
 }
