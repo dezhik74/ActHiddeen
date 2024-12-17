@@ -51,6 +51,61 @@ function formManager() {
                 console.error(err);
             }
         },
+        emptyAct(){
+            return {
+                id: 0,
+                act_number: "",
+                act_suffix: "",
+                act_date: "",
+                begin_date: "",
+                end_date: "",
+                permitted_work: "",
+                presented_work: "",
+                work_SNIP: "",
+                materials: "",
+                docs: "",
+                annex: "",
+                certificates: [],
+            }
+        },
+        renumerateActs() {
+            for (let i = 0; i < this.acts.length; i++) {
+                this.acts[i].act_number = String(i+1).padStart(2, '0');
+            }
+            let counter = this.acts.length
+            if (this.my_object.is_washing_purging_act) {
+                counter = counter + 1
+                this.my_object.w_p_act_number = String(counter).padStart(2, '0');
+            }
+            if (this.my_object.is_washing_disinfection_act) {
+                counter = counter + 1
+                this.my_object.w_d_act_number = String(counter).padStart(2, '0');
+            }
+            if (this.my_object.is_hydraulic_testing_act) {
+                counter = counter + 1
+                this.my_object.h_act_number = String(counter).padStart(2, '0');
+            }
+            if (this.my_object.is_sewer_testing_act) {
+                counter = counter + 1
+                this.my_object.s_t_act_number = String(counter).padStart(2, '0');
+            }
+            if (this.my_object.is_adjusting_heating_act) {
+                counter = counter + 1
+                this.my_object.a_act_number = String(counter).padStart(2, '0');
+            }
+        },
+        insertActUp(index) {
+            this.acts.splice(index, 0, this.emptyAct());
+            this.renumerateActs()
+        },
+        insertActDown(index) {
+            this.acts.splice(index+1, 0, this.emptyAct());
+            this.renumerateActs()
+        },
+        deleteAct(index) {
+            this.acts.splice(index, 1);
+            this.renumerateActs()
+        }
 
     }
 }

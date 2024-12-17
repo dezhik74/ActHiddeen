@@ -11,7 +11,6 @@
                 <form action="{% url 'objects_list_url' %}" method="post">
                     {% csrf_token %}
                     {{ search_form.search_object }}
-                    <!--                <input class="align-self-center form-control-sm mr-sm-2" type="search" placeholder="Поиск по объектам" aria-label="Search">-->
                     <button class="align-self-center btn btn-primary py-0 my-2 mr-2" type="submit">Найти</button>
                 </form>
             </div>
@@ -27,23 +26,11 @@
             <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Смотреть</a>
             <a href="{% url 'object_table_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Таблица</a>
             <a href="{{ obj.get_edit_url }}" class="btn btn-primary  my-1 py-0">Редактировать</a>
+            <a href="{% url 'new_object_edit' obj.pk %}" class="btn btn-primary  my-1 py-0">НОВ РЕД</a>
             <a href="{% url 'make_word_file' obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
             <a href="{% url 'make_cert_file' obj.pk %}" class="btn btn-primary my-1 py-0">Получить сертификаты</a>
             <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
             <a href="{% url 'delete_object' obj.pk %}" class="btn btn-primary  my-1 py-0 del_btn">Удалить объект</a>
-{#            <a class="btn btn-primary my-1 py-0" data-toggle="collapse" href="#collapseExample{{ obj.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample{{ obj.pk }}">#}
-{#                \/#}
-{#            </a>#}
-{#            <div class="collapse" id="collapseExample{{ obj.pk }}">#}
-{#                {% for act in  obj.acts.all %}#}
-{#                    <p class="card-text mb-0"> [ {{ act.pk }} ] № {{ act.act_number }}, {{ act.presented_work }} -> {{ act.permitted_work }}</p>#}
-{#                {% endfor %}#}
-{##}
-{#                {% if obj.blow_down_act %}#}
-{#                    <p class="card-text mb-0"> [ {{ obj.blow_down_act.pk }} ] № {{ obj.blow_down_act.act_number }}, Промывка-продувка</p>#}
-{#                {% endif %}#}
-{##}
-{#            </div>#}
           </div>
         </div>
     {% endfor %}
@@ -83,27 +70,6 @@
             {% endif %}
         </ul>
     </nav>
-
-
-<!--    <div class="pagination">-->
-<!--        <span class="step-links">-->
-<!--            {% if objects_acts.has_previous %}-->
-<!--                <a href="?page=1">&laquo; first</a>-->
-<!--                <a href="?page={{ objects_acts.previous_page_number }}">previous</a>-->
-<!--            {% endif %}-->
-
-<!--            <span class="current">-->
-<!--                Page {{ objects_acts.number }} of {{ objects_acts.paginator.num_pages }}.-->
-<!--            </span>-->
-
-<!--            {% if objects_acts.has_next %}-->
-<!--                <a href="?page={{ objects_acts.next_page_number }}">next</a>-->
-<!--                <a href="?page={{ objects_acts.paginator.num_pages }}">last &raquo;</a>-->
-<!--            {% endif %}-->
-<!--        </span>-->
-<!--    </div>-->
-
-
 
 {% endblock %}
 

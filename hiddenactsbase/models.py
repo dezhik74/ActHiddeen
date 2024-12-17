@@ -139,6 +139,32 @@ class ObjectActs(models.Model):
         self.save()
         return self
 
+    def update_from_json(self, object_data, acts_data):
+        self.__dict__.update(object_data)
+        self.save()
+        for act in self.acts.all():
+            if len(acts_data) > 0:
+                new_act_data = acts_data.pop()
+                act.__dict__.update(new_act_data)
+                if act.certificates.count() > 0:
+                    for cert in act.certificates.all():
+                        act.certificates.remove(cert)
+                for cert in new_act_data["certificates"]:
+                    new_cert = Certificate.objects.get(pk=cert['id'])
+                    act.certificates.add(new_cert)
+                act.save()
+            else:
+                act.delete()
+        for act_data in acts_data:
+            new_cert_list = act_data.pop('certificates')
+            new_act = self.acts.create(**act_data)
+            new_act.save()
+            for cert in new_cert_list:
+                new_cert = Certificate.objects.get(pk=cert['id'])
+                new_act.certificates.add(new_cert)
+        return self
+
+
 
 class Certificate(models.Model):
     filename = models.FileField(upload_to='certificates/', verbose_name='Файл')
