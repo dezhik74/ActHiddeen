@@ -24,7 +24,7 @@ def compose_cert_file(obj: ObjectActs):
                         if name.filename.startswith('word/media/'):
                             with zf.open(name.filename) as image:
                                 paragraph = result_doc.add_paragraph(
-                                    f'Приложение к АОСР №{act.act_number} от {act.act_date}')
+                                    f'Приложение к АОСР №{obj.acts_prefix}-{act.act_number} от {act.act_date}')
                                 paragraph_format = paragraph.paragraph_format
                                 paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
                                 result_doc.add_picture(image, width=Cm(16.5), height=Cm(20.9))

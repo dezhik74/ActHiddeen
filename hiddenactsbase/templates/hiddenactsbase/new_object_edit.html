@@ -14,7 +14,7 @@
 
         <h5> Редактирование </h5>
         <!-- Кнопки быстрого изменения -->
-        <div class="card mb-1">
+        <div class="card mb-1" x-data="{newDate: ''}">
             <div class="card-body">
                 <div class="card-title">
                     <span class="font-weight-bold">Пакетное изменение дат</span>
@@ -22,12 +22,15 @@
                 {# TODO сделать через alpine                 #}
                 <div class="row">
                     <div class="col-2 pe-1">
-                        <input type="text" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" x-model="newDate">
                     </div>
                     <div class="col ps-1">
-                        <button class="btn btn-primary py-0 me-1">Изм. Даты Акта</button>
-                        <button class="btn btn-primary py-0 me-1">Изм. Даты Начала</button>
-                        <button class="btn btn-primary py-0 me-1">Изм. Даты Конца</button>
+                        <button class="btn btn-primary py-0 me-1"
+                                @click="changeActsDate(newDate, 'act')">Изм. Даты Акта</button>
+                        <button class="btn btn-primary py-0 me-1"
+                                @click="changeActsDate(newDate, 'begin')">Изм. Даты Начала</button>
+                        <button class="btn btn-primary py-0 me-1"
+                                @click="changeActsDate(newDate, 'end')">Изм. Даты Конца</button>
                     </div>
                 </div>
             </div>
@@ -66,7 +69,8 @@
                             <i class="fas fa-trash-alt"></i>
                         </button>
                         <button type="button" class="btn btn-primary my-0 py-0 px-1"
-                                tabindex="-1">
+                                tabindex="-1"
+                                @click="swapActs(index)">
                             <i class="fas fa-retweet"></i>
                             <i class="fas fa-angle-double-down"></i>
                         </button>

@@ -105,7 +105,38 @@ function formManager() {
         deleteAct(index) {
             this.acts.splice(index, 1);
             this.renumerateActs()
-        }
-
+        },
+        swapActs(index) {
+            if (index < this.acts.length - 1) {
+                const temp = this.acts[index];
+                this.acts[index] = this.acts[index + 1];
+                this.acts[index + 1] = temp;
+            }
+        },
+        changeActsDate(date, date_type) {
+            for (let i = 0; i < this.acts.length; i++) {
+                switch (date_type) {
+                    case "begin": {
+                        this.acts[i].begin_date = date;
+                        break;
+                    }
+                    case "end": {
+                        this.acts[i].end_date = date;
+                        break;
+                    }
+                    case "act": {
+                        this.acts[i].act_date = date;
+                        break;
+                    }
+                }
+            }
+            if (date_type == "act") {
+                this.my_object.w_p_act_date = date;
+                this.my_object.w_d_act_date = date;
+                this.my_object.h_act_date = date;
+                this.my_object.s_t_act_date = date;
+                this.my_object.a_act_date = date;
+            }
+        },
     }
 }
