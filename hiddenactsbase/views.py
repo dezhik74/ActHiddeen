@@ -5,6 +5,7 @@ from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View, DetailView
 from django.contrib.auth.decorators import login_required
@@ -13,7 +14,7 @@ from django.core.paginator import Paginator
 
 from .certificates import compose_cert_file
 from .forms import ObjectForm, HActISForm, SearchForm
-from .models import ObjectActs
+from .models import ObjectActs, Certificate
 from .AssembleFile import AssembleFile
 
 
@@ -158,3 +159,22 @@ def object_edit(request, pk):
 def new_object_edit(request, pk):
     ctx = {"object_id": pk}
     return render(request, 'hiddenactsbase/new_object_edit.html', context=ctx)
+
+
+def get_object(request, pk):
+    my_obj = get_object_or_404(ObjectActs, pk=pk)
+    acts = []
+    for act in my_obj.acts.all():
+        acts.append(model_to_dict(act, exclude=['certificates']))
+        acts[-1]['certificates'] = []
+        for cert in act.certificates.all():
+            acts[-1]['certificates'].append(model_to_dict(cert, exclude=['filename']))
+    all_certs = []
+    for cert in Certificate.objects.all():
+        all_certs.append(model_to_dict(cert, exclude=['filename']))
+    result = {
+        "my_object": model_to_dict(my_obj, exclude=['acts']),
+        "acts": acts,
+        "all_certs": all_certs,
+    }
+    return JsonResponse(result)
