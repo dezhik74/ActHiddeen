@@ -152,6 +152,27 @@
             <a href="{% url 'objects_list_url' %}" class="btn btn-primary my-1 py-0">Вернуться в список</a>
         </div>
 
+        <!-- модальное окно -->
+
+        <div class="modal d-block" id="modal">
+            <div class="modal-dialog" id="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Выберите сертификат</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalCrossButton">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <!-- insert here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCancelButton">Отмена</button>
+                        <button type="button" class="btn btn-primary" id="modalOkButton">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 {% endblock %}
@@ -159,5 +180,6 @@
     <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
     <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
     <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
+    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>
 {% endblock %}
 

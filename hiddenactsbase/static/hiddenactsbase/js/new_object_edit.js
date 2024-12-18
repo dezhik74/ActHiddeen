@@ -6,6 +6,7 @@ function formManager() {
         loading: false,
         error: "",
         success: "",
+        showModal: false,
 
         init() {
             const objId = document.getElementById("object_id").value;
@@ -138,6 +139,9 @@ function formManager() {
                 this.my_object.s_t_act_date = date;
                 this.my_object.a_act_date = date;
             }
+        },
+        showAndInitModal() {
+            this.showModal = true;
         },
     }
 }
