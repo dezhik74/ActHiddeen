@@ -145,6 +145,7 @@ class ObjectActs(models.Model):
         for act in self.acts.all():
             if len(acts_data) > 0:
                 new_act_data = acts_data.pop()
+                new_act_data.pop('id')
                 act.__dict__.update(new_act_data)
                 if act.certificates.count() > 0:
                     for cert in act.certificates.all():
@@ -163,7 +164,6 @@ class ObjectActs(models.Model):
                 new_cert = Certificate.objects.get(pk=cert['id'])
                 new_act.certificates.add(new_cert)
         return self
-
 
 
 class Certificate(models.Model):

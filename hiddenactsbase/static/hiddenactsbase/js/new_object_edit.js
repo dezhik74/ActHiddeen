@@ -111,6 +111,7 @@ function formManager() {
                 const temp = this.acts[index];
                 this.acts[index] = this.acts[index + 1];
                 this.acts[index + 1] = temp;
+                this.renumerateActs()
             }
         },
         changeActsDate(date, date_type) {

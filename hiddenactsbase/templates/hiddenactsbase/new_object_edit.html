@@ -40,6 +40,11 @@
         {% include "hiddenactsbase/partials/upper_object_form.html" %}
 
         <!-- акты скрытых -->
+        <!-- Если актов скрытых нет, то единственная кнопка вставки акта -->
+        <div class="card p-1 mb-1 ha-card" x-show="acts.length == 0">
+            <button class="btn btn-primary py-0 me-1"
+                    @click="insertActDown(0)">Вставить акт скрытых</button>
+        </div>
         <template x-for="(act, index) in acts" :key="index">
             <div class="card p-1 mb-1 ha-card">
                 <div class="row mb-1">
