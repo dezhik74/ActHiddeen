@@ -184,7 +184,7 @@ def get_object(request, pk):
 
 def save_object(request):
     if request.method == "POST":
-        # try:
+        try:
             data = json.loads(request.body)
             result = data.get("result", [])
             if not result:
@@ -198,10 +198,10 @@ def save_object(request):
             my_obj.update_from_json(object_data, acts_data)
             # Возвращаем успешный ответ
             return JsonResponse({"message": "Данные успешно обработаны"}, status=200)
-        # except json.JSONDecodeError:
-        #     return JsonResponse({"error": "Неверный формат JSON"}, status=400)
-        # except Exception as e:
-        #     return JsonResponse({"error": str(e)}, status=500)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Неверный формат JSON"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
     # Если метод не POST, возвращаем ошибку
     return JsonResponse({"error": "Метод не поддерживается"}, status=405)
 
