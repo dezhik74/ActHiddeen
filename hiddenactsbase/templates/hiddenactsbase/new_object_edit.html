@@ -5,14 +5,8 @@
     {% csrf_token %}
     <div class="container-fluid mx-1" x-data="formManager()">
 
-        <div class="mt-3">
-            <!-- Сообщение об ошибке -->
-            <div class="alert alert-danger" x-cloak x-show="error" x-text="error"></div>
-            <!-- Сообщение об успешной отправке -->
-            <div class="alert alert-success" x-cloak x-show="success" x-text="success"></div>
-            <!-- Сообщение о процессе загрузки -->
-            <div class="alert alert-primary" x-cloak x-show="loading">Загрузка...</div>
-        </div>
+        <!-- Alerts -->
+        {% include "hiddenactsbase/partials/alerts.html" %}
 
         <h5> Редактирование </h5>
         <!-- Кнопки быстрого изменения -->
@@ -38,11 +32,7 @@
         </div>
 
         <!-- Кнопки сохранения -->
-        <div class="inline">
-            <button class="btn btn-primary my-1 py-0" @click="sendResults()">Сохранить изменения</button>
-            <a href="{% url 'object_detail_url' object_id %}" class="btn btn-primary  my-1 py-0">Вернуться в структуру</a>
-            <a href="{% url 'objects_list_url' %}" class="btn btn-primary my-1 py-0">Вернуться в список</a>
-        </div>
+        {% include "hiddenactsbase/partials/save_buttons.html" %}
 
         <!-- Начало формы по объекту -->
         {% include "hiddenactsbase/partials/upper_object_form.html" %}
@@ -154,12 +144,13 @@
         <!-- Низ формы - дополнительные акты -->
         {% include "hiddenactsbase/partials/additional_acts_form.html" %}
 
+        <!-- Alerts -->
+        {% include "hiddenactsbase/partials/alerts.html" %}
+
         <!-- Кнопки сохранения -->
-        <div class="inline">
-            <button class="btn btn-primary my-1 py-0" @click="sendResults()">Сохранить изменения</button>
-            <a href="{% url 'object_detail_url' object_id %}" class="btn btn-primary  my-1 py-0">Вернуться в структуру</a>
-            <a href="{% url 'objects_list_url' %}" class="btn btn-primary my-1 py-0">Вернуться в список</a>
-        </div>
+        {% include "hiddenactsbase/partials/save_buttons.html" %}
+
+        <div class="mb-5"></div>
 
         <!-- модальное окно -->
         <div class="modal" :class="showModal ? 'd-block' : ''">
