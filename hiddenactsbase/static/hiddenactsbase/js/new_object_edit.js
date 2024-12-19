@@ -25,9 +25,9 @@ function formManager() {
                 this.my_object = response.data.my_object
                 this.acts = response.data.acts;
                 this.all_certs = response.data.all_certs;
-                console.log(this.my_object);
-                console.log(this.acts);
-                console.log(this.all_certs);
+                // console.log(this.my_object);
+                // console.log(this.acts);
+                // console.log(this.all_certs);
             } catch (err) {
                 this.error = "Не удалось загрузить данные из API.";
                 console.error(err);

@@ -19,7 +19,6 @@
                 <div class="card-title">
                     <span class="font-weight-bold">Пакетное изменение дат</span>
                 </div>
-                {# TODO сделать через alpine                 #}
                 <div class="row">
                     <div class="col-2 pe-1">
                         <input type="text" class="form-control form-control-sm" x-model="newDate">
@@ -34,6 +33,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Кнопки сохранения -->
+        <div class="inline">
+            <button class="btn btn-primary my-1 py-0" @click="sendResults()">Сохранить изменения</button>
+            <a href="{% url 'object_detail_url' object_id %}" class="btn btn-primary  my-1 py-0">Вернуться в структуру</a>
+            <a href="{% url 'objects_list_url' %}" class="btn btn-primary my-1 py-0">Вернуться в список</a>
         </div>
 
         <!-- Начало формы по объекту -->
@@ -154,7 +160,6 @@
         </div>
 
         <!-- модальное окно -->
-
         <div class="modal" :class="showModal ? 'd-block' : ''">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -163,7 +168,6 @@
                         <button class="btn-close" @click="showModal = false"></button>
                     </div>
                     <div class="modal-body" id="modal-body">
-                        <!-- insert here -->
                         <template x-for="cert in all_certs" :key="cert.id">
                             <div class="form-check">
                                 <input type="checkbox"
@@ -186,9 +190,5 @@
     </div>
 {% endblock %}
 {% block my_java_script %}
-    <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
-    <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
-    <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
-{#    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>#}
 {% endblock %}
 
