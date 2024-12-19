@@ -29,10 +29,6 @@
                         {% csrf_token %}
                         <input type="submit" value="Выйти" class="btn btn-primary ">
                     </form>
-
-
-
-{#                    <a class="nav-item nav-link" href="/accounts/logout">Выйти</a>#}
                 {% else %}
                     <a class="nav-item nav-link" href="/accounts/login">Войти</a>
                 {% endif %}
