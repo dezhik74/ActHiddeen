@@ -134,7 +134,7 @@
                     <div class="col-sm-2 col-form-label-sm">Сертификаты</div>
                     <div class="col-sm-10 mb-1">
                         <template x-for="cert in act.certificates">
-                            <div class="badge rounded-pill text-bg-secondary me-1" x-text="cert.description"></div>
+                            <div class="badge rounded-pill text-bg-secondary me-1" x-text="`[${cert.year}] ${cert.description}`"></div>
                         </template>
                     </div>
                 </div>
@@ -153,12 +153,12 @@
         <div class="mb-5"></div>
 
         <!-- модальное окно -->
-        <div class="modal" :class="showModal ? 'd-block' : ''">
+        <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Выберите сертификат</h5>
-                        <button class="btn-close" @click="showModal = false"></button>
+                        <button class="btn-close" @click="modal.hide()"></button>
                     </div>
                     <div class="modal-body" id="modal-body">
                         <template x-for="cert in all_certs" :key="cert.id">
@@ -168,12 +168,12 @@
                                        :value="cert.id"
                                        x-model="selectedCerts"
                                 />
-                                <label class="form-check-label" x-text="`[${cert.id}] ${cert.description}`"></label>
+                                <label class="form-check-label" x-text="`[${cert.year}] ${cert.description}`"></label>
                             </div>
                         </template>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary"@click="showModal = false">Отмена</button>
+                        <button class="btn btn-secondary"@click="modal.hide()">Отмена</button>
                         <button type="button" class="btn btn-primary" @click="saveModal(modalAct)">Сохранить</button>
                     </div>
                 </div>

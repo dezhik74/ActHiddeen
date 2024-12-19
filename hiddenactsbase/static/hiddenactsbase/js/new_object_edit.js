@@ -8,13 +8,14 @@ function formManager() {
         loading: false,
         error: "",
         success: "",
-        showModal: false,
         // data for modal
+        modal: {},
         selectedCerts: [],
         modalAct: {},
 
         init() {
             const objId = document.getElementById("object_id").value;
+            this.modal = new bootstrap.Modal(document.getElementById('myModal'))
             this.loadData(objId)
         },
         async loadData(objId) {
@@ -149,14 +150,13 @@ function formManager() {
             }
         },
         showAndInitModal(act) {
-            this.showModal = true;
             this.selectedCerts   = act.certificates.map(cert => cert.id);
             this.modalAct = act;
-            console.log(this.selectedCerts);
+            this.modal.show()
         },
         saveModal(modalAct) {
             modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
-            this.showModal = false;
+            this.modal.hide();
         },
     }
 }
