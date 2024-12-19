@@ -131,7 +131,8 @@
                         <input type="text" class="form-control form-control-sm" x-model="act.annex">
                     </div>
                 </div>
-                <div class="row mb-1 cert-card align-items-center" style="cursor: pointer">
+                <div class="row mb-1 cert-card align-items-center" style="cursor: pointer"
+                     @click="showAndInitModal(act)">
                     <div class="col-sm-2 col-form-label-sm">Сертификаты</div>
                     <div class="col-sm-10 mb-1">
                         <template x-for="cert in act.certificates">
@@ -154,21 +155,29 @@
 
         <!-- модальное окно -->
 
-        <div class="modal d-block" id="modal">
-            <div class="modal-dialog" id="modal-dialog">
+        <div class="modal" :class="showModal ? 'd-block' : ''">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Выберите сертификат</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalCrossButton">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button class="btn-close" @click="showModal = false"></button>
                     </div>
                     <div class="modal-body" id="modal-body">
                         <!-- insert here -->
+                        <template x-for="cert in all_certs" :key="cert.id">
+                            <div class="form-check">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       :value="cert.id"
+                                       x-model="selectedCerts"
+                                />
+                                <label class="form-check-label" x-text="`[${cert.id}] ${cert.description}`"></label>
+                            </div>
+                        </template>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modalCancelButton">Отмена</button>
-                        <button type="button" class="btn btn-primary" id="modalOkButton">Сохранить</button>
+                        <button class="btn btn-secondary"@click="showModal = false">Отмена</button>
+                        <button type="button" class="btn btn-primary" @click="saveModal(modalAct)">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -180,6 +189,6 @@
     <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
     <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
     <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
-    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>
+{#    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>#}
 {% endblock %}
 

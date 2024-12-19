@@ -1,12 +1,17 @@
 function formManager() {
     return {
+        // data from API
         my_object: {},
         acts: [],
         all_certs: [],
+        // data for UI
         loading: false,
         error: "",
         success: "",
         showModal: false,
+        // data for modal
+        selectedCerts: [],
+        modalAct: {},
 
         init() {
             const objId = document.getElementById("object_id").value;
@@ -140,8 +145,15 @@ function formManager() {
                 this.my_object.a_act_date = date;
             }
         },
-        showAndInitModal() {
+        showAndInitModal(act) {
             this.showModal = true;
+            this.selectedCerts   = act.certificates.map(cert => cert.id);
+            this.modalAct = act;
+            console.log(this.selectedCerts);
+        },
+        saveModal(modalAct) {
+            modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
+            this.showModal = false;
         },
     }
 }
