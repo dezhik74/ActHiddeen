@@ -15,7 +15,7 @@ RUN apk update && apk add -u gcc musl-dev
 #RUN apk del .fetch-deps \
 RUN mkdir /code
 COPY . /code/
-WORKDIR /code/app/acts/
+WORKDIR /code/
 RUN python -m pip install --upgrade pip \
-    && pip install -r ../../requirements.txt \
+    && pip install -r requirements.txt \
     && pip install gunicorn
