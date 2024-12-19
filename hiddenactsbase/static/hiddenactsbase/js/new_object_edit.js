@@ -38,6 +38,7 @@ function formManager() {
         async sendResults() {
             this.error = "";
             this.success = "";
+            this.loading = true;
             const tokenInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
             axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
             axios.defaults.headers.common['X-CSRFToken'] = tokenInput ? tokenInput.value : '';
@@ -55,6 +56,8 @@ function formManager() {
             } catch (err) {
                 this.error = "Не удалось отправить данные на API.";
                 console.error(err);
+            } finally {
+                this.loading = false;
             }
         },
         emptyAct(){

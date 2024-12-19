@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="{% static 'hiddenactsbase/css/bootstrap.min.css' %}" >
         <link rel="stylesheet" href="{% static 'hiddenactsbase/css/style.css' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+        <script src="https://kit.fontawesome.com/574639bb8e.js" crossorigin="anonymous"></script>
+        <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
+        <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
+        <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
+    {#    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>#}
         <title>
             Акты скрытых для фонда
         </title>
@@ -20,7 +25,14 @@
             <div class="navbar-nav me-3">
                 {% if user.is_authenticated %}
                     <a class="navbar-text">Пользователь: {{ user.get_username }} </a>
-                    <a class="nav-item nav-link" href="/accounts/logout">Выйти</a>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Выйти" class="btn btn-primary ">
+                    </form>
+
+
+
+{#                    <a class="nav-item nav-link" href="/accounts/logout">Выйти</a>#}
                 {% else %}
                     <a class="nav-item nav-link" href="/accounts/login">Войти</a>
                 {% endif %}
@@ -32,11 +44,6 @@
         {% block mycontent %}
 
         {% endblock %}
-        <script src="https://kit.fontawesome.com/574639bb8e.js" crossorigin="anonymous"></script>
-        <script src="{% static 'hiddenactsbase/js/new_object_edit.js' %}"></script>
-        <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
-        <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
-    {#    <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>#}
 
         {% block my_java_script %}
 
