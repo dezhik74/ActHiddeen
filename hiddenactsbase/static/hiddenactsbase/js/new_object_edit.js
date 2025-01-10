@@ -12,10 +12,15 @@ function formManager() {
         modal: {},
         selectedCerts: [],
         modalAct: {},
+        // data for "steal acts modal"
+        stealActsModal: {},
+        allObjects: [],
+        selectedObjects: [],
 
         init() {
             const objId = document.getElementById("object_id").value;
             this.modal = new bootstrap.Modal(document.getElementById('myModal'))
+            this.stealActsModal = new bootstrap.Modal(document.getElementById('stealModal'))
             this.loadData(objId)
         },
         async loadData(objId) {
@@ -31,6 +36,20 @@ function formManager() {
                 // console.log(this.all_certs);
             } catch (err) {
                 this.error = "Не удалось загрузить данные из API.";
+                console.error(err);
+            } finally {
+                this.loading = false;
+            }
+        },
+        async loadAllObjects() {
+            this.loading = true;
+            this.error = "";
+            try {
+                const response = await axios.get(`/api/get-all-objects/`);
+                this.allObjects = response.data.all_objects;
+                console.log(this.allObjects);
+            } catch (err) {
+                this.error = "Не удалось загрузить данные всех объектов из API.";
                 console.error(err);
             } finally {
                 this.loading = false;
@@ -157,6 +176,12 @@ function formManager() {
         saveModal(modalAct) {
             modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
             this.modal.hide();
+        },
+        showAndInitStealActsModal() {
+            this.stealActsModal.show()
+        },
+        saveStealModal() {
+            this.stealActsModal.hide();
         },
     }
 }

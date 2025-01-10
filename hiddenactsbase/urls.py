@@ -14,5 +14,6 @@ urlpatterns = [
     path('make_sert-<int:pk>', views.make_cert_file, name='make_cert_file'),
     path('new-edit/<int:pk>/', views.new_object_edit, name='new_object_edit'),
     path('api/get-object/<int:pk>/', views.get_object, name='get_object'),
+    path('api/get-all-objects/', views.get_all_objects, name='get_all_objects'),
     path('api/results/', views.save_object, name='save_object'),
     ]
