@@ -182,10 +182,20 @@ def get_object(request, pk):
     return JsonResponse(result)
 
 
+def get_object_acts(request, pk):
+    my_obj = get_object_or_404(ObjectActs, pk=pk)
+    acts = []
+    for act in my_obj.acts.all():
+        acts.append(model_to_dict(act, exclude=['certificates']))
+        acts[-1]['certificates'] = []
+        for cert in act.certificates.all():
+            acts[-1]['certificates'].append(model_to_dict(cert, exclude=['filename']))
+    return JsonResponse(acts, safe=False)
+
+
 def get_all_objects(request):
     all_objects = [{'id': obj[0], 'address': obj[1], 'system_type': obj[2]} for obj in ObjectActs.objects.all().order_by('-id').values_list('id', 'address', 'system_type')]
-    print(all_objects)
-    return JsonResponse(all_objects)
+    return JsonResponse(all_objects, safe=False)
 
 
 def save_object(request):

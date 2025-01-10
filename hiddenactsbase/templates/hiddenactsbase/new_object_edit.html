@@ -154,7 +154,7 @@
 
         <!-- модальное окно -->
         <div class="modal" id="myModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Выберите сертификат</h5>
@@ -182,17 +182,31 @@
 
         <!-- модальное окно копирования актов из другого объекта-->
         <div class="modal" id="stealModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Выберите объект</h5>
                         <button class="btn-close" @click="stealActsModal.hide()"></button>
                     </div>
                     <div class="modal-body" id="modal-body">
-                        <div>юююююю</div>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Введите адрес объекта"
+                               x-model="stealFilter"
+                               @input="updateSelectedObjects()"
+                        >
+                        <div class="form-check">
+                            <template x-for="obj in selectedObjects" :key="obj.id">
+                                <div>
+                                    <input class="form-check-input" type="radio" :value="obj.id" x-model="objectForStealId">
+                                    <label class="form-check-label" x-text="`[${obj.id}] ${obj.address} - ${obj.system_type}`"></label>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <div>ааааааа</div>
+                        <button class="btn btn-secondary"@click="modal.hide()">Отмена</button>
+                        <button type="button" class="btn btn-primary" @click="saveStealModal()">Сохранить</button>
                     </div>
                 </div>
             </div>

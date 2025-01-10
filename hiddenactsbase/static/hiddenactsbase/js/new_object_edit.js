@@ -16,12 +16,14 @@ function formManager() {
         stealActsModal: {},
         allObjects: [],
         selectedObjects: [],
+        stealFilter: "",
+        objectForStealId: "",
 
-        init() {
+        async init() {
             const objId = document.getElementById("object_id").value;
             this.modal = new bootstrap.Modal(document.getElementById('myModal'))
             this.stealActsModal = new bootstrap.Modal(document.getElementById('stealModal'))
-            this.loadData(objId)
+            await this.loadData(objId)
         },
         async loadData(objId) {
             this.loading = true;
@@ -46,8 +48,7 @@ function formManager() {
             this.error = "";
             try {
                 const response = await axios.get(`/api/get-all-objects/`);
-                this.allObjects = response.data.all_objects;
-                console.log(this.allObjects);
+                this.allObjects = response.data;
             } catch (err) {
                 this.error = "Не удалось загрузить данные всех объектов из API.";
                 console.error(err);
@@ -80,7 +81,7 @@ function formManager() {
                 this.loading = false;
             }
         },
-        emptyAct(){
+        emptyAct() {
             return {
                 id: 0,
                 act_number: "",
@@ -99,7 +100,7 @@ function formManager() {
         },
         renumerateActs() {
             for (let i = 0; i < this.acts.length; i++) {
-                this.acts[i].act_number = String(i+1).padStart(2, '0');
+                this.acts[i].act_number = String(i + 1).padStart(2, '0');
             }
             let counter = this.acts.length
             if (this.my_object.is_washing_purging_act) {
@@ -128,7 +129,7 @@ function formManager() {
             this.renumerateActs()
         },
         insertActDown(index) {
-            this.acts.splice(index+1, 0, this.emptyAct());
+            this.acts.splice(index + 1, 0, this.emptyAct());
             this.renumerateActs()
         },
         deleteAct(index) {
@@ -169,7 +170,7 @@ function formManager() {
             }
         },
         showAndInitModal(act) {
-            this.selectedCerts   = act.certificates.map(cert => cert.id);
+            this.selectedCerts = act.certificates.map(cert => cert.id);
             this.modalAct = act;
             this.modal.show()
         },
@@ -177,10 +178,35 @@ function formManager() {
             modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
             this.modal.hide();
         },
-        showAndInitStealActsModal() {
+        async showAndInitStealActsModal() {
+            await this.loadAllObjects();
+            this.updateSelectedObjects();
             this.stealActsModal.show()
         },
+        updateSelectedObjects() {
+            this.selectedObjects = this.allObjects.filter(obj => obj.address.toLowerCase().includes(this.stealFilter.toLowerCase()));
+        },
+        async loadObjectActs(objId){
+            this.loading = true;
+            this.error = "";
+            try {
+                const response = await axios.get(`/api/get-object-acts/${objId}`);
+                const objectActs = response.data;
+                objectActs.forEach((act) => {
+                    act.id = 0;
+                    this.acts.push(act);
+                })
+                this.renumerateActs();
+            } catch (err) {
+                this.error = "Не удалось загрузить данные из API.";
+                console.error(err);
+            } finally {
+                this.loading = false;
+            }
+        },
         saveStealModal() {
+            console.log('asdfasdf', this.objectForStealId);
+            this.loadObjectActs(this.objectForStealId)
             this.stealActsModal.hide();
         },
     }

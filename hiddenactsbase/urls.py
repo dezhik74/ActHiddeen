@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/get-object/<int:pk>/', views.get_object, name='get_object'),
     path('api/get-all-objects/', views.get_all_objects, name='get_all_objects'),
     path('api/results/', views.save_object, name='save_object'),
+    path('api/get-object-acts/<int:pk>/', views.get_object_acts, name='get_object_acts'),
     ]
