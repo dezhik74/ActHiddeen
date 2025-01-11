@@ -26,10 +26,11 @@
             <a href="{{ obj.get_absolute_url }}" class="btn btn-primary  my-1 py-0">Смотреть</a>
             <a href="{% url 'object_table_url' obj.pk %}" class="btn btn-primary  my-1 py-0">Таблица</a>
             <a href="{% url 'new_object_edit' obj.pk %}" class="btn btn-primary  my-1 py-0">Редактировать</a>
-            <a href="{% url 'make_word_file' obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
+            <a href="{% url 'make_word_file' 0 obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
+            <a href="{% url 'make_word_file' 1 obj.pk %}" class="btn btn-primary my-1 py-0">Получить доп. акты</a>
             <a href="{% url 'make_cert_file' obj.pk %}" class="btn btn-primary my-1 py-0">Получить сертификаты</a>
-            <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию объекта</a>
-            <a href="{% url 'delete_object' obj.pk %}" class="btn btn-primary  my-1 py-0 del_btn">Удалить объект</a>
+            <a href="{% url 'copy_object' obj.pk %}" class="btn btn-primary  my-1 py-0">Создать копию</a>
+            <a href="{% url 'delete_object' obj.pk %}" class="btn btn-primary  my-1 py-0 del_btn">Удалить</a>
           </div>
         </div>
     {% endfor %}

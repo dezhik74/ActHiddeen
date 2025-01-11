@@ -52,7 +52,8 @@
                         <div class="col-md-3">{{ my_obj.acts_instance_num }}</div>
                     </div>
                     <a href="{% url 'new_object_edit' my_obj.pk %}" class="btn btn-primary my-1 py-0">Редактировать содержимое</a>
-                    <a href="{% url 'make_word_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
+                    <a href="{% url 'make_word_file' 0 my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить акты</a>
+                    <a href="{% url 'make_word_file' 1 my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить доп акты</a>
                     <a href="{% url 'make_cert_file' my_obj.pk %}" class="btn btn-primary my-1 py-0">Получить сертификаты</a>
                     <a href="{% url 'object_table_url' my_obj.pk %}" class="btn btn-primary my-1 py-0">Таблица</a>
 

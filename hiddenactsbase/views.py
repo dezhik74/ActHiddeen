@@ -100,10 +100,12 @@ def delete_object(request, pk):
     return redirect('objects_list_url')
 
 
-def make_word_file(request, pk):
+def make_word_file(request, only_additional_acts, pk):
     obj = get_object_or_404(ObjectActs, pk=pk)
-    docx_name = AssembleFile(obj, request.user.username)
-
+    if only_additional_acts == 1:
+        docx_name = AssembleFile(obj, request.user.username, True)
+    else:
+        docx_name = AssembleFile(obj, request.user.username, False)
     fp = open(docx_name, "rb")
     response = HttpResponse(fp.read())
     fp.close()
