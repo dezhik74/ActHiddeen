@@ -8,7 +8,7 @@ function formManager() {
         loading: false,
         error: "",
         success: "",
-        // data for modal
+        // data for certificates modal
         modal: {},
         selectedCerts: [],
         modalAct: {},
@@ -33,9 +33,6 @@ function formManager() {
                 this.my_object = response.data.my_object
                 this.acts = response.data.acts;
                 this.all_certs = response.data.all_certs;
-                // console.log(this.my_object);
-                // console.log(this.acts);
-                // console.log(this.all_certs);
             } catch (err) {
                 this.error = "Не удалось загрузить данные из API.";
                 console.error(err);
@@ -204,9 +201,9 @@ function formManager() {
                 this.loading = false;
             }
         },
-        saveStealModal() {
+        async saveStealModal() {
             console.log('asdfasdf', this.objectForStealId);
-            this.loadObjectActs(this.objectForStealId)
+            await this.loadObjectActs(this.objectForStealId)
             this.stealActsModal.hide();
         },
     }
