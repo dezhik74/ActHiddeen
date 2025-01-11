@@ -12,6 +12,8 @@ function formManager() {
         modal: {},
         selectedCerts: [],
         modalAct: {},
+        yearCertFilter: "",
+        filteredCerts: [],
         // data for "steal acts modal"
         stealActsModal: {},
         allObjects: [],
@@ -169,7 +171,11 @@ function formManager() {
         showAndInitModal(act) {
             this.selectedCerts = act.certificates.map(cert => cert.id);
             this.modalAct = act;
+            this.updateFilteredCerts();
             this.modal.show()
+        },
+        updateFilteredCerts() {
+            this.filteredCerts = this.all_certs.filter(cert => cert.year.toLowerCase().includes(this.yearCertFilter.toLowerCase()));
         },
         saveModal(modalAct) {
             modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
