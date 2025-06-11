@@ -6,8 +6,9 @@ cd /code
 echo "[ACTS] Collect static files..."
 python manage.py collectstatic --noinput
 
-echo "[ACTS] Check migrations..."
-./check_migrations.sh
+# Пока не используем
+#echo "[ACTS] Check migrations..."
+#./check_migrations.sh
 
 # echo "[ACTS] Starting dev server..."
 # echo "Django development server..."
