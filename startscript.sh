@@ -14,5 +14,5 @@ echo "[ACTS] Check migrations..."
 # python manage.py runserver 0.0.0.0:8000
 
 echo "[ACTS] Gunicorn server"
-gunicorn --config gunicorn.conf.py yourproject.wsgi
+gunicorn --config gunicorn.conf.py config.wsgi
 
