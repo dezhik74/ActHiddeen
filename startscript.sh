@@ -1,23 +1,18 @@
 #!/bin/sh
+set -e
 
-echo "[ACTS] PREPARE DATABASE..."
-echo "[ACTS] Для alpine linux используется #!/bin/sh для deb - #!/bin/bash"
-
-# cd ./app/acts
+cd /code
 
 echo "[ACTS] Collect static files..."
 python manage.py collectstatic --noinput
 
-# echo "Получение дампа данных только при первом запуске контейнера"
-# python manage.py loaddata datadump.json
+echo "[ACTS] Check migrations..."
+./check_migrations.sh
 
-# echo "Apply database migrations... только при первом запуске контейнера"
-# python manage.py migrate
-
-echo "[ACTS] Starting server..."
-# echo "[ACTS] Django development server..."
+# echo "[ACTS] Starting dev server..."
+# echo "Django development server..."
 # python manage.py runserver 0.0.0.0:8000
 
 echo "[ACTS] Gunicorn server"
-gunicorn -b 0.0.0.0:8000 config.wsgi:application
+gunicorn --config gunicorn.conf.py yourproject.wsgi
 

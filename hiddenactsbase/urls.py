@@ -1,8 +1,10 @@
 from django.urls import path
 
-from hiddenactsbase import views
+from hiddenactsbase import views, docker_views
+
 
 urlpatterns = [
+    path('health/', docker_views.health_view, name='health-check'),
     path('', views.main_index, name='main_index'),
     path('list/', views.ObjectsList.as_view(), name='objects_list_url'),
     path('see/<int:pk>/', views.ObjectDetail.as_view(), name='object_detail_url'),

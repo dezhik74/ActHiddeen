@@ -1,21 +1,26 @@
-#FROM python:3.7.4-alpine3.10
-#FROM python:3.8-buster
-#FROM python:3.7.4-slim-stretch
-FROM python:3.12-alpine
-ENV PYTHONUNBUFFERED 1
-RUN apk update && apk add -u gcc musl-dev
-#RUN apt-get install -y python3-dev python-dev default-libmysqlclient-dev
-#RUN apt-get  install -y gcc
-#RUN apk add --no-cache --virtual .build-deps\
-#     build-base \
-#     libxml2-dev \
-#     libxslt-dev \
-#     python-dev \
-#     python3-lxml
-#RUN apk del .fetch-deps \
-RUN mkdir /code
-COPY . /code/
-WORKDIR /code/
-RUN python -m pip install --upgrade pip \
-    && pip install -r requirements.txt \
-    && pip install gunicorn
+FROM python:3.11-slim-bookworm
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    DJANGO_SETTINGS_MODULE=default.settings.prod
+
+# Создаём пользователя
+RUN adduser --disabled-password --gecos '' appuser
+WORKDIR /code
+USER appuser
+
+# Копируем только необходимое
+COPY --chown=appuser:appuser requirements.txt /code/
+COPY --chown=appuser:appuser . /code/
+
+# Установка зависимостей
+RUN python -m pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install gunicorn
+
+# Проверяем наличие миграций (не применяем!)
+COPY --chown=appuser:appuser check_migrations.sh /code/check_migrations.sh
+RUN chmod +x /code/check_migrations.sh
+
+EXPOSE 8000
+CMD ["/code/startscript.sh"]
