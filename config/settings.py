@@ -142,4 +142,36 @@ if db_Debug == 1:
             }
         }
     }
-
+# Использовалась для логирования ошибок при отладке на боевом сервере
+#LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
+#    'formatters': {
+#        'verbose': {
+#            'format': '{levelname} {asctime} {module} {message}',
+#            'style': '{',
+#        },
+#        'simple': {
+#            'format': '{levelname} {message}',
+#            'style': '{',
+#        },
+#    },
+#    'handlers': {
+#        'console': {
+#            'level': 'DEBUG',
+#            'class': 'logging.StreamHandler',
+#            'formatter': 'verbose',
+#        },
+#    },
+#    'root': {
+#        'handlers': ['console'],
+#        'level': 'INFO',
+#    },
+#    'loggers': {
+#        'django': {
+#            'handlers': ['console'],
+#            'level': 'ERROR',
+#            'propagate': True,
+#        },
+#    },
+#}

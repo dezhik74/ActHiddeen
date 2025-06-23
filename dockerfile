@@ -28,7 +28,8 @@ ENV PATH="/home/appuser/.local/bin:$PATH"
 
 # Проверяем наличие миграций (не применяем!)
 COPY --chown=appuser:appuser check_migrations.sh /code/check_migrations.sh
-RUN chmod +x /code/check_migrations.sh
+RUN chmod +x /code/check_migrations.sh &&\
+    chown -R appuser:appuser /code/hiddenactsbase/dynamic
 
 EXPOSE 8000
 CMD ["/code/startscript.sh"]
