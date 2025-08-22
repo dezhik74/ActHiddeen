@@ -212,5 +212,25 @@ function formManager() {
             await this.loadObjectActs(this.objectForStealId)
             this.stealActsModal.hide();
         },
+        setCertificates() {
+            console.log(this.acts)
+            this.acts.forEach((act) => {
+                let materials = "-"
+                let annex = "исполнительная схема, "
+                let docs = "исполнительная схема."
+                if (act.certificates.length > 0) {
+                    materials = act.certificates.reduce((acc, cert) => {
+                        return acc + `${cert.material_name} (${cert.certificate_requisites}), `
+                    }, "").replace(/, $/, '.')
+                    annex = act.certificates.reduce((acc, cert) => {
+                        return acc + `${cert.certificate_requisites}, `
+                    }, "исполнительная схема, ")
+                    docs = "исполнительная схема, сертификаты/свидетельства."
+                }
+                act.materials = materials
+                act.annex = annex.replace(/, $/, '.').replace(/\.+$/, '.')
+                act.docs = docs
+            })
+        }
     }
 }

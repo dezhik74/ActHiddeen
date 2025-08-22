@@ -26,7 +26,8 @@ class ObjectActsAdmin(admin.ModelAdmin):
 
 @admin.register(Certificate)
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'description', 'get_filename', 'year')
+    list_display = ('id', 'description', 'material_name', 'certificate_requisites', 'get_filename', 'year',
+                    'expired_year')
     list_display_links = ('id', 'description')
 
     @admin.display(description='Имя файла')

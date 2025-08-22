@@ -170,6 +170,11 @@ class Certificate(models.Model):
     filename = models.FileField(upload_to='certificates/', verbose_name='Файл')
     description = models.CharField(max_length=100, verbose_name='Описание')
     year = models.CharField(max_length=4, verbose_name='Год')
+    material_name = models.CharField(max_length=100, verbose_name="Название для акта", blank=True)
+    certificate_requisites = models.CharField(max_length=100, verbose_name="Реквизиты", blank=True)
+    expired_year = models.CharField(max_length=7, verbose_name="Истекает", blank=True)
+
+
 
     class Meta:
         verbose_name = 'Сертификат'
