@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'hiddenactsbase',
+    'water',
 ]
 
 MIDDLEWARE = [

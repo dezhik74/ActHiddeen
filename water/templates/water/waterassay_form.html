@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block mycontent %}
+
+    <div class="container py-4">
+        <h4 class="mb-4">{{ title }}</h4>
+
+        {% include "water/partials/messages.html" %}
+
+        <!-- Глобальные ошибки формы -->
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+
+            <!-- Заключение -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Заключение</h6>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.conclusion_date.label }}</label>
+                {{ form.conclusion_date }}
+                {% if form.conclusion_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.conclusion_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.customer.label }}</label>
+                {{ form.customer }}
+                {% if form.customer.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.customer.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.address.label }}</label>
+                {{ form.address }}
+                {% if form.address.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.address.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Акт приёма проб -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Акт приёма проб воды</h6>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.act_number.label }}</label>
+                {{ form.act_number }}
+                {% if form.act_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.act_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.act_date.label }}</label>
+                {{ form.act_date }}
+                {% if form.act_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.act_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.probe_date.label }}</label>
+                {{ form.probe_date }}
+                {% if form.probe_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.probe_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <label class="form-label">{{ form.hvs_probe_number.label }}</label>
+                {{ form.hvs_probe_number }}
+                {% if form.hvs_probe_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.hvs_probe_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">{{ form.gvs_probe_number.label }}</label>
+                {{ form.gvs_probe_number }}
+                {% if form.gvs_probe_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.gvs_probe_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Химия -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Протокол химических испытаний</h6>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_number.label }}</label>
+                {{ form.chemistry_number }}
+                {% if form.chemistry_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.chemistry_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_date.label }}</label>
+                {{ form.chemistry_date }}
+                {% if form.chemistry_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.chemistry_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_order_number.label }}</label>
+                {{ form.chemistry_order_number }}
+                {% if form.chemistry_order_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.chemistry_order_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_order_date.label }}</label>
+                {{ form.chemistry_order_date }}
+                {% if form.chemistry_order_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.chemistry_order_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Биология -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Протокол биологических исследований</h6>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_number.label }}</label>
+                {{ form.bio_number }}
+                {% if form.bio_number.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.bio_number.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_date.label }}</label>
+                {{ form.bio_date }}
+                {% if form.bio_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.bio_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_begin_date.label }}</label>
+                {{ form.bio_begin_date }}
+                {% if form.bio_begin_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.bio_begin_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_end_date.label }}</label>
+                {{ form.bio_end_date }}
+                {% if form.bio_end_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.bio_end_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">{{ form.hvs_bio_code.label }}</label>
+                {{ form.hvs_bio_code }}
+                {% if form.hvs_bio_code.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.hvs_bio_code.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.gvs_bio_code.label }}</label>
+                {{ form.gvs_bio_code }}
+                {% if form.gvs_bio_code.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.gvs_bio_code.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.hvs_bio_referral.label }}</label>
+                {{ form.hvs_bio_referral }}
+                {% if form.hvs_bio_referral.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.hvs_bio_referral.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.gvs_bio_referral.label }}</label>
+                {{ form.gvs_bio_referral }}
+                {% if form.gvs_bio_referral.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.gvs_bio_referral.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Кнопки -->
+            <div class="col-12 mt-5 border-top pt-4">
+                <button type="submit" name="save_and_edit" class="btn btn-success me-2">
+                    <i class="fas fa-save"></i> Сохранить и продолжить редактирование
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Сохранить и выйти в список
+                </button>
+                <a href="{% url 'water:assay_list' %}" class="btn btn-secondary ms-2">
+                    <i class="fas fa-times"></i> Отмена
+                </a>
+                {% if not save_and_continue %}
+                    <a href="{% url 'water:assay_download_docx' object.pk %}"
+                       class="btn btn-success ms-2">
+                        <i class="far fa-file-word"></i> Скачать Word
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block my_java_script %}
+    <script>
+        const idArray = ["#id_conclusion_date", "#id_act_date", "#id_probe_date", "#id_chemistry_date", 
+            "#id_chemistry_order_date", "#id_bio_date", "#id_bio_begin_date", "#id_bio_end_date"]
+        idArray.forEach(function(item){
+            document.addEventListener('DOMContentLoaded', function() {
+                flatpickr(item, {
+                    locale: "ru",
+                    dateFormat: "d.m.Y",
+                });
+            });
+        })
+
+    </script>
+{% endblock %}

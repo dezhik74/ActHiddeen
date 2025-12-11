@@ -14,3 +14,4 @@ dynamic/
 *.sqlite3
 .env
 media/*
+.continue/

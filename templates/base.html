@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'hiddenactsbase/css/bootstrap.min.css' %}" >
         <link rel="stylesheet" href="{% static 'hiddenactsbase/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'hiddenactsbase/css/flatpickr.min.css' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'hiddenactsbase/favicon.ico' %}">
 {#        <script src="https://kit.fontawesome.com/574639bb8e.js" crossorigin="anonymous"></script>#}
         <script src="{% static 'hiddenactsbase/js/font_awesome.js' %}"></script>
@@ -13,6 +14,8 @@
         <script src="{% static 'hiddenactsbase/js/alpine.min.js' %}" defer></script>
         <script src="{% static 'hiddenactsbase/js/axios.min.js' %}"></script>
         <script src="{% static 'hiddenactsbase/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'hiddenactsbase/js/flatpickr.js' %}"></script>
+        <script src="{% static 'hiddenactsbase/js/ru.js' %}"></script>
         <title>
             Акты скрытых для фонда
         </title>
@@ -22,6 +25,7 @@
             <a class="navbar-brand ms-3" href="/">Холдинг</a>
             <div class="navbar-nav flex-grow-1">
                 <a class="nav-item nav-link " href="{% url 'objects_list_url' %}">Скрытые</a>
+                <a class="nav-item nav-link " href="{% url 'water:assay_list' %}">Вода</a>
             </div>
             <div class="navbar-nav me-3">
                 {% if user.is_authenticated %}
