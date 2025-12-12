@@ -269,18 +269,21 @@
                 <button type="submit" name="save_and_edit" class="btn btn-success me-2">
                     <i class="fas fa-save"></i> Сохранить и продолжить редактирование
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary me-2">
                     <i class="fas fa-check"></i> Сохранить и выйти в список
                 </button>
-                <a href="{% url 'water:assay_list' %}" class="btn btn-secondary ms-2">
+                <a href="{% url 'water:assay_list' %}" class="btn btn-secondary me-2">
                     <i class="fas fa-times"></i> Отмена
                 </a>
                 {% if not save_and_continue %}
                     <a href="{% url 'water:assay_download_docx' object.pk %}"
-                       class="btn btn-success ms-2">
+                       class="btn btn-success me-2">
                         <i class="far fa-file-word"></i> Скачать Word
                     </a>
                 {% endif %}
+                <button type="submit" name="autofill" class="btn btn-outline-info me-2">
+                    <i class="fas fa-magic"></i> Автозаполнить по шаблону
+                </button>
             </div>
         </form>
     </div>
@@ -289,10 +292,10 @@
 
 {% block my_java_script %}
     <script>
-        const idArray = ["#id_conclusion_date", "#id_act_date", "#id_probe_date", "#id_chemistry_date", 
+        const idArray = ["#id_conclusion_date", "#id_act_date", "#id_probe_date", "#id_chemistry_date",
             "#id_chemistry_order_date", "#id_bio_date", "#id_bio_begin_date", "#id_bio_end_date"]
-        idArray.forEach(function(item){
-            document.addEventListener('DOMContentLoaded', function() {
+        idArray.forEach(function (item) {
+            document.addEventListener('DOMContentLoaded', function () {
                 flatpickr(item, {
                     locale: "ru",
                     dateFormat: "d.m.Y",
