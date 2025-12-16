@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 from django.db.models import Q
 from django.http import HttpResponse
@@ -13,8 +12,6 @@ from django.views.generic.edit import DeleteView
 from docxtpl import DocxTemplate
 
 from config import settings
-from water.autofill import autofill_water_assay_data
-from water.digit_hashes import generate_5digit_hash
 from water.forms import WaterAssayForm
 from water.models import WaterAssay
 
@@ -57,42 +54,6 @@ class WaterAssayCreateView(CreateView):
         context['save_and_continue'] = True  # чтобы шаблон знал, что это создание
         return context
 
-    def post(self, request, *args, **kwargs):
-        self.object = None  # важно для CreateView
-        form = self.get_form()
-
-        # Кнопка "Автозаполнить"
-        if 'autofill' in request.POST:
-            if form.is_valid():  # проверяем только 3 обязательных поля
-                conclusion_date = form.cleaned_data['conclusion_date']
-                customer = form.cleaned_data['customer']
-                address = form.cleaned_data['address']
-
-                # Автозаполняем остальные поля
-                autofill_data = autofill_water_assay_data(conclusion_date, customer, address)
-
-                # Создаём НОВУЮ форму с initial из автозаполнения
-                new_form = self.form_class(initial={
-                    'conclusion_date': conclusion_date,
-                    'customer': customer,
-                    'address': address,
-                    **autofill_data
-                })
-
-                messages.success(request, "Поля успешно автозаполнены по шаблону")
-                return render(request, self.template_name, {
-                    'form': new_form,
-                    'title': self.get_context_data()['title']
-                })
-
-            else:
-                messages.error(request, "Заполните корректно: Дата заключения, Заказчик, Адрес")
-                return render(request, self.template_name, self.get_context_data(form=form))
-
-        # Обычное сохранение
-        return super().post(request, *args, **kwargs)
-
-
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(
@@ -123,40 +84,6 @@ class WaterAssayUpdateView(UpdateView):
             context['title'] = 'Редактирование анализа (дата отсутствует)'
         context['save_and_continue'] = False
         return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-
-        if 'autofill' in request.POST:
-            # Берём только 3 ключевых поля из текущей формы
-            conclusion_date = form.data.get('conclusion_date')
-            customer = form.data.get('customer')
-            address = form.data.get('address')
-
-            try:
-                conclusion_date = datetime.strptime(conclusion_date, '%d.%m.%Y').date()
-            except (ValueError, TypeError):
-                conclusion_date = None
-
-            if not all([conclusion_date, customer, address]):
-                messages.error(request, "Для автозаполнения нужны: Дата заключения, Заказчик, Адрес")
-            else:
-                autofill_data = autofill_water_assay_data(conclusion_date, customer, address)
-                # Создаём новую форму с текущими данными + автозаполненными
-                new_form = self.form_class(instance=self.object, initial=False)
-                for key, value in autofill_data.items():
-                    new_form.initial[key] = value
-
-                messages.success(request, "Поля успешно автозаполнены")
-                return render(request, self.template_name, {
-                    'form': new_form,
-                    'title': self.get_context_data()['title']
-                })
-
-            return render(request, self.template_name, self.get_context_data(form=form))
-
-        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         response = super().form_valid(form)
