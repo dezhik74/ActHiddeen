@@ -20,10 +20,7 @@ function generate4DigitHash(...args) {
     return String(hash % 10000).padStart(4, '0');
 }
 
-
-function getRandomItem(itemsArray) {
-    return itemsArray[Math.floor(Math.random() * itemsArray.length)]
-}
+const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Вычисление даты минус N рабочих дней (пропускаем субботу и воскресенье)
 function subtractWorkingDays(dateStr, days) {
@@ -128,15 +125,15 @@ document.addEventListener('DOMContentLoaded', function () {
                                 "0,18  ±  0,04", "0,20  ±  0,04", "0,27  ±  0,05", "0,26  ±  0,04",
                                 "0,09  ±  0,02", "0,12  ±  0,02", "0,11  ±  0,02", "0,17  ±  0,03",
                                 "0,24  ±  0,05", "0,19  ±  0,03", "0,07  ±  0,01"]
-        const mutnArray = ["2,0  ±  0,4", "2,2  ±  0,4", "2,5  ±  0,4", "2,5  ±  0,5", "2,4  ±  0,5",
+        const turbArray = ["2,0  ±  0,4", "2,2  ±  0,4", "2,5  ±  0,4", "2,5  ±  0,5", "2,4  ±  0,5",
                                 "2,6  ±  0,5", "1,4  ±  0,3", "2,3  ±  0,5", "2,2  ±  0,4", "2,1  ±  0,4",
                                 "1,6  ±  0,3", "1,9  ±  0,4"]
-        const colorArray = ["5  ±  2", "15  ±  3", "4  ±  2", "6  ±  2", "3  ±  1", "7  ±  3", "17  ±  3",
+        const chromaArray = ["5  ±  2", "15  ±  3", "4  ±  2", "6  ±  2", "3  ±  1", "7  ±  3", "17  ±  3",
                                 "16  ±  3", "14  ±  3", "13  ±  3", "10  ±  2", "9  ±  4"]
-        const zhArray = ["1,1  ±  0,2", "3,2  ±  0,5", "1,5  ±  0,2", "1,6  ±  0,2", "2,0  ±  0,3",
+        const rigArray = ["1,1  ±  0,2", "3,2  ±  0,5", "1,5  ±  0,2", "1,6  ±  0,2", "2,0  ±  0,3",
                                 "1,7  ±  0,3", "3,3  ±  0,5", "2,2  ±  0,3", "2,4  ±  0,4", "3,6  ±  0,5",
                                 "2,6  ±  0,4", "2,3  ±  0,3", "1,0  ±  0,2", "0,9  ±  0,1"]
-        const okislArray = ["1,7  ±  0,3", "0,8  ±  0,2", "1,4  ±  0,3", "1,3  ±  0,3", "1,8  ±  0,4", "2,2  ±  0,2",
+        const oxArray = ["1,7  ±  0,3", "0,8  ±  0,2", "1,4  ±  0,3", "1,3  ±  0,3", "1,8  ±  0,4", "2,2  ±  0,2",
                                 "1,6  ±  0,3", "1,9  ±  0,4", "2,4  ±  0,2", "1,0  ± 0,2",  "2,7  ±  0,3", "2,6  ±  0,3"]
 
         // Заполняем поля (даже если они не пустые)
@@ -169,6 +166,20 @@ document.addEventListener('DOMContentLoaded', function () {
         setValueIfEmpty('input[name="gvs_bio_referral"]', `${baseHash5}-3`);
         setValueIfEmpty('input[name="bio_begin_date"]', bioBeginDate);
         setValueIfEmpty('input[name="bio_end_date"]', bioEndDate);
+
+        // Показатели хим анализа
+        setValueIfEmpty('input[name="hvs_ph"]', getRandomElement(phArray));
+        setValueIfEmpty('input[name="hvs_fe"]', getRandomElement(feArray));
+        setValueIfEmpty('input[name="hvs_turb"]', getRandomElement(turbArray));
+        setValueIfEmpty('input[name="hvs_chroma"]', getRandomElement(chromaArray));
+        setValueIfEmpty('input[name="hvs_rig"]', getRandomElement(rigArray));
+        setValueIfEmpty('input[name="hvs_ox"]', getRandomElement(oxArray));
+        setValueIfEmpty('input[name="gvs_ph"]', getRandomElement(phArray));
+        setValueIfEmpty('input[name="gvs_fe"]', getRandomElement(feArray));
+        setValueIfEmpty('input[name="gvs_turb"]', getRandomElement(turbArray));
+        setValueIfEmpty('input[name="gvs_chroma"]', getRandomElement(chromaArray));
+        setValueIfEmpty('input[name="gvs_rig"]', getRandomElement(rigArray));
+        setValueIfEmpty('input[name="gvs_ox"]', getRandomElement(oxArray));
 
         // Успешное сообщение
         const successAlert = document.createElement('div');

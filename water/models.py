@@ -25,6 +25,19 @@ class WaterAssay (models.Model):
     gvs_bio_referral = models.CharField(verbose_name="Направление ГВС био", max_length=20, blank=True)
     bio_begin_date = models.DateField(verbose_name="Дата начала испытаний", null=True, blank=True)
     bio_end_date = models.DateField(verbose_name="Дата конца испытаний", null=True, blank=True)
+    # Показатели хим анализа
+    hvs_ph = models.CharField(verbose_name="ХВС ph", max_length=20, blank=True)
+    hvs_fe = models.CharField(verbose_name="ХВС fe", max_length=20, blank=True)
+    hvs_turb = models.CharField(verbose_name="ХВС Мутн.", max_length=20, blank=True)
+    hvs_chroma = models.CharField(verbose_name="ХВС Цветн.", max_length=20, blank=True)
+    hvs_rig = models.CharField(verbose_name="ХВС Жестк.", max_length=20, blank=True)
+    hvs_ox = models.CharField(verbose_name="ХВС Окисл.", max_length=20, blank=True)
+    gvs_ph = models.CharField(verbose_name="ГВС ph", max_length=20, blank=True)
+    gvs_fe = models.CharField(verbose_name="ГВС fe", max_length=20, blank=True)
+    gvs_turb = models.CharField(verbose_name="ГВС Мутн.", max_length=20, blank=True)
+    gvs_chroma = models.CharField(verbose_name="ГВС Цветн.", max_length=20, blank=True)
+    gvs_rig = models.CharField(verbose_name="ГВС Жестк.", max_length=20, blank=True)
+    gvs_ox = models.CharField(verbose_name="ГВС Окисл.", max_length=20, blank=True)
 
     class Meta:
         verbose_name = "Анализ воды"

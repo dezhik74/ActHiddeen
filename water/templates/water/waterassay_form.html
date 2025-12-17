@@ -63,25 +63,24 @@
             <div class="col-12">
                 <h6 class="border-bottom pb-2 text-primary">Акт приёма проб воды</h6>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label">{{ form.act_number.label }}</label>
                 {{ form.act_number }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label">{{ form.act_date.label }}</label>
                 {{ form.act_date }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label">{{ form.probe_date.label }}</label>
                 {{ form.probe_date }}
             </div>
-            <div class="col-md-3"></div>
 
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <label class="form-label">{{ form.hvs_probe_number.label }}</label>
                 {{ form.hvs_probe_number }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <label class="form-label">{{ form.gvs_probe_number.label }}</label>
                 {{ form.gvs_probe_number }}
             </div>
@@ -145,8 +144,63 @@
                 {{ form.gvs_bio_referral }}
             </div>
 
+            <!-- Показатели химии -->
+            <!-- ХВС -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Показатели химических исследований</h6>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_ph.label }}</label>
+                {{ form.hvs_ph }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_fe.label }}</label>
+                {{ form.hvs_fe }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_turb.label }}</label>
+                {{ form.hvs_turb }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_chroma.label }}</label>
+                {{ form.hvs_chroma }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_rig.label }}</label>
+                {{ form.hvs_rig }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_ox.label }}</label>
+                {{ form.hvs_ox }}
+            </div>
+            <!-- ГВС -->
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_ph.label }}</label>
+                {{ form.gvs_ph }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_fe.label }}</label>
+                {{ form.gvs_fe }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_turb.label }}</label>
+                {{ form.gvs_turb }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_chroma.label }}</label>
+                {{ form.gvs_chroma }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_rig.label }}</label>
+                {{ form.gvs_rig }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_ox.label }}</label>
+                {{ form.gvs_ox }}
+            </div>
+
             <!-- Кнопки -->
-            <div class="col-12 mt-5 border-top pt-4">
+            <div class="col-12 mt-3 border-top pt-2">
                 <button type="submit" name="save_and_edit" class="btn btn-success me-2">
                     <i class="fas fa-save"></i> Сохранить и продолжить редактирование
                 </button>

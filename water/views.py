@@ -159,6 +159,18 @@ def generate_water_docx(request, pk):
             'gvs_bio_referral': assay.gvs_bio_referral or '',
             'bio_begin_date': assay.bio_begin_date.strftime('%d.%m.%Y') if assay.bio_begin_date else '',
             'bio_end_date': assay.bio_end_date.strftime('%d.%m.%Y') if assay.bio_end_date else '',
+            'hvs_ph': assay.hvs_ph or '',
+            'hvs_fe': assay.hvs_fe or '',
+            'hvs_turb': assay.hvs_turb or '',
+            'hvs_chroma': assay.hvs_chroma or '',
+            'hvs_rig': assay.hvs_rig or '',
+            'hvs_ox': assay.hvs_ox or '',
+            'gvs_ph': assay.gvs_ph or '',
+            'gvs_fe': assay.gvs_fe or '',
+            'gvs_turb': assay.gvs_turb or '',
+            'gvs_chroma': assay.gvs_chroma or '',
+            'gvs_rig': assay.gvs_rig or '',
+            'gvs_ox': assay.gvs_ox or '',
         }
 
         doc.render(context)
