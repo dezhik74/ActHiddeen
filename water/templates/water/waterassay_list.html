@@ -33,8 +33,13 @@
                     <div class="col">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">
+                                <h5 class="card-title d-flex justify-content-between">
                                     {{ assay.conclusion_date|date:"d.m.Y" }}
+                                        {% if assay.is_fully_filled %}
+                                            <i class="fas fa-check-square text-success fs-4" title="Все поля заполнены"></i>
+                                        {% else %}
+                                            <i class="far fa-square text-muted fs-4" title="Не все поля заполнены"></i>
+                                        {% endif %}
                                 </h5>
                                 <p class="card-text mb-1">
                                     <strong>Адрес:</strong> {{ assay.address|default:"—" }}

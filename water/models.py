@@ -44,5 +44,21 @@ class WaterAssay (models.Model):
         verbose_name_plural = "Анализы воды"
         ordering = ['-id']
 
+    def is_fully_filled(self):
+        """
+        Возвращает True, если ВСЕ поля (кроме id и pk) имеют значение
+        """
+        for field in self._meta.fields:
+            if field.name == 'id':
+                continue
+            value = getattr(self, field.name)
+            # Проверяем на пустоту: None, пустая строка, пустая дата и т.д.
+            if value in (None, '', [], {}):
+                return False
+            # Для дат — дополнительно проверяем на минимальную дату (если поле пустое, Django может вернуть None)
+            if isinstance(field, models.DateField) and value is None:
+                return False
+        return True
+
     def __str__(self):
         return f"[{self.customer}] [{self.address}] [{str(self.conclusion_date)}]"
