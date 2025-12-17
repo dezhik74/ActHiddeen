@@ -7,6 +7,7 @@ from .settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('', include('hiddenactsbase.urls')),
+    path('water/', include('water.urls')),
     path('admin/', admin.site.urls, name='admin_url'),
     ]
 

@@ -1,0 +1,48 @@
+{% if messages %}
+    <div class="container mt-3" id="messages-container">
+        {% for message in messages %}
+            <div class="alert
+                {% if message.tags == 'error' %}alert-danger
+                {% elif message.tags == 'success' %}alert-success
+                {% elif message.tags == 'warning' %}alert-warning
+                {% elif message.tags == 'info' %}alert-info
+                {% else %}alert-primary{% endif %}
+                alert-dismissible fade show" role="alert">
+
+                {% if message.tags == 'success' %}
+                    <i class="fas fa-check-circle me-2"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                {% else %}
+                    <i class="fas fa-info-circle me-2"></i>
+                {% endif %}
+
+                {{ message }}
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alerts = document.querySelectorAll('#messages-container .alert');
+        let delay = 0;
+
+        alerts.forEach((alert, index) => {
+            setTimeout(() => {
+                if (alert.isConnected) {  // если пользователь не закрыл вручную
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 300); // время анимации fade
+                }
+            }, 3000 + delay);
+            delay += 800; // следующее сообщение исчезает на 0.8 сек позже
+        });
+    });
+</script>

@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block mycontent %}
+
+    <div class="container py-4">
+        <h4 class="mb-4">{{ title }}</h4>
+
+        {% include "water/partials/messages.html" %}
+
+        <!-- Глобальные ошибки формы -->
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+
+            <!-- Заключение -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Заключение</h6>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.conclusion_date.label }}</label>
+                {{ form.conclusion_date }}
+                {% if form.conclusion_date.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.conclusion_date.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.customer.label }}</label>
+                {{ form.customer }}
+                {% if form.customer.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.customer.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">{{ form.address.label }}</label>
+                {{ form.address }}
+                {% if form.address.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.address.errors %}
+                            <small>{{ error }}</small><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Акт приёма проб -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Акт приёма проб воды</h6>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{ form.act_number.label }}</label>
+                {{ form.act_number }}
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{ form.act_date.label }}</label>
+                {{ form.act_date }}
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{ form.probe_date.label }}</label>
+                {{ form.probe_date }}
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">{{ form.hvs_probe_number.label }}</label>
+                {{ form.hvs_probe_number }}
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{ form.gvs_probe_number.label }}</label>
+                {{ form.gvs_probe_number }}
+            </div>
+
+            <!-- Химия -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Протокол химических испытаний</h6>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_number.label }}</label>
+                {{ form.chemistry_number }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_date.label }}</label>
+                {{ form.chemistry_date }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_order_number.label }}</label>
+                {{ form.chemistry_order_number }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.chemistry_order_date.label }}</label>
+                {{ form.chemistry_order_date }}
+            </div>
+
+            <!-- Биология -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Протокол биологических исследований</h6>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_number.label }}</label>
+                {{ form.bio_number }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_date.label }}</label>
+                {{ form.bio_date }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_begin_date.label }}</label>
+                {{ form.bio_begin_date }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.bio_end_date.label }}</label>
+                {{ form.bio_end_date }}
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">{{ form.hvs_bio_code.label }}</label>
+                {{ form.hvs_bio_code }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.gvs_bio_code.label }}</label>
+                {{ form.gvs_bio_code }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.hvs_bio_referral.label }}</label>
+                {{ form.hvs_bio_referral }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{ form.gvs_bio_referral.label }}</label>
+                {{ form.gvs_bio_referral }}
+            </div>
+
+            <!-- Показатели химии -->
+            <!-- ХВС -->
+            <div class="col-12">
+                <h6 class="border-bottom pb-2 text-primary">Показатели химических исследований</h6>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_ph.label }}</label>
+                {{ form.hvs_ph }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_fe.label }}</label>
+                {{ form.hvs_fe }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_turb.label }}</label>
+                {{ form.hvs_turb }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_chroma.label }}</label>
+                {{ form.hvs_chroma }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_rig.label }}</label>
+                {{ form.hvs_rig }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.hvs_ox.label }}</label>
+                {{ form.hvs_ox }}
+            </div>
+            <!-- ГВС -->
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_ph.label }}</label>
+                {{ form.gvs_ph }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_fe.label }}</label>
+                {{ form.gvs_fe }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_turb.label }}</label>
+                {{ form.gvs_turb }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_chroma.label }}</label>
+                {{ form.gvs_chroma }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_rig.label }}</label>
+                {{ form.gvs_rig }}
+            </div>
+            <div class="col-md-1">
+                <label class="form-label">{{ form.gvs_ox.label }}</label>
+                {{ form.gvs_ox }}
+            </div>
+
+            <!-- Кнопки -->
+            <div class="col-12 mt-3 border-top pt-2">
+                <button type="submit" name="save_and_edit" class="btn btn-success me-2">
+                    <i class="fas fa-save"></i> Сохранить и продолжить редактирование
+                </button>
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-check"></i> Сохранить и выйти в список
+                </button>
+                <a href="{% url 'water:assay_list' %}" class="btn btn-secondary me-2">
+                    <i class="fas fa-times"></i> Отмена
+                </a>
+{#                {% if not save_and_continue %}#}
+{#                    <a href="{% url 'water:assay_download_docx' object.pk %}"#}
+{#                       class="btn btn-success me-2">#}
+{#                        <i class="far fa-file-word"></i> Скачать Word#}
+{#                    </a>#}
+{#                {% endif %}#}
+                <button type="button" id="autofill-btn" class="btn btn-outline-info">
+                    <i class="fas fa-magic me-2"></i> Автозаполнить форму
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block my_java_script %}
+    <script>
+        const idArray = ["#id_conclusion_date", "#id_act_date", "#id_probe_date", "#id_chemistry_date",
+            "#id_chemistry_order_date", "#id_bio_date", "#id_bio_begin_date", "#id_bio_end_date"]
+        idArray.forEach(function (item) {
+            document.addEventListener('DOMContentLoaded', function () {
+                flatpickr(item, {
+                    locale: "ru",
+                    dateFormat: "d.m.Y",
+                });
+            });
+        })
+
+    </script>
+    <script src="{% static 'water/js/autofill.js' %}"></script>
+{% endblock %}
