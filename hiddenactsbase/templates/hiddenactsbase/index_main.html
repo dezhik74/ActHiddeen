@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% block mycontent %}
+    {% if user.is_authenticated %}
+        <p>Вы залогинены как {{ user }}</p>
+    {% else %}
+        <p> Вы не залогинены</p>
+    {% endif %}
 
-    <a href="/admin" class="btn btn-primary  my-1 py-0">Админка</a>
-    <a href="{% url 'objects_list_url' %}" class="btn btn-primary  my-1 py-0">Акты скрытых</a>
+{#    <a href="/admin" class="btn btn-primary  my-1 py-0">Админка</a>#}
+{#    <a href="{% url 'objects_list_url' %}" class="btn btn-primary  my-1 py-0">Акты скрытых</a>#}
 <!--    <a href="{# % url 'ks14_list_url' %}" class="btn btn-primary  my-1 py-0">КС14</a>-->
 {#    <a href="{% url 'gati_order_list_url' %}" class="btn btn-primary  my-1 py-0">ГАТИ</a>#}
 {% endblock %}
