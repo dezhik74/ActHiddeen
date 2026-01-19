@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -16,7 +17,7 @@ from water.forms import WaterAssayForm
 from water.models import WaterAssay
 
 
-class WaterAssayListView(generic.ListView):
+class WaterAssayListView(LoginRequiredMixin, generic.ListView):
     model = WaterAssay
     template_name = 'water/waterassay_list.html'
     context_object_name = 'water_assay_list'
@@ -42,7 +43,7 @@ class WaterAssayListView(generic.ListView):
         return context
 
 
-class WaterAssayCreateView(CreateView):
+class WaterAssayCreateView(LoginRequiredMixin, CreateView):
     model = WaterAssay
     form_class = WaterAssayForm
     template_name = 'water/waterassay_form.html'
@@ -69,7 +70,7 @@ class WaterAssayCreateView(CreateView):
         return reverse_lazy('water:assay_list')
 
 
-class WaterAssayUpdateView(UpdateView):
+class WaterAssayUpdateView(LoginRequiredMixin, UpdateView):
     model = WaterAssay
     form_class = WaterAssayForm
     template_name = 'water/waterassay_form.html'
@@ -96,7 +97,7 @@ class WaterAssayUpdateView(UpdateView):
         return reverse_lazy('water:assay_list')
 
 
-class WaterAssayCopyView(View):
+class WaterAssayCopyView(LoginRequiredMixin, View):
     def post(self, request, pk):
         original = get_object_or_404(WaterAssay, pk=pk)
         
@@ -113,7 +114,7 @@ class WaterAssayCopyView(View):
         return redirect('water:assay_update', pk=duplicate.pk)
 
 
-class WaterAssayDeleteView(SuccessMessageMixin, DeleteView):
+class WaterAssayDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = WaterAssay
     success_url = reverse_lazy('water:assay_list')
     template_name = 'water/waterassay_confirm_delete.html'
