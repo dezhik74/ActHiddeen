@@ -16,6 +16,12 @@ def compose_cert_file(obj: ObjectActs):
     download_file_name = download_file.name
     download_file.close()
     result_doc = Document()
+    section = result_doc.sections[0]
+    margin = 0.5
+    section.top_margin = Cm(margin)
+    section.bottom_margin = Cm(margin)
+    section.left_margin = Cm(0.8)
+    section.right_margin = Cm(margin)
     for act in obj.acts.all():
         if act.certificates.count() > 0:
             for cert in act.certificates.all():
@@ -27,7 +33,7 @@ def compose_cert_file(obj: ObjectActs):
                                     f'Приложение к АОСР №{obj.acts_prefix}-{act.act_number} от {act.act_date}')
                                 paragraph_format = paragraph.paragraph_format
                                 paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
-                                result_doc.add_picture(image, width=Cm(16.5), height=Cm(20.9))
+                                result_doc.add_picture(image, width=Cm(20), height=Cm(25))
                                 result_doc.add_page_break()
     result_doc.save(download_file_name)
     with open(download_file_name, 'rb') as download_file:
