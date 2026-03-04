@@ -6,7 +6,7 @@ import zipfile
 from django.http import HttpResponse
 from docx import Document
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from docx.shared import Cm
+from docx.shared import Cm, Pt
 
 from .models import ObjectActs
 
@@ -29,10 +29,15 @@ def compose_cert_file(obj: ObjectActs):
                     for name in zf.infolist():
                         if name.filename.startswith('word/media/'):
                             with zf.open(name.filename) as image:
-                                paragraph = result_doc.add_paragraph(
+                                paragraph = result_doc.add_paragraph()
+                                paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
+                                run = paragraph.add_run(
                                     f'Приложение к АОСР №{obj.acts_prefix}-{act.act_number} от {act.act_date}')
-                                paragraph_format = paragraph.paragraph_format
-                                paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
+                                run.font.size = Pt(9)
+                                fmt = paragraph.paragraph_format
+                                fmt.space_before = Pt(0)  # Нет отступа перед
+                                fmt.space_after = Pt(2)  # Минимальный отступ после (2 пункта)
+                                fmt.line_spacing = 1.0  # Одинарный межстрочный интервал
                                 result_doc.add_picture(image, width=Cm(20), height=Cm(25))
                                 result_doc.add_page_break()
     result_doc.save(download_file_name)
