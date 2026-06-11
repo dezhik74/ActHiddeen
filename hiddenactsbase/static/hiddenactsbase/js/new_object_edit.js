@@ -175,7 +175,11 @@ function formManager() {
             this.modal.show()
         },
         updateFilteredCerts() {
-            this.filteredCerts = this.all_certs.filter(cert => cert.year.toLowerCase().includes(this.yearCertFilter.toLowerCase()));
+            const filter = this.yearCertFilter.toLowerCase();
+            this.filteredCerts = this.all_certs.filter(cert => 
+                cert.year.toLowerCase().includes(filter) || 
+            cert.description.toLowerCase().includes(filter)
+            );
         },
         saveModal(modalAct) {
             modalAct.certificates = this.selectedCerts.map(id => this.all_certs.find(cert => cert.id == id));
